@@ -1,0 +1,50 @@
+
+<project name="QA" basedir=".">
+	
+	<condition property="runtime.payload" value="" else="${qa.payload}">								    <not><isset property="qa.payload"/></not></condition> 
+	<condition property="runtime.base_url" value="" else="${qa.base_url}">								 <not><isset property="qa.base_url"/></not></condition>
+	<condition property="runtime.display" value="" else="${qa.display}">								    <not><isset property="qa.display"/></not></condition>
+	<condition property="runtime.typology" value="" else="${qa.typology}">								 <not><isset property="qa.typology"/></not></condition>
+	
+   <condition property="python.path" value="python"><os family="unix" /></condition>  
+	
+	<fail message="Property qa.payload needs to be set to a value">	<condition><not><isset property="qa.payload"/></not></condition></fail>
+	
+   <macrodef name="run-python">
+		<sequential>
+			<echo message=": executing: ${python.path} pyrobot.py  "/>
+			<exec executable="${python.path}" resultproperty="test.run">
+				<env key="DISPLAY"  value="${runtime.display}"/>
+				<env key="BASE_URL" value="${runtime.base_url}"/>
+				<env key="PAYLOAD"  value="${runtime.payload}"/>
+				<env key="TYPOLOGY"  value="${runtime.typology}"/>
+			</exec>
+			<echo message="
+			[PYBOT RUNTIME]${line.separator}
+			runtime.display             : ${runtime.display}${line.separator}
+			runtime.base_url            : ${runtime.base_url}${line.separator}
+			runtime.payload             : ${runtime.payload}${line.separator}
+			runtime.typology            : ${runtime.typology}${line.separator}
+			"/>
+		</sequential>
+   </macrodef>
+
+   <macrodef name="finally">
+		<sequential>
+			<echo message="-- [PYRO_FINAL] "/>
+         <echo message="      -- test.run result: ${test.run}"/>
+			<fail message="some tests failed !">
+            <condition>
+               <not>
+						<equals arg1="${test.run}" arg2="0"/>
+               </not>
+            </condition>
+			</fail>
+      </sequential>
+   </macrodef>	
+	
+	<target name="pyrobot">
+		<run-python/>
+		<finally/>
+   </target>
+</project>
