@@ -24,7 +24,7 @@ then
 	git commit -am 'automatically publishing and installing (PyroFactory)'
 	git push
 	pip install git+https://github.com/Tallisado/pyrofactory.git#egg=PyroFactory	
-	cd $(cwd)
+	#cd $(cwd)
 
 
 elif [ "$1" = "library" ]
