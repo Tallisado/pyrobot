@@ -37,3 +37,6 @@ DEFAULT_BROWSER_DISPLAY = ":80"
 BROWSER_CAPABILITIES = 'name:%s,platform:%s,version:%s,browserName:%s,javascriptEnabled:True'
 
 BASE_URL = "http://www.google.ca"
+
+#WORKSPACE_HOME = "/mnt/wt/pyrobot_2/pyrobot/workspace/"
+WORKSPACE_HOME = "/mnt/wt/pyrobot_v1.1/pyrobot/workspace/"

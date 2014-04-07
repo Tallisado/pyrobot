@@ -2,8 +2,8 @@
 #Suite Teardown    Close Pyro Browser
 Suite Teardown    Close Browser
 Library           Selenium2Library
+Library           PyroLibrary
 Library           Collections
-Library           ../../pyrolibrary/PyroLibrary.py
 Documentation     Testing library
 Metadata          Version                            1.1
 Metadata          More Info                          For more information about Pyrobot see https://github.com/Tallisado
@@ -14,8 +14,8 @@ ${NEO_TITLE}        ADTRAN Neo
 
 *** Test Cases ***
 Test NEO Login Library
-	Open Browser Sencha Login        3011    1234    settingsButton-btnIconEl
-    Title Should Be       ${NEO_TITLE} 
+	Open Browser Login Sencha    3011    1234    settingsButton-btnIconEl
+    Title Should Be              ${NEO_TITLE} 
 
 # Test NEO Login Library
 	# Open Neo Login        3011    1234    settingsButton-btnIconEl
