@@ -12,7 +12,25 @@ Force Tags        PyroUnitTest
 ${NEO_TITLE}        ADTRAN Neo
 
 *** Test Cases ***
-Test NEO Login Library
+Test NEO Login Library - LOGIN
 	Open Pyro Browser
-	Login Sencha    		3011    1234    settingsButton-btnIconEl
+	Sencha Login     		3011    1234    settingsButton-btnIconEl
     Title Should Be         ${NEO_TITLE} 
+	
+Verify Attribute From Element
+	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+	Selenium Click    id    settingsButton-btnIconEl
+	Selenium Wait For Element Present    id    settingsProfile
+	Selenium Click    id    settingsProfile
+	Selenium Verify Attribute From Element    name    HomeNumber    value    (613) 599-0100
+	Selenium Click    id    saveUserProfileId-btnIconEl
+	
+Drag and Drop and Verify Text From Element
+	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+	Selenium Click   id    settingsButton-btnIconEl
+	Selenium Wait For Element Present    id    settingsPhone
+	Selenium Click   id    settingsPhone
+	Selenium Wait For Element Present    id    phone_btn0_lbl
+	Selenium Drag And Drop    id    phoneFunc0_6    phone_btn2
+	Selenium Verify Text From Element    id    phone_btn2_lbl    Mailbox	
+	Selenium Reload
