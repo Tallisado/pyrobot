@@ -1,0 +1,51 @@
+*** Settings ***
+Suite Setup
+Suite Teardown    Close Browser
+Library           Selenium2Library
+Library           Collections
+Library           PyroLibrary
+
+*** Variables ***
+${Neo}            http://${DEVICE_IP}
+${DEVICE_IP}      10.10.9.164
+
+*** Test Cases ***
+Edit Voicemail Configuration
+	Open Browser Login Sencha    admin    password    helpButton-btnIconEl
+	Selenium Wait For Element Present    id    users_tab
+	Selenium Click    id    users_tab
+	Selenium Wait For Element Present    xpath	   //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]
+	Selenium Click    xpath    //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]
+	Selenium Wait For Element Present    id    users_panel_edit_btn-btnEl
+	Selenium Click    id    users_panel_edit_btn-btnEl
+	Selenium Wait For Element Present    id    users_panel_edit_voicemail_cfg_menuitem-itemEl
+	Selenium Click    id    users_panel_edit_voicemail_cfg_menuitem-itemEl
+	Selenium Wait For Element Present    id    playEnvelope_checkbox-inputEl
+	Selenium Uncheck    id    playEnvelope_checkbox-inputEl
+	Selenium Uncheck    id    autoPlayMessage_checkbox-inputEl
+	Selenium Click Text From Combobox    id    primaryEmailNotification_combobox-inputEl    Never
+	#Selenium Click Text From Combobox    id    secondaryEmailNotification_combobox-inputEl    Always
+	Selenium Type    name    operatorAssist    1000
+	Selenium Uncheck    id    newuser_checkbox-inputEl
+	Selenium Uncheck    id    fwdcourtesy_checkbox-inputEl
+	Selenium Check    id    autoanswerdnd_checkbox-inputEl
+	Selenium Click    id    settingVMConfigSave-btnEl
+	
+Verify Voicemail Configuration Settings
+	Selenium Reload
+	Selenium Wait For Element Present    id    users_tab
+	Selenium Click    id    users_tab
+	Selenium Wait For Element Present    xpath	   //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]
+	Selenium Click    xpath    //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]
+	Selenium Wait For Element Present    id    users_panel_edit_btn-btnEl
+	Selenium Click    id    users_panel_edit_btn-btnEl
+	Selenium Wait For Element Present    id    users_panel_edit_voicemail_cfg_menuitem-itemEl
+	Selenium Click    id    users_panel_edit_voicemail_cfg_menuitem-itemEl
+	Checkbox Should Not Be Selected    id=playEnvelope_checkbox-inputEl
+	Checkbox Should Not Be Selected    id=autoPlayMessage_checkbox-inputEl
+	Selenium Verify Attribute From Element    name   operatorAssist    value    1000
+	Checkbox Should Not Be Selected    id=newuser_checkbox-inputEl
+	Checkbox Should Not Be Selected    id=fwdcourtesy_checkbox-inputEl
+	#Checkbox Should Be Selected    id=autoanswerdnd_checkbox-inputEl
+
+*** Keywords ***

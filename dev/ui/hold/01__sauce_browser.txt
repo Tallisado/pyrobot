@@ -1,0 +1,40 @@
+*** Settings ***
+Documentation  A browser test case for sauce local test (non-onconnect)
+
+Library           PyroLibrary
+
+
+*** Variables ***
+${GOOGLE_URL}       http://www.google.ca
+${GOOGLE_TITLE}     Google
+${REDDIT_TITLE}     reddit: the front page of the internet
+${NEO_URL}          http://10.10.9.129/Login/index.php
+${NEO_TITLE}        ADTRAN Neo
+
+
+
+*** Test Cases ***
+Local Default Browser TestLevel URL 
+	Open Pyrobot	  ${GOOGLE_URL}
+    Check Title       ${GOOGLE_TITLE}
+	[Teardown]  Close Browser
+	
+Local Non-Default Browser TestLevel URL 
+	Open Pyrobot 	  ${GOOGLE_URL}    chrome
+	Check Title       ${GOOGLE_TITLE}
+	[Teardown]  Close Browser
+
+Sauce Browser TestLevel URL
+	Open Pyrobot 	  ${PYRO_BROWSER}    ${GOOGLE_URL}
+	[Teardown]        Close Browser
+    Check Title       ${GOOGLE_TITLE}
+	
+Sauce Browser BaseUrl URL
+	Open Pyrobot	  ${PYRO_BROWSER}  
+	Check Title       ${REDDIT_TITLE}
+	[Teardown]  Close Browser
+    
+Sauce Browser OnConnect
+	Open Pyrobot	  ${PYRO_BROWSER}    ${NEO_URL}
+	Check Title       ${NEO_TITLE}
+	[Teardown]  Close Browser

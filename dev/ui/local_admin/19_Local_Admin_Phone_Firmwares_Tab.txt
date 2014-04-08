@@ -1,0 +1,24 @@
+*** Settings ***
+Suite Setup
+Suite Teardown    Close Browser
+Library           Selenium2Library
+Library           Collections
+Library           PyroLibrary
+
+*** Variables ***
+${Neo}            http://${DEVICE_IP}
+${DEVICE_IP}      10.10.9.164
+
+*** Test Cases ***
+Verify Phone Firmware for 321
+	Open Browser Login Sencha    admin    password    helpButton-btnIconEl
+	Selenium Wait For Element Present    id    firmwares_tab
+	Selenium Click    id    firmwares_tab
+	Selenium Wait For Element Present    xpath    //*[@id="firmwares_panelfirmware_grid-body"]/div/table/tbody/tr[1]
+	Selenium Verify Text From Element    xpath    //*[@id="firmwares_panelfirmware_grid-body"]/div/table/tbody/tr[1]/td/div    Polycom 321
+	
+Export Phone Firmwares List
+	Selenium Wait For Element Present    id    firmwares_panelfirmware_grid_export_btn
+	Selenium Click    id    firmwares_panelfirmware_grid_export_btn
+
+*** Keywords ***

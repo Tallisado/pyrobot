@@ -1,0 +1,24 @@
+*** Settings ***
+Suite Setup
+Suite Teardown    Close Browser
+Library           Selenium2Library
+Library           Collections
+Library           PyroLibrary
+
+*** Variables ***
+${Neo}            http://${DEVICE_IP}
+${DEVICE_IP}      10.10.9.164
+
+*** Test Cases ***
+Upload Firmware
+	Open Browser Login Sencha    admin    password    helpButton-btnIconEl
+	Selenium Wait For Element Present    id    firmwareUpdateSystem_wiz
+	Selenium Click    id    firmwareUpdateSystem_wiz
+	Selenium Wait For Element Present    id    firmwareSystemWiz_file-button-fileInputEl
+	Choose File    id=firmwareSystemWiz_file-button-fileInputEl    /tmp/amb_r6.196.D.E.image
+	Selenium Click    id    updateFirmwareWiz_next_btn-btnIconEl
+	Sleep     90
+	Selenium Verify Text From Element    id    updateFirmwareWiz_cancel_btn-btnInnerEl     Close
+	Selenium Click    id    updateFirmwareWiz_cancel_btn-btnIconEl
+
+*** Keywords ***

@@ -1,0 +1,32 @@
+*** Settings ***
+Suite Setup
+Suite Teardown    Close Browser
+Library           Selenium2Library
+Library           Collections
+Library           PyroLibrary
+
+*** Variables ***
+${Neo}            http://${DEVICE_IP}
+${DEVICE_IP}      10.10.9.164
+
+*** Test Cases ***
+Edit the External Caller ID
+	Open Browser Login Sencha    admin    password    helpButton-btnIconEl
+	Selenium Wait For Element Present    id    users_tab
+	Selenium Click    id    users_tab
+	Selenium Wait For Element Present    xpath	   //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]
+	Selenium Click    xpath    //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]
+	Selenium Wait For Element Present    id    users_panel_edit_btn-btnEl
+	Selenium Click    id    users_panel_edit_btn-btnEl
+	Selenium Wait For Element Present    id    users_panel_edit_callerId_menuitem-textEl
+	Selenium Click    id    users_panel_edit_callerId_menuitem-textEl
+	Selenium Wait For Element Present    id    editCallerID_window_name_combobox-inputEl
+	Selenium Click    id    editCallerID_window_name_combobox-inputEl
+	Selenium Clear    id    editCallerID_window_name_combobox-inputEl
+	Selenium Type    id    editCallerID_window_name_combobox-inputEl    Name
+	Selenium Click    id    editCallerID_window_number_combobox-inputEl
+	Selenium Clear    id    editCallerID_window_number_combobox-inputEl
+	Selenium Type    id    editCallerID_window_number_combobox-inputEl    1234
+	Selenium Click    id    editCallerID_window_save_btn
+
+*** Keywords ***

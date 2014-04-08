@@ -6,7 +6,8 @@ if [ "$1" = "all" ]
 then
     echo "ALL"
 	echo "Pyrobot"
-	git add -A; git commit -am 'automatically publishing and installing (Pyrobot)'
+	git add -A
+	git commit -am 'automatically publishing and installing (Pyrobot)'
 	git push
 
 	echo "PyroLibrary"
@@ -24,8 +25,6 @@ then
 	git commit -am 'automatically publishing and installing (PyroFactory)'
 	git push
 	pip install git+https://github.com/Tallisado/pyrofactory.git#egg=PyroFactory	
-	#cd $(cwd)
-
 
 elif [ "$1" = "library" ]
 then
@@ -36,7 +35,6 @@ then
 	git commit -am 'automatically publishing and installing (PyroLibrary)'
 	git push
 	pip install git+https://github.com/Tallisado/pyrolibrary.git#egg=PyroLibrary
-	cd $(cwd)
 
 elif [ "$1" = "factory" ]
 then
@@ -47,7 +45,6 @@ then
 	git commit -am 'automatically publishing and installing (PyroFactory)'
 	git push
 	pip install git+https://github.com/Tallisado/pyrofactory.git#egg=PyroFactory	
-	cd $(cwd)
 
 elif [ "$1" = "bot" ]
 then
