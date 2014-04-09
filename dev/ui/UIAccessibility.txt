@@ -11,7 +11,7 @@ ${DEVICE_IP}      10.10.9.164
 
 *** Test Cases ***
 Go to Neo
-    Open Browser to ${Neo}
+    Open Browser    ${Neo}
 
 Check Login Page
 	Selenium Wait For Element Present    id    loginnameid-inputEl

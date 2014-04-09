@@ -11,7 +11,8 @@ ${DEVICE_IP}      10.10.9.164
 
 *** Test Cases ***
 Open Phone Dialog
-	Open Browser Login Sencha    3011    1234    settingsButton-btnIconEl
+	Open Pyro Browser
+	Sencha Login     		3011    1234    settingsButton-btnIconEl
 	Selenium Click    id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsPhone
 	Selenium Click    id    settingsPhone

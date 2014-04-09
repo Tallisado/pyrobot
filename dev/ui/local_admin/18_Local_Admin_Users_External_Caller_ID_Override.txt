@@ -11,7 +11,8 @@ ${DEVICE_IP}      10.10.9.164
 
 *** Test Cases ***
 Edit the External Caller ID
-	Open Browser Login Sencha    admin    password    helpButton-btnIconEl
+	Open Pyro Browser
+	Sencha Login     		admin    password    helpButton-btnIconEl
 	Selenium Wait For Element Present    id    users_tab
 	Selenium Click    id    users_tab
 	Selenium Wait For Element Present    xpath	   //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]

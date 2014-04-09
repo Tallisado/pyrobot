@@ -4,6 +4,7 @@ Library           String
 Library           Collections
 Library			  FtpLibrary
 Library           OperatingSystem
+Library           PyroLibrary
 
 *** Variables ***
 ${DEVICE_IP}               10.10.9.164

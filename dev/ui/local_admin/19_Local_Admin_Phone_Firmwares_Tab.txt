@@ -11,7 +11,8 @@ ${DEVICE_IP}      10.10.9.164
 
 *** Test Cases ***
 Verify Phone Firmware for 321
-	Open Browser Login Sencha    admin    password    helpButton-btnIconEl
+	Open Pyro Browser
+	Sencha Login     		admin    password    helpButton-btnIconEl
 	Selenium Wait For Element Present    id    firmwares_tab
 	Selenium Click    id    firmwares_tab
 	Selenium Wait For Element Present    xpath    //*[@id="firmwares_panelfirmware_grid-body"]/div/table/tbody/tr[1]

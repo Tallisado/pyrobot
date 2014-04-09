@@ -11,7 +11,8 @@ ${DEVICE_IP}      10.10.9.164
 
 *** Test Cases ***
 Remove User 3001
-	Open Browser Login Sencha    admin    password    helpButton-btnIconEl
+	Open Pyro Browser
+	Sencha Login     		admin    password    helpButton-btnIconEl
 	Selenium Wait For Element Present    xpath    //div[@id="removeUser_wiz"]
 	Selenium Click    xpath    //div[@id="removeUser_wiz"]
 	Selenium Wait For Element Present    name    removeUserWizard_window_removeUser_wizard_user_combobox-inputEl

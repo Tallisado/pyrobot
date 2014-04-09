@@ -11,7 +11,8 @@ ${DEVICE_IP}      10.10.9.164
 
 *** Test Cases ***
 Login to PPM
-	Open Browser Login Sencha    3011    1234    settingsButton-btnIconEl
+	Open Pyro Browser
+	Sencha Login     		3011    1234    settingsButton-btnIconEl
 
 Set Profile Settings
 	Selenium Wait For Element Present    id    settingsButton-btnIconEl

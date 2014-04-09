@@ -3,6 +3,7 @@ Documentation     DVT Test resource for Robot Framework
 Library           String
 Library           Telnet
 Library           Collections
+Library           PyroLibrary
 
 *** Variables ***
 ${DEVICE_IP}               10.10.9.164

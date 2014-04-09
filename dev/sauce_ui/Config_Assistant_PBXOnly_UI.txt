@@ -2,8 +2,9 @@
 Suite Setup
 Suite Teardown    Close Browser
 Library           Selenium2Library
+Library           PyroLibrary
 Library           Collections
-Variables         phone_dictionary.py
+Variables         ../cli/phone_dictionary.py
 
 *** Variables ***
 ${Neo}            http://admin:password@${DEVICE_IP}:81
@@ -12,7 +13,7 @@ ${VOICE_USER_NUMBER}    2
 
 *** Test Cases ***
 Go to Neo
-    Open Browser to ${Neo}
+    Open Pyro Browser
 
 Go to Wizard
     Click Image    WizardToggleIcon

@@ -11,7 +11,8 @@ ${DEVICE_IP}      10.10.9.164
 
 *** Test Cases ***
 Edit The Paging Group Membership And Add The User To Pickup Group
-	Open Browser Login Sencha    admin    password    helpButton-btnIconEl
+	Open Pyro Browser
+	Sencha Login     		admin    password    helpButton-btnIconEl
 	Selenium Wait For Element Present    id    editPickupMembership_wiz
 	Selenium Click    xpath    //*[@id="editPickupMembership_wiz"]
 	Selenium Wait For Element Present    xpath    //*[@id="pickupGroupWiz_grid-body"]

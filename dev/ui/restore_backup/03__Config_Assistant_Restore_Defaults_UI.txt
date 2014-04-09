@@ -3,6 +3,7 @@ Suite Setup
 Suite Teardown    Close Browser
 Library           Selenium2Library
 Library           Collections
+Library           PyroLibrary
 
 *** Variables ***
 ${Neo}            http://admin:password@${DEVICE_IP}:81

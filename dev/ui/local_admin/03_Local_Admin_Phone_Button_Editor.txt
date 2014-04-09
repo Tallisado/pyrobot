@@ -11,7 +11,8 @@ ${DEVICE_IP}      10.10.9.164
 
 *** Test Cases ***
 Open Phone Dialog
-	Open Browser Login Sencha    admin    password    helpButton-btnIconEl
+	Open Pyro Browser
+	Sencha Login     		admin    password    helpButton-btnIconEl
 	Selenium Click    id    editPhoneButton_wiz
 	Selenium Wait For Element Present    id    phonebuttonWizard_comboBox-inputEl
 	Selenium Click Text From Combobox    id    phonebuttonWizard_comboBox-inputEl    Wizard User

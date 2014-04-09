@@ -2,6 +2,7 @@
 Suite Setup
 Suite Teardown    Close Browser
 Library           Selenium2Library
+Library           PyroLibrary
 Library           Collections
 Variables         phone_dictionary.py
 
