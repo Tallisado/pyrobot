@@ -12,38 +12,30 @@ then
 
 	echo "PyroLibrary"
 	cd ../pyrolibrary
-	pip uninstall git+https://github.com/Tallisado/pyrolibrary.git#egg=PyroLibrary
-	git add -A
-	git commit -am 'automatically publishing and installing (PyroLibrary)'
-	git push
+	/usr/bin/yes | pip uninstall git+https://github.com/Tallisado/pyrolibrary.git#egg=PyroLibrary
+	git add -A;	git commit -am 'automatically publishing and installing (PyroLibrary)';	git push
 	pip install git+https://github.com/Tallisado/pyrolibrary.git#egg=PyroLibrary
 
 	echo "PyroFactory"
 	cd ../pyrofactory
-	pip uninstall git+https://github.com/Tallisado/pyrofactory.git#egg=PyroFactory
-	git add -A
-	git commit -am 'automatically publishing and installing (PyroFactory)'
-	git push
+	/usr/bin/yes | pip uninstall git+https://github.com/Tallisado/pyrofactory.git#egg=PyroFactory
+	git add -A; git commit -am 'automatically publishing and installing (PyroFactory)'; git push
 	pip install git+https://github.com/Tallisado/pyrofactory.git#egg=PyroFactory	
 
 elif [ "$1" = "library" ]
 then
 	echo "PyroLibrary"
 	cd ../pyrolibrary
-	pip uninstall git+https://github.com/Tallisado/pyrolibrary.git#egg=PyroLibrary
-	git add -A
-	git commit -am 'automatically publishing and installing (PyroLibrary)'
-	git push
+	/usr/bin/yes | pip uninstall git+https://github.com/Tallisado/pyrolibrary.git#egg=PyroLibrary
+	git add -A; git commit -am 'automatically publishing and installing (PyroLibrary)'; git push
 	pip install git+https://github.com/Tallisado/pyrolibrary.git#egg=PyroLibrary
 
 elif [ "$1" = "factory" ]
 then
 	echo "PyroFactory"
 	cd ../pyrofactory
-	pip uninstall git+https://github.com/Tallisado/pyrofactory.git#egg=PyroFactory
-	git add -A
-	git commit -am 'automatically publishing and installing (PyroFactory)'
-	git push
+	/usr/bin/yes | pip uninstall git+https://github.com/Tallisado/pyrofactory.git#egg=PyroFactory
+	git add -A; git commit -am 'automatically publishing and installing (PyroFactory)'; git push
 	pip install git+https://github.com/Tallisado/pyrofactory.git#egg=PyroFactory	
 
 elif [ "$1" = "bot" ]
@@ -55,9 +47,9 @@ then
 elif [ "$1" = "pip" ]
 then	
 	echo "PIP ONLY"
-	pip uninstall git+https://github.com/Tallisado/pyrolibrary.git#egg=PyroLibrary
+	/usr/bin/yes | pip uninstall git+https://github.com/Tallisado/pyrolibrary.git#egg=PyroLibrary
 	pip install git+https://github.com/Tallisado/pyrolibrary.git#egg=PyroLibrary
-	pip uninstall git+https://github.com/Tallisado/pyrofactory.git#egg=PyroFactory
+	/usr/bin/yes | pip uninstall git+https://github.com/Tallisado/pyrofactory.git#egg=PyroFactory
 	pip install git+https://github.com/Tallisado/pyrofactory.git#egg=PyroFactory
 else
 	echo "USAGE: "

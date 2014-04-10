@@ -20,88 +20,88 @@ Library - Open Pyro Browser
 Factory - Typology
 	Should Be Equal         ${DEFAULT_TOPOLOGY_VALUE}    1337    msg="topology was not given to pybot"
 	
-Library - Verify Attribute From Element
-	Selenium Wait For Element Present    id    settingsButton-btnIconEl
-	Selenium Click    id    settingsButton-btnIconEl
-	Selenium Wait For Element Present    id    settingsProfile
-	Selenium Click    id    settingsProfile
-	Selenium Verify Attribute From Element    name    HomeNumber    value    (613) 599-0100
-	Selenium Click    id    saveUserProfileId-btnIconEl
-	
-Library - Drag and Drop and Verify Text From Element
-	Selenium Wait For Element Present    id    settingsButton-btnIconEl
-	Selenium Click   id    settingsButton-btnIconEl
-	Selenium Wait For Element Present    id    settingsPhone
-	Selenium Click   id    settingsPhone
-	Selenium Wait For Element Present    id    phone_btn0_lbl
-	Selenium Drag And Drop    id    phoneFunc0_6    phone_btn2
-	Selenium Verify Text From Element    id    phone_btn2_lbl    Mailbox	
-	Selenium Reload
-	
-Library - Uncheck Box
-	Selenium Wait For Element Present    id    settingsButton-btnIconEl
-	Selenium Click   id    settingsButton-btnIconEl
-	Selenium Wait For Element Present    id    settingsVoicemail
-	Selenium Click   id    settingsVoicemail
-	Selenium Wait For Element Present    id    autoPlayMessage_checkbox-inputEl
-	Selenium Uncheck   id    autoPlayMessage_checkbox-inputEl
-	Selenium Click   id    settingVMConfigClose-btnIconEl
-	
-Library - Check Box
-	Selenium Wait For Element Present    id    settingsButton-btnIconEl
-	Selenium Click   id    settingsButton-btnIconEl
-	Selenium Wait For Element Present    id    settingsVoicemail
-	Selenium Click   id    settingsVoicemail
-	Selenium Wait For Element Present    id    autoPlayMessage_checkbox-inputEl
-	Selenium Check   id    autoPlayMessage_checkbox-inputEl
-	Selenium Click   id    settingVMConfigClose-btnIconEl
-
-# Clear and Type in Text Box Sel Only
-	# Wait Until Page Contains Element             id=settingsButton-btnIconEl
-	# Selenium Click                       id      settingsButton-btnIconEl
-	# Selenium Wait For Element Present    id      settingsProfile
-    # Selenium Click                       id      settingsProfile
-    # Input Text                           name=HomeNumber     ${EMPTY}
-    # Input Text                           name=HomeNumber     8880000101
-    # Input Text                           name=HomeNumber     ${EMPTY}
-    # Input Text                           name=HomeNumber     (613) 123-1234
-	
-# Clear and Type in Text Box
+# Library - Verify Attribute From Element
 	# Selenium Wait For Element Present    id    settingsButton-btnIconEl
 	# Selenium Click    id    settingsButton-btnIconEl
 	# Selenium Wait For Element Present    id    settingsProfile
 	# Selenium Click    id    settingsProfile
-    # Selenium Click    name    HomeNumber
-	# Selenium Clear    name    HomeNumber
-	# Selenium Type    name    HomeNumber    8880000101
-	# Selenium Verify Attribute From Element    name    HomeNumber    value    8880000101
-    # Selenium Click    name    HomeNumber
-	# Selenium Clear    name    HomeNumber
-	# Selenium Type    name    HomeNumber    (613) 599-0100
+	# Selenium Verify Attribute From Element    name    HomeNumber    value    (613) 599-0100
 	# Selenium Click    id    saveUserProfileId-btnIconEl
 	
-Library - Click Text From Combobox
-	Selenium Wait For Element Present    id    settingsButton-btnIconEl
-	Selenium Click    id    settingsButton-btnIconEl
-	Selenium Wait For Element Present    id    settingsVoicemail
-	Selenium Click    id    settingsVoicemail
-	Selenium Click Text From Combobox    id    primaryEmailNotification_combobox-inputEl    Never
-	Selenium Click Text From Combobox    id    primaryEmailNotification_combobox-inputEl    Always
-	#Selenium Click Text From Combobox    id    secondaryEmailNotification_combobox-inputEl    Never
-	#Selenium Click Text From Combobox    id    secondaryEmailNotification_combobox-inputEl    Always
-	Selenium Click    id    settingVMConfigClose-btnIconEl
+# Library - Drag and Drop and Verify Text From Element
+	# Selenium Wait For Element Present    id    settingsButton-btnIconEl
+	# Selenium Click   id    settingsButton-btnIconEl
+	# Selenium Wait For Element Present    id    settingsPhone
+	# Selenium Click   id    settingsPhone
+	# Selenium Wait For Element Present    id    phone_btn0_lbl
+	# Selenium Drag And Drop    id    phoneFunc0_6    phone_btn2
+	# Selenium Verify Text From Element    id    phone_btn2_lbl    Mailbox	
+	# Selenium Reload
 	
-Library - Selenium Populate Combo And Click Text
-	Selenium Wait For Element Present    id    settingsButton-btnIconEl
-	Selenium Click   id    settingsButton-btnIconEl
-	Selenium Wait For Element Present    id    settingsPhone
-	Selenium Click   id    settingsPhone
-	Selenium Wait For Element Present    id    phone_btn0_lbl
-	Selenium Drag And Drop    id    phoneFunc0_6    phone_btn2
-	Selenium Verify Text From Element    id    phone_btn2_lbl    Mailbox	
-	Selenium Double Click    id    phone_btn2
-	Selenium Populate Combo And Click Text    id    mailbox_combobox-inputEl    Wizard User
-	Selenium Drag And Drop    id    phoneFunc0_9    phone_btn3
-	Selenium Verify Text From Element    id    phone_btn3_lbl    Paging G...	
-	Selenium Double Click    id    phone_btn3
-	Selenium Populate Combo And Click Text    id    paginggroup_combobox-inputEl    Paging Group
+# Library - Uncheck Box
+	# Selenium Wait For Element Present    id    settingsButton-btnIconEl
+	# Selenium Click   id    settingsButton-btnIconEl
+	# Selenium Wait For Element Present    id    settingsVoicemail
+	# Selenium Click   id    settingsVoicemail
+	# Selenium Wait For Element Present    id    autoPlayMessage_checkbox-inputEl
+	# Selenium Uncheck   id    autoPlayMessage_checkbox-inputEl
+	# Selenium Click   id    settingVMConfigClose-btnIconEl
+	
+# Library - Check Box
+	# Selenium Wait For Element Present    id    settingsButton-btnIconEl
+	# Selenium Click   id    settingsButton-btnIconEl
+	# Selenium Wait For Element Present    id    settingsVoicemail
+	# Selenium Click   id    settingsVoicemail
+	# Selenium Wait For Element Present    id    autoPlayMessage_checkbox-inputEl
+	# Selenium Check   id    autoPlayMessage_checkbox-inputEl
+	# Selenium Click   id    settingVMConfigClose-btnIconEl
+
+# # Clear and Type in Text Box Sel Only
+	# # Wait Until Page Contains Element             id=settingsButton-btnIconEl
+	# # Selenium Click                       id      settingsButton-btnIconEl
+	# # Selenium Wait For Element Present    id      settingsProfile
+    # # Selenium Click                       id      settingsProfile
+    # # Input Text                           name=HomeNumber     ${EMPTY}
+    # # Input Text                           name=HomeNumber     8880000101
+    # # Input Text                           name=HomeNumber     ${EMPTY}
+    # # Input Text                           name=HomeNumber     (613) 123-1234
+	
+# # Clear and Type in Text Box
+	# # Selenium Wait For Element Present    id    settingsButton-btnIconEl
+	# # Selenium Click    id    settingsButton-btnIconEl
+	# # Selenium Wait For Element Present    id    settingsProfile
+	# # Selenium Click    id    settingsProfile
+    # # Selenium Click    name    HomeNumber
+	# # Selenium Clear    name    HomeNumber
+	# # Selenium Type    name    HomeNumber    8880000101
+	# # Selenium Verify Attribute From Element    name    HomeNumber    value    8880000101
+    # # Selenium Click    name    HomeNumber
+	# # Selenium Clear    name    HomeNumber
+	# # Selenium Type    name    HomeNumber    (613) 599-0100
+	# # Selenium Click    id    saveUserProfileId-btnIconEl
+	
+# Library - Click Text From Combobox
+	# Selenium Wait For Element Present    id    settingsButton-btnIconEl
+	# Selenium Click    id    settingsButton-btnIconEl
+	# Selenium Wait For Element Present    id    settingsVoicemail
+	# Selenium Click    id    settingsVoicemail
+	# Selenium Click Text From Combobox    id    primaryEmailNotification_combobox-inputEl    Never
+	# Selenium Click Text From Combobox    id    primaryEmailNotification_combobox-inputEl    Always
+	# #Selenium Click Text From Combobox    id    secondaryEmailNotification_combobox-inputEl    Never
+	# #Selenium Click Text From Combobox    id    secondaryEmailNotification_combobox-inputEl    Always
+	# Selenium Click    id    settingVMConfigClose-btnIconEl
+	
+# Library - Selenium Populate Combo And Click Text
+	# Selenium Wait For Element Present    id    settingsButton-btnIconEl
+	# Selenium Click   id    settingsButton-btnIconEl
+	# Selenium Wait For Element Present    id    settingsPhone
+	# Selenium Click   id    settingsPhone
+	# Selenium Wait For Element Present    id    phone_btn0_lbl
+	# Selenium Drag And Drop    id    phoneFunc0_6    phone_btn2
+	# Selenium Verify Text From Element    id    phone_btn2_lbl    Mailbox	
+	# Selenium Double Click    id    phone_btn2
+	# Selenium Populate Combo And Click Text    id    mailbox_combobox-inputEl    Wizard User
+	# Selenium Drag And Drop    id    phoneFunc0_9    phone_btn3
+	# Selenium Verify Text From Element    id    phone_btn3_lbl    Paging G...	
+	# Selenium Double Click    id    phone_btn3
+	# Selenium Populate Combo And Click Text    id    paginggroup_combobox-inputEl    Paging Group
