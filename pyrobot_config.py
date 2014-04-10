@@ -23,7 +23,7 @@ time_between_test_start_up = 0
 #
 #######
 
-DEFAULT_TOPOLOGY_FOLDER = "./dev/resources/topology/"
+DEFAULT_TOPOLOGY_FOLDER = "dev/resources/topology/"
 DEFAULT_TOPOLOGY = "topology_default.py"
 
 SAUCE_USERNAME = 'talliskane'

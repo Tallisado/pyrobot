@@ -17,16 +17,21 @@ Library - Open Pyro Browser
 	Sencha Login     		3011    1234    settingsButton-btnIconEl
     Title Should Be         ${NEO_TITLE}
 	
+# Library - Reload Browser
+	# Selenium Reload
+    # Title Should Be         ${NEO_TITLE}
+
 Factory - Typology
 	Should Be Equal         ${DEFAULT_TOPOLOGY_VALUE}    1337    msg="topology was not given to pybot"
-	
-# Library - Verify Attribute From Element
-	# Selenium Wait For Element Present    id    settingsButton-btnIconEl
-	# Selenium Click    id    settingsButton-btnIconEl
-	# Selenium Wait For Element Present    id    settingsProfile
-	# Selenium Click    id    settingsProfile
-	# Selenium Verify Attribute From Element    name    HomeNumber    value    (613) 599-0100
-	# Selenium Click    id    saveUserProfileId-btnIconEl
+
+    
+Library - Verify Attribute From Element
+	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+	Selenium Click    id    settingsButton-btnIconEl
+	Selenium Wait For Element Present    id    settingsProfile
+	Selenium Click    id    settingsProfile
+	Selenium Verify Attribute From Element    name    HomeNumber    value    (613) 599-0100
+	Selenium Click    id    saveUserProfileId-btnIconEl
 	
 # Library - Drag and Drop and Verify Text From Element
 	# Selenium Wait For Element Present    id    settingsButton-btnIconEl
