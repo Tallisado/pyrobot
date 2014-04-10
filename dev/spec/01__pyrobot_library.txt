@@ -12,12 +12,15 @@ Force Tags        PyroUnitTest
 ${NEO_TITLE}        ADTRAN Neo
 
 *** Test Cases ***
-Test NEO Login Library - LOGIN
+Library - Open Pyro Browser
 	Open Pyro Browser
 	Sencha Login     		3011    1234    settingsButton-btnIconEl
-    Title Should Be         ${NEO_TITLE} 
+    Title Should Be         ${NEO_TITLE}
 	
-Verify Attribute From Element
+Factory - Typology
+	Should Be Equal         ${DEFAULT_TOPOLOGY_VALUE}    1337    msg="topology was not given to pybot"
+	
+Library - Verify Attribute From Element
 	Selenium Wait For Element Present    id    settingsButton-btnIconEl
 	Selenium Click    id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsProfile
@@ -25,7 +28,7 @@ Verify Attribute From Element
 	Selenium Verify Attribute From Element    name    HomeNumber    value    (613) 599-0100
 	Selenium Click    id    saveUserProfileId-btnIconEl
 	
-Drag and Drop and Verify Text From Element
+Library - Drag and Drop and Verify Text From Element
 	Selenium Wait For Element Present    id    settingsButton-btnIconEl
 	Selenium Click   id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsPhone
@@ -35,7 +38,7 @@ Drag and Drop and Verify Text From Element
 	Selenium Verify Text From Element    id    phone_btn2_lbl    Mailbox	
 	Selenium Reload
 	
-Uncheck Box
+Library - Uncheck Box
 	Selenium Wait For Element Present    id    settingsButton-btnIconEl
 	Selenium Click   id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsVoicemail
@@ -44,7 +47,7 @@ Uncheck Box
 	Selenium Uncheck   id    autoPlayMessage_checkbox-inputEl
 	Selenium Click   id    settingVMConfigClose-btnIconEl
 	
-Check Box
+Library - Check Box
 	Selenium Wait For Element Present    id    settingsButton-btnIconEl
 	Selenium Click   id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsVoicemail
@@ -77,7 +80,7 @@ Check Box
 	# Selenium Type    name    HomeNumber    (613) 599-0100
 	# Selenium Click    id    saveUserProfileId-btnIconEl
 	
-Click Text From Combobox
+Library - Click Text From Combobox
 	Selenium Wait For Element Present    id    settingsButton-btnIconEl
 	Selenium Click    id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsVoicemail
@@ -88,7 +91,7 @@ Click Text From Combobox
 	#Selenium Click Text From Combobox    id    secondaryEmailNotification_combobox-inputEl    Always
 	Selenium Click    id    settingVMConfigClose-btnIconEl
 	
-Selenium Populate Combo And Click Text
+Library - Selenium Populate Combo And Click Text
 	Selenium Wait For Element Present    id    settingsButton-btnIconEl
 	Selenium Click   id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsPhone

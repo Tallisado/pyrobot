@@ -15,7 +15,6 @@ DYN_ARGS =  [
     ["PASS", "HansPassword", "KlausPassword", "PetersPassword", "MartinsPassword", "EricsPassword"]
 ]
 
-
 time_between_test_start_up = 0
 
 
@@ -24,7 +23,8 @@ time_between_test_start_up = 0
 #
 #######
 
-DEFAULT_TYPOLOGY = "./dev/resources/typologies/typology_default.py"
+DEFAULT_TOPOLOGY_FOLDER = "./dev/resources/topology/"
+DEFAULT_TOPOLOGY = "topology_default.py"
 
 SAUCE_USERNAME = 'talliskane'
 SAUCE_ACCESSKEY = "6c3ed64b-e065-4df4-b921-75336e2cb9cf"
