@@ -2,6 +2,8 @@
 Suite Setup
 Suite Teardown    Close Browser
 Library           Selenium2Library
+Library	    String
+Library	    Telnet
 Library           Collections
 Library           PyroLibrary
 
@@ -15,8 +17,9 @@ Open a Browser Window
 	
 Wait For Unit To Restart
 	Sleep    60
-	Wait Until Keyword Succeeds    5 min    5 sec    Check UI ${DEVICE_IP}
-	
+	Wait Until Keyword Succeeds    10 min    5 sec    Check Telnet
+	Sleep    30
+
 *** Keywords ***
 Open Browser to ${URL}
     Open Browser    ${URL}
@@ -25,4 +28,22 @@ Open Browser to ${URL}
 	
 Check UI ${URL}
     Selenium2Library.Go To    ${URL}/Login/index.php
-	Wait Until Element Is Visible    loginnameid-inputEl
+    Wait Until Element Is Visible    loginnameid-inputEl
+
+Check Telnet
+    [Documentation]    This creates a telnet session, logs into the unit, and stores the unit's hostname in "${HOSTNAME}". \ This keyword leaves you at global enable mode on an AOS unit.
+    ${telnet_id_temp}    Telnet.Open Connection    ${DEVICE_IP}    timeout=10 seconds
+    Set Global Variable    ${TELNET_ID}    ${telnet_id_temp}
+    Telnet.Login    ${TELNET_USER_NAME}    ${TELNET_PASSWORD}    ${TELNET_LOGIN_PROMPT}    ${TELNET_PASSWORD_PROMPT}
+    Telnet.Set Prompt    ${PROMPT}
+    Telnet.Write    ${EMPTY}
+    ${out}=    Telnet.Read Until Prompt
+    ${out}=    Replace String    ${out}    >    ${EMPTY}
+    Set Global Variable    ${HOSTNAME}    ${out}
+    Telnet.Write    enable
+    Telnet.Read Until    Password:
+    Telnet.Set Prompt    ${HOSTNAME}#    prompt_is_regexp=False
+    Telnet.Write    ${ENABLE_PASSWORD}
+    Telnet.Write    no events
+    Telnet.Write    terminal length 0
+    Telnet.Read Until Prompt
