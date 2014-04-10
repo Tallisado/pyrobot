@@ -7,8 +7,8 @@
 	<condition property="runtime.typology" value="" else="${qa.typology}">								 <not><isset property="qa.typology"/></not></condition>
 	
    <condition property="python.path" value="python"><os family="unix" /></condition>  
+   <condition property="xvfb.path" value="Xvfb"><os family="unix" /></condition>
 	
-	<fail message="Property qa.payload needs to be set to a value">	<condition><not><isset property="qa.payload"/></not></condition></fail>
 	
    <macrodef name="run-python">
 		<sequential>
@@ -42,9 +42,84 @@
 			</fail>
       </sequential>
    </macrodef>	
+   
+      <macrodef name="start-xvfb">
+		<sequential>
+			<echo message="${local.exec_trace}${xvfb.path} ${runtime.display} -screen 0 1280x1024x16"/>
+			<exec executable="${xvfb.path}" spawn="true">
+				<arg line="${runtime.display} -screen 0 1280x1024x16"/>
+			</exec>
+			<echo message="${local.exec_trace}ps ax | grep '[X]vfb ${runtime.display}' | awk '{print $1}'"/>
+			<exec executable="bash" outputproperty="staged.pidofxvfb">
+			<arg value="-c"/>
+			<arg value="ps ax | grep '[X]vfb ${runtime.display}' | awk '{print $1}'"/>
+			</exec>
+			<echo message="${local.exec_trace}ps ax | grep '[X]vfb ${runtime.display}'"/>
+			<exec executable="bash" outputproperty="staged.psinfoxvfb">
+			<arg value="-c"/>
+			<arg value="ps ax | grep '[X]vfb ${runtime.display}'"/>
+			</exec>
+			<echo message="
+				${local.runtime_trace} Xvfb Starting ... ${line.separator}
+					-- display set to    : ${runtime.display} ${line.separator}
+					-- pid of xvfb       : ${staged.pidofxvfb} ${line.separator}
+					-- ps info for xvfb  : ${staged.psinfoxvfb} ${line.separator}
+			"/>
+		</sequential>
+   </macrodef>   
+	
+	<macrodef name="stop-xvfb">
+		<sequential>
+	    <echo message="${local.exec_trace}ps ax | grep '[X]vfb ${runtime.display}' | awk '{print $1}'"/>
+	    <exec executable="bash" outputproperty="staged.pidofxvfb">
+	      <arg value="-c"/>
+	      <arg value="ps ax | grep '[X]vfb ${runtime.display}' | awk '{print $1}'"/>
+        </exec>
+		<echo message="${local.exec_trace}kill -9 ${staged.pidofxvfb}"/>
+		<exec executable="kill" resultproperty="staged.killexitcode">
+			<arg value="-9"/>
+			<arg value="${staged.pidofxvfb}"/>
+		</exec>
+
+		<echo message="
+			-- [PYRO_RUNTIME] Xvfb Stopping ...${line.separator}
+				-- pidofxvfb      : ${staged.pidofxvfb}${line.separator}
+				-- kill exit code : ${staged.killexitcode}${line.separator}
+		"/>
+		<fail message="Failed to kill Xvfb process: ${staged.pidofxvfb}">
+			<condition>
+				<not>
+					<equals arg1="${staged.killexitcode}" arg2="0"/>
+				</not>
+			</condition>
+		</fail>
+      </sequential>
+   </macrodef>
 	
 	<target name="pyrobot">
+	<fail message="Property qa.payload needs to be set to a value">	<condition><not><isset property="qa.payload"/></not></condition></fail>
 		<run-python/>
 		<finally/>
+   </target>
+   
+		<target name="construct">
+		<fail message="Property qa.display needs to be set to a value"><condition><not><isset property="qa.display"/></not></condition></fail>	
+		<echo message="
+			${local.runtime_trace}${line.separator}
+			qa.display           : ${runtime.display}${line.separator}
+		"/>
+	
+		<!-- <echo message=": [PYRO_RUNTIME] ant construct "/> -->
+		<start-xvfb/>
+   </target>
+	
+	<target name="deconstruct">
+		<fail message="Property qa.display needs to be set to a value"><condition><not><isset property="qa.display"/></not></condition></fail>
+		<echo message="
+			${local.runtime_trace}${line.separator}
+			qa.display           : ${runtime.display}${line.separator}
+		"/>
+		<!-- <echo message=": [PYRO_RUNTIME] ant construct "/> -->
+		<stop-xvfb/>
    </target>
 </project>

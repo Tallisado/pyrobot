@@ -8,12 +8,13 @@ Variables         ../cli/phone_dictionary.py
 
 *** Variables ***
 ${Neo}            http://admin:password@${DEVICE_IP}:81
-${DEVICE_IP}      10.10.9.164
+${DEVICE_IP}      http://admin:password@10.10.9.26
 ${VOICE_USER_NUMBER}    1
 
 *** Test Cases ***
 Go to Neo
     Open Pyro Browser
+	Set Selenium Implicit Wait    15
 
 Go to Wizard
     Click Image    WizardToggleIcon
