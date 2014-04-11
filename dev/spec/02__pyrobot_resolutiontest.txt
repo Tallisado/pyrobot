@@ -1,0 +1,73 @@
+*** Settings ***
+Suite Setup
+Suite Teardown    Close Browser
+Library           Selenium2Library
+Library           Collections
+Library           PyroLibrary
+
+*** Variables ***
+${Neo}            http://${DEVICE_IP}
+${DEVICE_IP}      10.10.9.164
+
+*** Test Cases ***
+Drag And Drop SPRE Settings - System Speed Dial
+	Open Pyro Browser
+	Sencha Login     		3011    1234    settingsButton-btnIconEl
+#	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+#	Selenium Click    id    settingsButton-btnIconEl
+#	Selenium Wait For Element Present    id    settingsPhone
+#	Selenium Click    id    settingsPhone
+#	Selenium Wait For Element Present    id    phone_btn0_lbl
+#	Selenium Drag And Drop    id    phoneFunc0_3    phone_btn2
+#	Selenium Verify Text From Element    id    phone_btn2_lbl    SPRE
+#	Selenium Double Click    id    phone_btn2_lbl
+#	Selenium Wait For Element Present    xpath    //div[@id='spreSetting_grid-body']
+#	Selenium Click    xpath    //div[@id='spreSetting_grid-body']/div/table/tbody/tr[1]
+#	Selenium Wait For Element Present    name    select_cmb-inputEl
+#	Selenium Click Text From Combobox    name    select_cmb-inputEl    Homer Simpson
+#	Selenium Wait For Element Present    id    spreOK_btn
+#	Selenium Click    id    spreOK_btn
+#	Selenium Wait For Element Present    id    phone_btn2_lbl
+#	Selenium Verify Text From Element    id    phone_btn2_lbl    Homer Si...
+#	Selenium Click    id    phone_btn2_del-innerCt
+#	Selenium Verify Text From Element    id    phone_btn2_lbl    ""
+	
+Drag And Drop SPRE Settings - Page-Overhead
+	Selenium Reload
+	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+	Selenium Click    id    settingsButton-btnIconEl
+	Selenium Wait For Element Present    id    settingsPhone
+	Selenium Click    id    settingsPhone
+	Selenium Wait For Element Present    id    phone_btn0_lbl
+	Selenium Drag And Drop    id    phoneFunc0_3    phone_btn2
+	Selenium Verify Text From Element    id    phone_btn2_lbl    SPRE
+	Selenium Double Click    id    phone_btn2_lbl
+	Selenium Wait For Element Present    xpath    //div[@id='spreSetting_grid-body']
+	Selenium Click    xpath    //div[@id='spreSetting_grid-body']/div/table/tbody/tr[2]
+	Selenium Wait For Element Present    id    spreOK_btn
+	Selenium Click    id    spreOK_btn
+	Selenium Wait For Element Present    id    phone_btn2_lbl
+	Selenium Verify Text From Element    id    phone_btn2_lbl    pageOver...
+#	Selenium Click    id    phone_btn2_del-innerCt
+#	Execute Javascript    document.getElementById('phone_btn2_del-innerCt').click();
+#	Selenium Verify Text From Element    id    phone_btn2_lbl    ""
+
+Drag And Drop SPRE Settings - Forward Notification Cancel
+	Selenium Reload
+	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+	Selenium Click    id    settingsButton-btnIconEl
+	Selenium Wait For Element Present    id    settingsPhone
+	Selenium Click    id    settingsPhone
+	Selenium Wait For Element Present    id    phone_btn0_lbl
+	Selenium Drag And Drop    id    phoneFunc0_3    phone_btn2
+	Selenium Verify Text From Element    id    phone_btn2_lbl    SPRE
+	Selenium Double Click    id    phone_btn2_lbl
+	Selenium Wait For Element Present    xpath    //div[@id='spreSetting_grid-body']
+	Selenium Click    xpath    //div[@id='spreSetting_grid-body']/div/table/tbody/tr[3]
+	Selenium Wait For Element Present    id    spreOK_btn
+	Selenium Click    id    spreOK_btn
+	Selenium Wait For Element Present    id    phone_btn2_lbl
+	Selenium Verify Text From Element    id    phone_btn2_lbl    Forward ...
+#	Selenium Click    id    phone_btn2_del-innerCt
+#	Execute Javascript    document.getElementById('phone_btn2_del-innerCt').click();
+#	Selenium Verify Text From Element    id    phone_btn2_lbl    ""
