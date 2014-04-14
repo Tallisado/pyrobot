@@ -14,6 +14,7 @@ ${VOICE_USER_NUMBER}    1
 *** Test Cases ***
 Go to Neo
     Open Browser to ${Neo}
+	
 
 Go to Wizard
     Click Image    WizardToggleIcon
