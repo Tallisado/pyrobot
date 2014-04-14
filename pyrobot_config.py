@@ -23,7 +23,7 @@ time_between_test_start_up = 0
 #
 #######
 
-DEFAULT_TOPOLOGY_FOLDER = "dev/resources/topology/"
+DEFAULT_TOPOLOGY_FOLDER = "/mnt/wt/pyrobot_v1.1/pyrobot/dev/resources/topology/"
 DEFAULT_TOPOLOGY = "topology_default.py"
 
 SAUCE_USERNAME = 'talliskane'
@@ -34,7 +34,7 @@ DEFAULT_SOLO_BROWSER = 'chrome'
 DEFAULT_BROWSER_DISPLAY = ":80"
 
 
-BROWSER_CAPABILITIES = 'name:%s,platform:%s,version:%s,browserName:%s,javascriptEnabled:True'
+BROWSER_CAPABILITIES = 'name:%s,platform:%s,version:%s,browserName:%s,javascriptEnabled:True,screen-resolution:1280x1024'
 
 BASE_URL = "http://www.google.ca"
 
