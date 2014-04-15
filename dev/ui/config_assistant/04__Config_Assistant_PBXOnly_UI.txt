@@ -7,8 +7,7 @@ Library           Collections
 Variables         phone_dictionary.py
 
 *** Variables ***
-${Neo}            http://admin:password@${DEVICE_IP}:81
-${DEVICE_IP}      10.10.9.164
+${Neo}            http://admin:password@${LAN_IP}:81
 ${VOICE_USER_NUMBER}    2
 
 *** Test Cases ***
@@ -18,7 +17,7 @@ Go to Neo
 Go to Wizard
     Click Image    WizardToggleIcon
     #we can open it here but I have no way to move to it...yet    Execute Javascript    openStartupWizard()
-    Selenium2Library.Go To    ${DEVICE_IP}:81/main/wizard/startup/startup_welcome.html
+    Selenium2Library.Go To    ${LAN_IP}:81/main/wizard/startup/startup_welcome.html
 
 Create New Configuration
     [Tags]    new

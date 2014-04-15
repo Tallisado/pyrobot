@@ -7,15 +7,14 @@ Library           Collections
 Variables         phone_dictionary.py
 
 *** Variables ***
-${Neo}            http://admin:password@${DEVICE_IP}
-${DEVICE_IP}      10.10.9.164
+${Neo}            http://admin:password@${LAN_IP}
 
 *** Test Cases ***
 Go to Neo
     Open Browser to ${Neo}
 
 Go to Login Page
-    Selenium2Library.Go To    ${DEVICE_IP}/Login/index.php
+    Selenium2Library.Go To    ${LAN_IP}/Login/index.php
 	
 Check Login Page
 	Wait Until Element Is Visible    loginnameid-inputEl    timeout=5

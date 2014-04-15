@@ -6,7 +6,7 @@ Library           Collections
 Library           PyroLibrary
 
 *** Variables ***
-${DEVICE_IP}               10.10.9.164
+${LAN_IP}               10.10.9.164
 ${TELNET_USER_NAME}        admin
 ${TELNET_PASSWORD}         password
 ${ENABLE_PASSWORD}         password
@@ -20,7 +20,7 @@ ${SHOW_VOICE_USERS}        show voice users
 *** Test Cases ***
 Login via Telnet
     [Documentation]    This creates a telnet session, logs into the unit, and stores the unit's hostname in "${HOSTNAME}". \ This keyword leaves you at global enable mode on an AOS unit.
-    ${telnet_id_temp}    Telnet.Open Connection    ${DEVICE_IP}    timeout=10 seconds
+    ${telnet_id_temp}    Telnet.Open Connection    ${LAN_IP}    timeout=10 seconds
     Set Global Variable    ${TELNET_ID}    ${telnet_id_temp}
     Telnet.Login    ${TELNET_USER_NAME}    ${TELNET_PASSWORD}    ${TELNET_LOGIN_PROMPT}    ${TELNET_PASSWORD_PROMPT}
     Telnet.Set Prompt    ${PROMPT}

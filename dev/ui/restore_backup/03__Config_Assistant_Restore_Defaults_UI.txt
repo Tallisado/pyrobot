@@ -25,7 +25,7 @@ Restore Factory Defaults
 	Sleep    80s
 	
 Wait For Unit To Restart
-	Wait Until Keyword Succeeds    5 min    5 sec    Check UI ${DEVICE_IP}
+	Wait Until Keyword Succeeds    10 min    5 sec    Check UI ${DEVICE_IP}
 	
 *** Keywords ***
 Open Browser to ${URL}

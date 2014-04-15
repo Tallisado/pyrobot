@@ -33,7 +33,6 @@ Drag And Drop SPRE Settings - System Speed Dial
 #	Selenium Verify Text From Element    id    phone_btn2_lbl    ""
 	
 Drag And Drop SPRE Settings - Page-Overhead
-	Selenium Reload
 	Selenium Wait For Element Present    id    settingsButton-btnIconEl
 	Selenium Click    id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsPhone
@@ -512,6 +511,7 @@ Drag And Drop SPRE Settings - Held Call Pickup/Park Retrieve - Park Zone
 	Selenium Wait For Element Present    id    phone_btn2_lbl
 	Selenium Verify Text From Element    id    phone_btn2_lbl    Pickup
 #	Selenium Click    id    phone_btn2_del-innerCt
+
 #	Execute Javascript    document.getElementById('phone_btn2_del-innerCt').click();
 #	Selenium Verify Text From Element    id    phone_btn2_lbl    ""
 
