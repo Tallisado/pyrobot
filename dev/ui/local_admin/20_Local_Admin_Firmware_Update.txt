@@ -16,7 +16,7 @@ Upload Firmware
 	Selenium Wait For Element Present    id    firmwareUpdateSystem_wiz
 	Selenium Click    id    firmwareUpdateSystem_wiz
 	Selenium Wait For Element Present    id    firmwareSystemWiz_file-button-fileInputEl
-	Choose File    id=firmwareSystemWiz_file-button-fileInputEl    /tmp/amb_r6.196.D.E.image
+	Choose File    id=firmwareSystemWiz_file-button-fileInputEl    /tmp/amb_r6.224.E.image
 	Selenium Click    id    updateFirmwareWiz_next_btn-btnIconEl
 	Sleep     90
 	Selenium Verify Text From Element    id    updateFirmwareWiz_cancel_btn-btnInnerEl     Close

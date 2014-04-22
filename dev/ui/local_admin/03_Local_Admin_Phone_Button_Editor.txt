@@ -76,6 +76,8 @@ Drag and Drop Blank - BTN11
 	
 Reload Page 1
 	Selenium Reload
+	Selenium Click    id    editPhoneButton_wiz
+	Selenium Wait For Element Present    id    phonebuttonWizard_comboBox-inputEl
 	Selenium Click Text From Combobox    id    phonebuttonWizard_comboBox-inputEl    Wizard User
 	Selenium Wait For Element Present    id    launchPhoneWiz_launchEditor_btn-btnEl
 	Selenium Wait For Element Present    id    phone_btn0_lbl
@@ -122,6 +124,8 @@ Drag and Drop SPRE - BTN11
 	
 Reload Page 2
 	Selenium Reload
+	Selenium Click    id    editPhoneButton_wiz
+	Selenium Wait For Element Present    id    phonebuttonWizard_comboBox-inputEl
 	Selenium Click Text From Combobox    id    phonebuttonWizard_comboBox-inputEl    Wizard User
 	Selenium Wait For Element Present    id    launchPhoneWiz_launchEditor_btn-btnEl
 	Selenium Wait For Element Present    id    phone_btn0_lbl
@@ -168,6 +172,8 @@ Drag and Drop User - BTN11
 	
 Reload Page 3
 	Selenium Reload
+	Selenium Click    id    editPhoneButton_wiz
+	Selenium Wait For Element Present    id    phonebuttonWizard_comboBox-inputEl
 	Selenium Click Text From Combobox    id    phonebuttonWizard_comboBox-inputEl    Wizard User
 	Selenium Wait For Element Present    id    launchPhoneWiz_launchEditor_btn-btnEl
 	Selenium Wait For Element Present    id    phone_btn0_lbl
@@ -214,6 +220,8 @@ Drag and Drop Mailbox - BTN11
 	
 Reload Page 4
 	Selenium Reload
+	Selenium Click    id    editPhoneButton_wiz
+	Selenium Wait For Element Present    id    phonebuttonWizard_comboBox-inputEl
 	Selenium Click Text From Combobox    id    phonebuttonWizard_comboBox-inputEl    Wizard User
 	Selenium Wait For Element Present    id    launchPhoneWiz_launchEditor_btn-btnEl
 	Selenium Wait For Element Present    id    phone_btn0_lbl
@@ -260,6 +268,8 @@ Drag and Drop Speed Dial - BTN11
 	
 Reload Page 5
 	Selenium Reload
+	Selenium Click    id    editPhoneButton_wiz
+	Selenium Wait For Element Present    id    phonebuttonWizard_comboBox-inputEl
 	Selenium Click Text From Combobox    id    phonebuttonWizard_comboBox-inputEl    Wizard User
 	Selenium Wait For Element Present    id    launchPhoneWiz_launchEditor_btn-btnEl
 	Selenium Wait For Element Present    id    phone_btn0_lbl
@@ -306,6 +316,8 @@ Drag and Drop Park Zone - BTN11
 	
 Reload Page 6
 	Selenium Reload
+	Selenium Click    id    editPhoneButton_wiz
+	Selenium Wait For Element Present    id    phonebuttonWizard_comboBox-inputEl
 	Selenium Click Text From Combobox    id    phonebuttonWizard_comboBox-inputEl    Wizard User
 	Selenium Wait For Element Present    id    launchPhoneWiz_launchEditor_btn-btnEl
 	Selenium Wait For Element Present    id    phone_btn0_lbl
@@ -352,6 +364,8 @@ Drag and Drop Paging Group - BTN11
 	
 Reload Page 7
 	Selenium Reload
+	Selenium Click    id    editPhoneButton_wiz
+	Selenium Wait For Element Present    id    phonebuttonWizard_comboBox-inputEl
 	Selenium Click Text From Combobox    id    phonebuttonWizard_comboBox-inputEl    Wizard User
 	Selenium Wait For Element Present    id    launchPhoneWiz_launchEditor_btn-btnEl
 	Selenium Wait For Element Present    id    phone_btn0_lbl
