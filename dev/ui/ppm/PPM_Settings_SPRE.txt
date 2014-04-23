@@ -37,6 +37,7 @@ Drag And Drop SPRE Settings - Page-Overhead
 	Selenium Click    id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsPhone
 	Selenium Click    id    settingsPhone
+	Sleep    10s
 	Selenium Wait For Element Present    id    phone_btn0_lbl
 	Selenium Drag And Drop    id    phoneFunc0_3    phone_btn2
 	Selenium Verify Text From Element    id    phone_btn2_lbl    SPRE

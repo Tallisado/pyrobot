@@ -19,10 +19,10 @@ Set Profile Settings
 	Selenium Click    id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsProfile
 	Selenium Click    id    settingsProfile
-	Selenium Clear    name    HomeNumber
-	Selenium Type    name    HomeNumber    (613) 599-0100
-	Selenium Clear    name    MobileNumber
-	Selenium Type    name    MobileNumber    (613) 333-3007
+	#Selenium Clear    name    HomeNumber
+	#Selenium Type    name    HomeNumber    (613) 599-0100
+	#Selenium Clear    name    MobileNumber
+	#Selenium Type    name    MobileNumber    (613) 333-3007
 	Selenium Clear    name    PrimaryEmail
 	Selenium Type    name    PrimaryEmail    Kyle.Turris@senators.nhl.com
 	Selenium Clear    name    SecondaryEmail
