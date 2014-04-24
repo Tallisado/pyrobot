@@ -16,12 +16,12 @@ Verify User 3001 Does Not Exist
 	Selenium Wait For Element Present    id    createUser_wiz
 	Selenium Click    id    createUser_wiz
 	Selenium Wait For Element Present    id    createUsersWizardFirstNameField_txtinput-inputEl
-	Selenium Type    id    createUsersWizardFirstNameField_txtinput-inputEl    Automated
-	Selenium Type    id    createUsersWizardLastNameField_txtinput-inputEl     User
-    Selenium Type    id    createUsersWizardDescriptionField_txtinput-inputEl    Creating user for automated test
-	Selenium Clear   id    createUsersWizardExtensionNumberField_txtinput-inputEl
-	Selenium Type    id    createUsersWizardExtensionNumberField_txtinput-inputEl    3001
-	Selenium Type    id    createUsersWizardCellPhoneField_txtinput-inputEl    6135550134
+	Input Text    id=createUsersWizardFirstNameField_txtinput-inputEl    Automated
+	Input Text    id=createUsersWizardLastNameField_txtinput-inputEl    User
+	Input Text    id=createUsersWizardDescriptionField_txtinput-inputEl    Creating user for automated test
+	Input Text    id=createUsersWizardExtensionNumberField_txtinput-inputEl    ${EMPTY}
+	Input Text    id=createUsersWizardExtensionNumberField_txtinput-inputEl    3001
+	Input Text    id=createUsersWizardCellPhoneField_txtinput-inputEl    6135550134
 	Selenium Element Should Not Be Visible    xpath    //div[@role='presentation' and @style='']
 	
 Create User 3001
@@ -29,12 +29,12 @@ Create User 3001
 	Selenium Wait For Element Present    id    createUser_wiz
 	Selenium Click    id    createUser_wiz
 	Selenium Wait For Element Present    id    createUsersWizardFirstNameField_txtinput-inputEl
-	Selenium Type    id    createUsersWizardFirstNameField_txtinput-inputEl    Automated
-	Selenium Type    id    createUsersWizardLastNameField_txtinput-inputEl     User
-    Selenium Type    id    createUsersWizardDescriptionField_txtinput-inputEl    Creating user for automated test
-	Selenium Clear   id    createUsersWizardExtensionNumberField_txtinput-inputEl
-	Selenium Type    id    createUsersWizardExtensionNumberField_txtinput-inputEl    3001
-	Selenium Type    id    createUsersWizardCellPhoneField_txtinput-inputEl    6135550134
+	Input Text    id=createUsersWizardFirstNameField_txtinput-inputEl    Automated
+	Input Text    id=createUsersWizardLastNameField_txtinput-inputEl    User
+	Input Text    id=createUsersWizardDescriptionField_txtinput-inputEl    Creating user for automated test
+	Input Text    id=createUsersWizardExtensionNumberField_txtinput-inputEl    ${EMPTY}
+	Input Text    id=createUsersWizardExtensionNumberField_txtinput-inputEl    3001
+	Input Text    id=createUsersWizardCellPhoneField_txtinput-inputEl    6135550134
 	Selenium Element Should Not Be Visible    xpath    //div[@role='presentation' and @style='']
 	Selenium Click    id    createUserWiz_next_btn-btnWrap
 	Selenium Wait For Element Present    id    default_radio-inputEl
@@ -52,12 +52,12 @@ Create User 3002
 	Selenium Wait For Element Present    id    createUser_wiz
 	Selenium Click    id    createUser_wiz
 	Selenium Wait For Element Present    id    createUsersWizardFirstNameField_txtinput-inputEl
-	Selenium Type    id    createUsersWizardFirstNameField_txtinput-inputEl    Automated
-	Selenium Type    id    createUsersWizardLastNameField_txtinput-inputEl     User2
-    Selenium Type    id    createUsersWizardDescriptionField_txtinput-inputEl    Creating user for automated test
-	Selenium Clear   id    createUsersWizardExtensionNumberField_txtinput-inputEl
-	Selenium Type    id    createUsersWizardExtensionNumberField_txtinput-inputEl    3002
-	Selenium Type    id    createUsersWizardCellPhoneField_txtinput-inputEl    6135550134
+	Input Text    id=createUsersWizardFirstNameField_txtinput-inputEl    Automated
+	Input Text    id=createUsersWizardLastNameField_txtinput-inputEl    User2
+	Input Text    id=createUsersWizardDescriptionField_txtinput-inputEl    Creating user for automated test
+	Input Text    id=createUsersWizardExtensionNumberField_txtinput-inputEl    ${EMPTY}
+	Input Text    id=createUsersWizardExtensionNumberField_txtinput-inputEl    3002
+	Input Text    id=createUsersWizardCellPhoneField_txtinput-inputEl    6135550134
 	Selenium Element Should Not Be Visible    xpath    //div[@role='presentation' and @style='']
 	Selenium Click    id    createUserWiz_next_btn-btnWrap
 	Selenium Wait For Element Present    id    default_radio-inputEl
