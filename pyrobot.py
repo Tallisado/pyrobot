@@ -6,4 +6,8 @@
 
 from pyro_factory import pyro_factory as PyroFactory
 import pyrobot_config as config
-pyrofactory = PyroFactory.PyroFactory().run(config)
+pyrofactory = PyroFactory.PyroFactory()
+pyrofactory.run(config)
+pyrofactory.send_email()
+
+
