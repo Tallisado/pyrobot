@@ -17,7 +17,7 @@ Go to Neo
 	
 Go to Wizard
     Click Image    WizardToggleIcon
-	Execute Javascript    openStartupWizard()
+	#Execute Javascript    openStartupWizard()
     Selenium2Library.Go To    ${LAN_IP}:81/main/wizard/startup/startup_welcome.html
 
 Create New Configuration
@@ -26,10 +26,8 @@ Create New Configuration
     Click Link    modal-upload-submit
 
 Network Configuration
-    Select PBX
-    Use DHCP
-	Check Box    remoteAdminEnabled
-    Configure LAN Port Settings    ${LAN_PORT}    ${LAN_MASK}
+    Select PBX Only
+    Configure LAN Port Settings    ${LAN_PORT}    ${LAN_MASK}    10.10.10.254    10.10.10.250    10.10.10.251
     Next
     Sleep    3
     Next
@@ -134,7 +132,6 @@ Configure Admin
 Select PBX ${function}
     [Documentation]    if ${function}==Only will select optionB else if ${function}==and Router will select optionA
     Run Keyword if    '${function}'=='Only'    Select Radio Button    network_radiobutton    optionB
-    Run Keyword if    '${function}'=='Only'    Click Link    use_dhcp
     Run Keyword if    '${function}'=='and Router'    Select Radio Button    network_radiobutton    optionA
     Selenium2Library.Click Button    next
 
@@ -202,9 +199,12 @@ Use DHCP
     Check Box    use_dhcp
 
 Configure LAN Port Settings
-    [Arguments]    ${address}    ${mask}
+    [Arguments]    ${address}    ${mask}    ${gateway}    ${dns1}    ${dns2}    
     Selenium2Library.Input Text    voiceLanIpAddr    ${address}
     Selenium2Library.Input Text    voiceLanSubnetMask    ${mask}
+    Selenium2Library.Input Text    defaultGateway    ${gateway}
+    Selenium2Library.Input Text    primaryDns    ${dns1}
+	Selenium2Library.Input Text    secondaryDns    ${dns2}
 
 SIP Server
     [Arguments]    ${server}    # may be IP address or host name

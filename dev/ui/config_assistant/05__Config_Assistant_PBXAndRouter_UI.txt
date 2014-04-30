@@ -118,18 +118,7 @@ Apply Configuration
     Next
     Sleep    2
     Apply
-    Sleep    30
-
-Config Written
-    Wait Until Keyword Succeeds    3 min    5 sec    Run Keyword And Continue On Failure    Open Connection    ${LAN_IP}    None
-    ...    23
-    Login    ${USER}    ${PASSWORD}    Username:    Password:
-    Write Until Expected Output    enable\r\n    Password:    10 s    3
-    Write    password
-    Write    terminal length 0
-    Write    show file flash startupwizard.log
-    Sleep    1
-    Read Until    Config Applied
+    Sleep    60
 
 *** Keywords ***
 Open Browser to ${URL}
