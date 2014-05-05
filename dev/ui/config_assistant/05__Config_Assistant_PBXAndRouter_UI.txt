@@ -235,21 +235,17 @@ Enable SIP Authentication
 
 Create User
     [Arguments]    ${extension}    ${first_name}    ${last_name}    ${phone_model}    ${MAC}=""    ${operator_group}=false
-    Select Frame    user_table_frame
-    Selenium2Library.Click Element    bottom_area
-    Selenium2Library.Input Text    extension${VOICE_USER_NUMBER}    ${extension}
-    Selenium2Library.Input Text    first_name${VOICE_USER_NUMBER}    ${first_name}
-    Selenium2Library.Input Text    last_name${VOICE_USER_NUMBER}    ${last_name}
-    ${phone}=    Collections.Get From Dictionary    ${PHONE_MODELS}    ${phone_model}
-    log    ${phone}
-    ${phone_str}    Convert to String    ${phone}
-    Selenium2Library.Select From List By Value    phoneModel${VOICE_USER_NUMBER}    ${phone_str}
-    Run Keyword If    ${phone} > 2    Selenium2Library.Input Text    mac_address${VOICE_USER_NUMBER}    ${MAC}
+    Click Element    name=create_btn
+    Selenium2Library.Input Text    inputExtension    ${extension}
+    Selenium2Library.Input Text    inputFirstname    ${first_name}
+    Selenium2Library.Input Text    inputLastname    ${last_name}
+    Selenium2Library.Select From List By Value    inputPhoneType    ${phone_model}
+    Selenium2Library.Input Text    inputMAC    ${MAC}
     ${bool}    Convert to Boolean    ${operator_group}
-    Run Keyword If    ${bool}    Check Box    opr${VOICE_USER_NUMBER}
-    Unselect Frame
+    Run Keyword If    ${bool}    Check Box    inputOperator
     ${number}=    Evaluate    ${VOICE_USER_NUMBER} + 1
     Set Global Variable    ${VOICE_USER_NUMBER}    ${number}
+    Click Element    name=saveAndClose_btn
 
 Apply
     Selenium2Library.Click Button    apply
