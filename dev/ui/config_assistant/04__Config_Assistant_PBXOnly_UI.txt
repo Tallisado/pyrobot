@@ -99,8 +99,11 @@ SIP Trunk Configuration
     SIP Proxy
     SIP Proxy Port
     Enable SIP Authentication    ${ENABLE_SIP_AUTH}
-    Allow Trunk to Trunk Calls    ${SIP_ALLOW_TRUNK_TO_TRUNK}
     Next
+	
+SIP Trunk Configuration Options
+	Allow Trunk to Trunk Calls    ${SIP_ALLOW_TRUNK_TO_TRUNK}
+	Next
 
 Inband Call Routing
     [Documentation]    Select to route incoming calls to the Autoattendant (id=autoattendant) or operator group (id=operatorgroup)
