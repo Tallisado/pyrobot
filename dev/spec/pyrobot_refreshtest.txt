@@ -1,0 +1,24 @@
+*** Settings ***
+Suite Setup
+Suite Teardown    Close Browser
+Library           Selenium2Library
+Library           Collections
+Library           PyroLibrary
+
+*** Variables ***
+${Neo}            http://${DEVICE_IP}
+${DEVICE_IP}      10.10.9.164
+
+*** Keywords ***
+Click Button On Main Page
+	Selenium Wait For Element Present    id    createUser_wiz
+	Selenium Click    id    createUser_wiz
+	Selenium Wait For Element Present    id    createUsersWizardFirstNameField_txtinput-inputEl
+	Selenium Reload
+
+*** Test Cases ***
+Open To Main Page
+	Open Pyro Browser
+	Sencha Login     		admin    password    helpButton-btnIconEl
+	Selenium Wait For Element Present    id    createUser_wiz
+    Repeat Keyword    10    Click Button On Main Page

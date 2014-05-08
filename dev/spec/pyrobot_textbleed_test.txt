@@ -1,0 +1,22 @@
+*** Settings ***
+Suite Setup
+Suite Teardown    Close Browser
+Library           Selenium2Library
+Library           Collections
+
+*** Variables ***
+
+*** Test Cases ***
+Login
+	Open Browser    http://dev.sencha.com/deploy/ext-4.0.0/examples/writer/writer.html    browser=firefox
+	
+Set Profile Settings
+	Sleep    1
+	Input Text    name=email    ${EMPTY}
+	Input Text    name=email    (613) 123-4567	
+	Input Text    name=first    ${EMPTY}
+	Input Text    name=first    (613) 123-9999
+	Sleep    55
+	Textfield Should Contain    name=email    (613) 123-4567
+	Textfield Should Contain    name=first    (613) 123-9999
+	
