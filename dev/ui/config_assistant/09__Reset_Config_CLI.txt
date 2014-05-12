@@ -1,5 +1,7 @@
 *** Settings ***
 Documentation     DVT Test resource for Robot Framework
+Suite Teardown    Close Browser
+Library           Selenium2Library
 Library           String
 Library           Collections
 Library			  BuiltIn
@@ -42,7 +44,7 @@ Factory Default Unit
 	Read Until    [y/n]
 	Write    y
 	Close Connection
-	Run    sleep 60
+	Sleep 60
 	Wait Until Keyword Succeeds    10 min    5 sec    Verify reconnect to SSH
 	Sleep    30
 	
@@ -86,7 +88,7 @@ Reboot Unit
 	Write    y
 	Close Connection
 	Run    sleep 60
-	Wait Until Keyword Succeeds    10 min    5 sec    Verify reconnect to SSH
+	Wait Until Keyword Succeeds    10 min    5 sec    Check UI ${LAN_IP}
 	Sleep    30
 
 *** Keywords ***
@@ -108,3 +110,7 @@ Verify reconnect to SSH
     Write    no events
     Write    terminal length 0
     Read Until Prompt
+	
+Check UI ${URL}
+    Selenium2Library.Go To    ${URL}/Login/index.php
+	Wait Until Element Is Visible    loginnameid-inputEl

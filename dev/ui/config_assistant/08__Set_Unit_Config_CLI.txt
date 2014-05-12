@@ -107,3 +107,4 @@ Turn off Firewall
 Save Config
 	Write    do write
 	Read Until Prompt
+	Sleep 30
