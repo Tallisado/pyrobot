@@ -12,7 +12,7 @@ ${DEVICE_IP}      10.10.9.164
 *** Test Cases ***
 Test PPM Login and Logout
 	Open Pyro Browser
-	Sencha Login     		3011    1234    settingsButton-btnIconEl
+	Sencha Login     		3011    1234    settingsButton-btnIconEl    False
 	Title Should Be    ADTRAN Neo
 	Selenium Click    id    logout-btnEl
 	Selenium Wait For Element Present    id    loginnameid-inputEl

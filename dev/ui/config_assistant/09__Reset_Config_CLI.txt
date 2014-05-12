@@ -21,7 +21,7 @@ ${CONFIG_FILE}             config-NEO-nightly.cfg
 *** Test Cases ***
 Login via SSH
     [Documentation]    This creates a SSH session, logs into the unit, and stores the unit's hostname in "${HOSTNAME}". \ This keyword leaves you at global enable mode on an AOS unit.
-    ${ssh_id_temp}    Open Connection    ${DEVICE_IP}    timeout=600 seconds
+    ${ssh_id_temp}    Open Connection    ${LAN_IP}    timeout=600 seconds
     Set Global Variable    ${SSH_ID}    ${ssh_id_temp}
 	Set Client Configuration    prompt=${PROMPT}
     Login    ${SSH_USER_NAME}    ${SSH_PASSWORD}
@@ -47,7 +47,7 @@ Factory Default Unit
 	Sleep    30
 	
 Configure WAN Interface
-	${ssh_id_temp}    Open Connection    ${DEVICE_IP}    timeout=600 seconds
+	${ssh_id_temp}    Open Connection    ${LAN_IP}    timeout=600 seconds
     Set Global Variable    ${SSH_ID}    ${ssh_id_temp}
 	Set Client Configuration    prompt=${PROMPT}
     Login    ${SSH_USER_NAME}    ${SSH_PASSWORD}
@@ -93,7 +93,7 @@ Reboot Unit
 
 Verify reconnect to SSH
     [Documentation]    This creates a SSH session, logs into the unit, and stores the unit's hostname in "${HOSTNAME}". \ This keyword leaves you at global enable mode on an AOS unit.
-    ${ssh_id_temp}    Open Connection    ${DEVICE_IP}    timeout=10 seconds
+    ${ssh_id_temp}    Open Connection    ${LAN_IP}    timeout=10 seconds
     Set Global Variable    ${SSH_ID}    ${ssh_id_temp}
 	Set Client Configuration    prompt=${PROMPT}
     Login    ${SSH_USER_NAME}    ${SSH_PASSWORD}
