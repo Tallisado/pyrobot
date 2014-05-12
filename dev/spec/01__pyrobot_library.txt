@@ -21,16 +21,6 @@ Library - Sencha Login
     Sencha Login     		3011    1234    settingsButton-btnIconEl
     Title Should Be         ${NEO_TITLE}
     
-    
-A1
-    Should Be Equal         ${DEFAULT_TOPOLOGY_VALUE}    1337    msg="topology was not given to pybot"
-    
-A2
-    Sleep     5
-    
-A3
-    Reload Page
-    
 A4
     Selenium Click    id    settingsButton-btnIconEl
 
