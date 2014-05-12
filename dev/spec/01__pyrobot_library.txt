@@ -3,6 +3,7 @@ Suite Teardown    Close Browser
 Library           Selenium2Library
 Library           PyroLibrary
 Library           Collections
+Library           OperatingSystem
 Documentation     Testing library
 Metadata          Version                            1.1
 Metadata          More Info                          For more information about Pyrobot see https://github.com/Tallisado/pyro
@@ -14,24 +15,47 @@ ${NEO_TITLE}        ADTRAN Neo
 *** Test Cases ***
 Library - Open Pyro Browser
 	Open Pyro Browser
-	Sencha Login     		3011    1234    settingsButton-btnIconEl
-    Title Should Be         ${NEO_TITLE}
+    Set Selenium Timeout    15
 	
-# Library - Reload Browser
-	# Selenium Reload
-    # Title Should Be         ${NEO_TITLE}
-
-Factory - Typology
-	Should Be Equal         ${DEFAULT_TOPOLOGY_VALUE}    1337    msg="topology was not given to pybot"
+Library - Sencha Login
+    Sencha Login     		3011    1234    settingsButton-btnIconEl
+    Title Should Be         ${NEO_TITLE}
+    
+    
+A1
+    Should Be Equal         ${DEFAULT_TOPOLOGY_VALUE}    1337    msg="topology was not given to pybot"
+    
+A2
+    Sleep     5
+    
+A3
+    Reload Page
+    
+A4
+    Selenium Click    id    settingsButton-btnIconEl
 
     
-Library - Verify Attribute From Element
-	Selenium Wait For Element Present    id    settingsButton-btnIconEl
-	Selenium Click    id    settingsButton-btnIconEl
-	Selenium Wait For Element Present    id    settingsProfile
-	Selenium Click    id    settingsProfile
-	Selenium Verify Attribute From Element    name    HomeNumber    value    (613) 599-0100
-	Selenium Click    id    saveUserProfileId-btnIconEl
+    
+# Open Pyro Browser
+	# Sencha Login     		admin    password    helpButton-btnIconEl
+	# Selenium Wait For Element Present    id    createUser_wiz
+
+# Get It
+    # Get Source
+    #Wait Until Page Contains Element     id=settingsButton-btnIconEl
+    #Selenium Wait For Element Present       id    settingsButton-btnIconEl
+
+# Factory - Typology
+	# Should Be Equal         ${DEFAULT_TOPOLOGY_VALUE}    1337    msg="topology was not given to pybot"
+
+    
+# Library - Verify Attribute From Element
+	# Selenium Wait For Element Present    id    settingsButton-btnIconEl
+	# Selenium Click    id    settingsButton-btnIconEl
+	# Selenium Wait For Element Present    id    settingsProfile
+	# Selenium Click    id    settingsProfile
+	# Selenium Verify Attribute From Element    name    HomeNumber    value    (613) 599-0100
+	# Selenium Click    id    saveUserProfileId-btnIconEl
 	
 # Library - Drag and Drop and Verify Text From Element
 	# Selenium Wait For Element Present    id    settingsButton-btnIconEl
