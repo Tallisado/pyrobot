@@ -15,6 +15,7 @@ Edit the User Profile
 	Sencha Login     		admin    password    helpButton-btnIconEl
 	Selenium Wait For Element Present    id    users_tab
 	Selenium Click    id    users_tab
+	Selenium Type    id    users_panel_filterUser_search-inputEl    3011
 	Selenium Wait For Element Present    xpath	   //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]
 	Selenium Click    xpath    //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]
 	Selenium Wait For Element Present    id    users_panel_edit_btn-btnEl
@@ -39,6 +40,7 @@ Verify User Profile Settings
 	Selenium Reload
 	Selenium Wait For Element Present    id    users_tab
 	Selenium Click    id    users_tab
+	Selenium Type    id    users_panel_filterUser_search-inputEl    3011
 	Selenium Wait For Element Present    xpath	   //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]
 	Selenium Verify Text From Element    xpath    //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]/td[1]/div    Some
 	Selenium Verify Text From Element    xpath    //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]/td[2]/div    Guy
@@ -49,6 +51,7 @@ Edit The User Profile To Original Values
 	Selenium Reload
 	Selenium Wait For Element Present    id    users_tab
 	Selenium Click    id    users_tab
+	Selenium Type    id    users_panel_filterUser_search-inputEl    3011
 	Selenium Wait For Element Present    xpath	   //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]
 	Selenium Click    xpath    //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]
 	Selenium Wait For Element Present    id    users_panel_edit_btn-btnEl
@@ -72,6 +75,7 @@ Verify Original User Profile Settings
 	Selenium Reload
 	Selenium Wait For Element Present    id    users_tab
 	Selenium Click    id    users_tab
+	Selenium Type    id    users_panel_filterUser_search-inputEl    3011
 	Selenium Wait For Element Present    xpath	   //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]
 	Selenium Verify Text From Element    xpath    //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]/td[1]/div    Wizard
 	Selenium Verify Text From Element    xpath    //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]/td[2]/div    User

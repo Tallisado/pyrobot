@@ -37,7 +37,7 @@ Verify Speed Dial 1 Exists
 	Selenium Wait For Element Present    xpath    //*[@id="speedDial_panel_spds_grid-body"]/div/table/tbody/tr[1]/td[2]/div
 	Selenium Verify Text From Element    xpath    //*[@id="speedDial_panel_spds_grid-body"]/div/table/tbody/tr[1]/td[2]/div    Bart Simpson
 	Selenium Wait For Element Present    xpath    //*[@id="speedDial_panel_spds_grid-body"]/div/table/tbody/tr[1]/td[3]/div
-	Selenium Verify Text From Element    xpath    //*[@id="speedDial_panel_spds_grid-body"]/div/table/tbody/tr[1]/td[3]/div    6135551111
+	Selenium Verify Text From Element    xpath    //*[@id="speedDial_panel_spds_grid-body"]/div/table/tbody/tr[1]/td[3]/div    613-555-1111
 	
 Create Speed Dial 2
 	Selenium Reload
@@ -65,7 +65,7 @@ Verify Speed Dial 2 Exists
 	Selenium Wait For Element Present    xpath    //*[@id="speedDial_panel_spds_grid-body"]/div/table/tbody/tr[2]/td[2]/div
 	Selenium Verify Text From Element    xpath    //*[@id="speedDial_panel_spds_grid-body"]/div/table/tbody/tr[2]/td[2]/div    Homer Simpson
 	Selenium Wait For Element Present    xpath    //*[@id="speedDial_panel_spds_grid-body"]/div/table/tbody/tr[2]/td[3]/div
-	Selenium Verify Text From Element    xpath    //*[@id="speedDial_panel_spds_grid-body"]/div/table/tbody/tr[2]/td[3]/div    6135552222
+	Selenium Verify Text From Element    xpath    //*[@id="speedDial_panel_spds_grid-body"]/div/table/tbody/tr[2]/td[3]/div    613-555-2222
 
 Create Speed Dial 3
 	Selenium Reload
@@ -93,7 +93,7 @@ Verify Speed Dial 3 Exists
 	Selenium Wait For Element Present    xpath    //*[@id="speedDial_panel_spds_grid-body"]/div/table/tbody/tr[3]/td[2]/div
 	Selenium Verify Text From Element    xpath    //*[@id="speedDial_panel_spds_grid-body"]/div/table/tbody/tr[3]/td[2]/div    Marge Simpson
 	Selenium Wait For Element Present    xpath    //*[@id="speedDial_panel_spds_grid-body"]/div/table/tbody/tr[3]/td[3]/div
-	Selenium Verify Text From Element    xpath    //*[@id="speedDial_panel_spds_grid-body"]/div/table/tbody/tr[3]/td[3]/div    6135553333
+	Selenium Verify Text From Element    xpath    //*[@id="speedDial_panel_spds_grid-body"]/div/table/tbody/tr[3]/td[3]/div    613-555-3333
 	
 Create Speed Dial 4
 	Selenium Reload
@@ -121,7 +121,7 @@ Verify Speed Dial 4 Exists
 	Selenium Wait For Element Present    xpath    //*[@id="speedDial_panel_spds_grid-body"]/div/table/tbody/tr[4]/td[2]/div
 	Selenium Verify Text From Element    xpath    //*[@id="speedDial_panel_spds_grid-body"]/div/table/tbody/tr[4]/td[2]/div    Lisa Simpson
 	Selenium Wait For Element Present    xpath    //*[@id="speedDial_panel_spds_grid-body"]/div/table/tbody/tr[4]/td[3]/div
-	Selenium Verify Text From Element    xpath    //*[@id="speedDial_panel_spds_grid-body"]/div/table/tbody/tr[4]/td[3]/div    6135554444
+	Selenium Verify Text From Element    xpath    //*[@id="speedDial_panel_spds_grid-body"]/div/table/tbody/tr[4]/td[3]/div    613-555-4444
 	
 Edit Speed Dial 4
 	Selenium Click    xpath    //*[@id="speedDial_panel_spds_grid-body"]/div/table/tbody/tr[4]
@@ -146,7 +146,7 @@ Verify Edit To Speed Dial 4
 	Selenium Wait For Element Present    xpath    //*[@id="speedDial_panel_spds_grid-body"]/div/table/tbody/tr[4]/td[2]/div
 	Selenium Verify Text From Element    xpath    //*[@id="speedDial_panel_spds_grid-body"]/div/table/tbody/tr[4]/td[2]/div    Ned Flanders
 	Selenium Wait For Element Present    xpath    //*[@id="speedDial_panel_spds_grid-body"]/div/table/tbody/tr[4]/td[3]/div
-	Selenium Verify Text From Element    xpath    //*[@id="speedDial_panel_spds_grid-body"]/div/table/tbody/tr[4]/td[3]/div    6135561111
+	Selenium Verify Text From Element    xpath    //*[@id="speedDial_panel_spds_grid-body"]/div/table/tbody/tr[4]/td[3]/div    613-556-1111
 	
 Delete Speed Dial 4
 	Selenium Click    xpath    //*[@id="speedDial_panel_spds_grid-body"]/div/table/tbody/tr[4]

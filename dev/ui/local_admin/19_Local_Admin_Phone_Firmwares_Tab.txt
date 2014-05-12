@@ -16,7 +16,7 @@ Verify Phone Firmware for 321
 	Selenium Wait For Element Present    id    firmwares_tab
 	Selenium Click    id    firmwares_tab
 	Selenium Wait For Element Present    xpath    //*[@id="firmwares_panelfirmware_grid-body"]/div/table/tbody/tr[1]
-	Selenium Verify Text From Element    xpath    //*[@id="firmwares_panelfirmware_grid-body"]/div/table/tbody/tr[1]/td/div    Polycom 321
+	Selenium Verify Text From Element    xpath    //*[@id="firmwares_panelfirmware_grid-body"]/div/table/tbody/tr[1]/td/div    ADTRAN IP 321
 	
 Export Phone Firmwares List
 	Selenium Wait For Element Present    id    firmwares_panelfirmware_grid_export_btn
