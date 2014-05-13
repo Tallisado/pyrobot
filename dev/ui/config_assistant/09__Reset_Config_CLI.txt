@@ -44,7 +44,7 @@ Factory Default Unit
 	Read Until    [y/n]
 	Write    y
 	Close Connection
-	Sleep 60
+	Sleep    60
 	Wait Until Keyword Succeeds    10 min    5 sec    Verify reconnect to SSH
 	Sleep    30
 	
