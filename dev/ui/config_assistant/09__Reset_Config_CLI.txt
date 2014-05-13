@@ -87,7 +87,7 @@ Reboot Unit
 	Read Until    You are about to reboot the system. Continue?[y/n]
 	Write    y
 	Close Connection
-	Run    sleep 60
+	Sleep    60
 	Wait Until Keyword Succeeds    10 min    5 sec    Check UI ${LAN_IP}
 	Sleep    30
 
