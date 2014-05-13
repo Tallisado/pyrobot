@@ -7,6 +7,7 @@ Library           Collections
 Library			  BuiltIn
 Library			  SSHLibrary
 Library           OperatingSystem
+Library           PyroLibrary
 
 *** Variables ***
 ${TFTP_SERVER}			   10.10.9.156
@@ -87,12 +88,12 @@ Reboot Unit
 	Read Until    You are about to reboot the system. Continue?[y/n]
 	Write    y
 	Close Connection
-	Sleep    60
-	Wait Until Keyword Succeeds    10 min    5 sec    Check UI ${LAN_IP}
+	Run    sleep 60
+	Open Browser    http://www-internal.objectworld.com
+	Wait Until Keyword Succeeds    10 min    5 sec    Check UI http://${LAN_IP}
 	Sleep    30
 
 *** Keywords ***
-
 Verify reconnect to SSH
     [Documentation]    This creates a SSH session, logs into the unit, and stores the unit's hostname in "${HOSTNAME}". \ This keyword leaves you at global enable mode on an AOS unit.
     ${ssh_id_temp}    Open Connection    ${LAN_IP}    timeout=10 seconds
