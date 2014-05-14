@@ -13,13 +13,13 @@ ${FTP_PASSWORD}         password
 
 *** Test Cases ***
 Connect to FTP
-    ftp connect    ${DEVICE_IP}    ${FTP_USER_NAME}    ${FTP_PASSWORD}
+    ftp connect    ${LAN_IP}    ${FTP_USER_NAME}    ${FTP_PASSWORD}
 	
 Change to backup directory
     Cwd    /backup
 	
 Upload Backup File
-	Upload File    /tmp/neo.backup    remoteFileName=neo.backup
+    Upload File    /tmp/neo.backup    remoteFileName=neo.backup
 	
 Disconnect from FTP Server
-	Ftp Close
+    Ftp Close
