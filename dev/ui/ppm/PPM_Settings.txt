@@ -19,6 +19,7 @@ Set Profile Settings
 	Selenium Click    id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsProfile
 	Selenium Click    id    settingsProfile
+	Selenium Wait For Element Present    name    HomeNumber
 	Input Text    name=HomeNumber    ${EMPTY}
 	Input Text    name=HomeNumber    (613) 599-0100
 	Input Text    name=MobileNumber    ${EMPTY}
