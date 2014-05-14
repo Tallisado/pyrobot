@@ -12,7 +12,7 @@ ${DEVICE_IP}      10.10.9.164
 *** Test Cases ***
 Create Call Queue
 	Open Pyro Browser
-	Sencha Login     		admin    password    helpButton-btnIconEl
+	Sencha Login     		admin    password    helpButton-btnIconEl    False
 	Selenium Wait For Element Present    id    groups_tab
 	Selenium Click    id    groups_tab
 	Selenium Wait For Element Present    id	   groups_panelCreate_btn-btnEl
@@ -24,14 +24,16 @@ Create Call Queue
 	Selenium Click    id    createGroupWiz_next_btn
 	Selenium Wait For Element Present    id    groupName_txt-inputEl
 	Selenium2Library.Input Text    id=groupName_txt-inputEl   CQTest
+	Selenium Click Text From Combobox    id    groupOverflowExt_combobox-inputEl    DefaultAA (x8200)
 	Selenium Click    id    createGroupWiz_next_btn-btnEl
 	Selenium Click    xpath    //*[@id="callQueueGroupUser_gridconfig-body"]/tr[1]
 	Selenium Click    id    callQueueGroupRight_button-btnEl
-	Selenium Wait For Element Present    xpath    //*[@id="callQueueGroupMember_gridconfig-body"][1]
+	Selenium Wait For Element Present    xpath    //*[@id="callQueueGroupMember_gridconfig-body"]
 	Selenium Wait For Element Present    id    createGroupWiz_next_btn-btnEl
 	Selenium Click    id    createGroupWiz_next_btn-btnEl
 	Selenium Wait For Element Present    id    createGroupWiz_save_btn-btnEl
 	Selenium Click    id    createGroupWiz_save_btn-btnEl
+	Sleep    1
 	
 Verify Call Queue
 	Selenium Reload    None
@@ -112,12 +114,12 @@ Change Call Queue Membership
 	Selenium Click    id    groups_tab
 	Selenium Click    id    groups_panelfilter_search-inputEl
 	Selenium Type    id    groups_panelfilter_search-inputEl    CQTest
-	Selenium Wait For Element Present    xpath    //*[@id="groups_panelGroups_grid-body"]/div/table/tbody/tr[1]
-	Selenium Click    xpath    //*[@id="groups_panelGroups_grid-body"]/div/table/tbody/tr[1]
+	Selenium Wait For Element Present    xpath    //*[@id="groups_panelGroups_grid-body"]/div/table/tbody/tr
+	Selenium Click    xpath    //*[@id="groups_panelGroups_grid-body"]/div/table/tbody/tr
 	Selenium Click    id    groups_panelMembership_btn-btnEl
 	Selenium Wait For Element Present    xpath    //*[@id="undefinedMember_gridconfig-body"]
-	Selenium Click    xpath    //*[@id="callQueueGroupUser_gridconfig-body"]/tr[1]
-	Selenium Click    id    undefinedRight_button-btnEl
+	Selenium Click    xpath    //*[@id="undefinedMember_gridconfig-body"]/tr
+	Selenium Click    id    undefinedLeft_button-btnEl
 	Sleep    1
 	Selenium Click    id    editMembersGroupWiz_next_btn-btnEl
 	Selenium Wait For Element Present    id    editMembersGroupWiz_save_btn-btnEl
