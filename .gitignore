@@ -1,3 +1,4 @@
 *.pyc
 /workspace/*
 pyrobot_config.py
+./pyrobot_config.py
