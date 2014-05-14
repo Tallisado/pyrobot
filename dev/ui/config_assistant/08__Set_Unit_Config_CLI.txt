@@ -19,7 +19,7 @@ ${DEVICE_IP}      10.10.9.164
 *** Test Cases ***
 Login via SSH
     [Documentation]    This creates a SSH session, logs into the unit, and stores the unit's hostname in "${HOSTNAME}". \ This keyword leaves you at global enable mode on an AOS unit.
-    ${telnet_id_temp}    Open Connection    ${DEVICE_IP}    timeout=600 seconds
+    ${telnet_id_temp}    Open Connection    ${LAN_IP}    timeout=600 seconds
     Set Global Variable    ${TELNET_ID}    ${telnet_id_temp}
 	Set Client Configuration    prompt=${PROMPT}
     Login    ${TELNET_USER_NAME}    ${TELNET_PASSWORD}
