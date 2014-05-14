@@ -18,7 +18,7 @@ Library - Open Pyro Browser
     Set Selenium Timeout    15
 	
 Library - Sencha Login
-    Sencha Login     		3011    1234    settingsButton-btnIconEl
+    Sencha Login     		3011    1234    settingsButton-btnIconEl     False
     Title Should Be         ${NEO_TITLE}
     
 A4
