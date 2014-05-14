@@ -21,8 +21,13 @@ Library - Sencha Login
     Sencha Login     		3011    1234    settingsButton-btnIconEl     False
     Title Should Be         ${NEO_TITLE}
     
-A4
-    Selenium Click    id    settingsButton-btnIconEl
+Library - Reload
+	Selenium Reload    None
+	Selenium Click   id    settingsButton-btnIconEl
+	Selenium Wait For Element Present    id    settingsVoicemail
+	Selenium Click   id    settingsVoicemail
+	Selenium Verify Attribute From Element    id    primaryEmailNotification_combobox-inputEl    value    Never
+	#Selenium Verify Attribute From Element    id    secondaryEmailNotification_combobox-inputEl    value    Never
 
     
     

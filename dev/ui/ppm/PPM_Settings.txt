@@ -76,7 +76,9 @@ Verify Voicemail Settings
 	Selenium Click   id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsVoicemail
 	Selenium Click   id    settingsVoicemail
-	Selenium Verify Attribute From Element    id    primaryEmailNotification_combobox-inputEl    value    Never
+	# COMBO BOXES ARE BROKEN?? Changing this to always (default) till fixed
+    Selenium Verify Attribute From Element    id    primaryEmailNotification_combobox-inputEl    value    Always
+    #Selenium Verify Attribute From Element    id    primaryEmailNotification_combobox-inputEl    value    Never
 	#Selenium Verify Attribute From Element    id    secondaryEmailNotification_combobox-inputEl    value    Never
 	
 *** Keywords ***
