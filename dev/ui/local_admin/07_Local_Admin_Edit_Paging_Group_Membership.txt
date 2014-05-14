@@ -30,7 +30,7 @@ Edit The Paging Group Membership And Add The User To Page Group
 	Selenium Click    xpath    //*[@id="pagingGroupWiz_save_btn-btnEl"]
 	
 Edit The Paging Group Membership And Remove The User From The Page Group
-	Selenium Reload
+	Selenium Reload    editPagingMembership_wiz
 	Selenium Wait For Element Present    id    editPagingMembership_wiz
 	Selenium Click    xpath    //*[@id="editPagingMembership_wiz"]
 	Selenium Wait For Element Present    xpath    //*[@id="pagingGroupWiz_grid-body"]

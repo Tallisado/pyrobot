@@ -25,16 +25,18 @@ Create Call Queue
 	Selenium Wait For Element Present    id    groupName_txt-inputEl
 	Selenium2Library.Input Text    id=groupName_txt-inputEl   CQTest
 	Selenium Click    id    createGroupWiz_next_btn-btnEl
-	Selenium Drag And Drop    xpath    //*[@id="callQueueGroupUser_gridconfig-body"]/tr[1]   //*[@id="callQueueGroupMember_gridconfig-body"]
+	Selenium Click    xpath    //*[@id="callQueueGroupUser_gridconfig-body"]/tr[1]
+	Selenium Click    id    callQueueGroupRight_button-btnEl
+	Selenium Wait For Element Present    xpath    //*[@id="callQueueGroupMember_gridconfig-body"][1]
 	Selenium Wait For Element Present    id    createGroupWiz_next_btn-btnEl
 	Selenium Click    id    createGroupWiz_next_btn-btnEl
 	Selenium Wait For Element Present    id    createGroupWiz_save_btn-btnEl
 	Selenium Click    id    createGroupWiz_save_btn-btnEl
 	
 Verify Call Queue
-	Selenium Reload
-	Selenium Wait For Element Present    id    groups_tab
+	Selenium Reload    groups_tab
 	Selenium Click    id    groups_tab
+	Selenium Click    id    groups_panelfilter_search-inputEl
 	Selenium Type    id    groups_panelfilter_search-inputEl    CQTest
 	Selenium Wait For Element Present    xpath    //*[@id="groups_panelGroups_grid-body"]/div/table/tbody/tr[1]
 	Selenium Verify Text From Element    xpath    //*[@id="groups_panelGroups_grid-body"]/div/table/tbody/tr[1]/td[1]/div    CQTest
@@ -104,23 +106,27 @@ Verify Call Queue
 #	Selenium Verify Text From Element    xpath    //*[@id="groups_panelGroups_grid-body"]/div/table/tbody/tr[8]/td[4]/div    1201
 
 Change Call Queue Membership
-	Selenium Reload
+	Selenium Reload    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    groups_tab
 	Selenium Click    id    groups_tab
+	Selenium Click    id    groups_panelfilter_search-inputEl
 	Selenium Type    id    groups_panelfilter_search-inputEl    CQTest
 	Selenium Wait For Element Present    xpath    //*[@id="groups_panelGroups_grid-body"]/div/table/tbody/tr[1]
 	Selenium Click    xpath    //*[@id="groups_panelGroups_grid-body"]/div/table/tbody/tr[1]
 	Selenium Click    id    groups_panelMembership_btn-btnEl
 	Selenium Wait For Element Present    xpath    //*[@id="undefinedMember_gridconfig-body"]
-	Selenium Drag And Drop    xpath    //*[@id="undefinedMember_gridconfig-body"]/tr[1]   //*[@id="undefinedUser_grid-body"]
+	Selenium Click    xpath    //*[@id="callQueueGroupUser_gridconfig-body"]/tr[1]
+	Selenium Click    id    undefinedRight_button-btnEl
+	Sleep    1
 	Selenium Click    id    editMembersGroupWiz_next_btn-btnEl
 	Selenium Wait For Element Present    id    editMembersGroupWiz_save_btn-btnEl
 	Selenium Click    id    editMembersGroupWiz_save_btn-btnEl
 	
 Delete Call Queue
-	Selenium Reload
+	Selenium Reload    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    groups_tab
 	Selenium Click    id    groups_tab
+	Selenium Click    id    groups_panelfilter_search-inputEl
 	Selenium Type    id    groups_panelfilter_search-inputEl    CQTest
 	Selenium Wait For Element Present    xpath    //*[@id="groups_panelGroups_grid-body"]/div/table/tbody/tr[1]
 	Selenium Click    xpath    //*[@id="groups_panelGroups_grid-body"]/div/table/tbody/tr[1]
@@ -129,7 +135,7 @@ Delete Call Queue
 	Selenium Click    id    deleteGroupWindow_save_btn-btnEl
 	
 Verify Delete Call Queue
-	Selenium Reload
+	Selenium Reload    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    groups_tab
 	Selenium Click    id    groups_tab
 	Selenium Type    id    groups_panelfilter_search-inputEl    CQTest
