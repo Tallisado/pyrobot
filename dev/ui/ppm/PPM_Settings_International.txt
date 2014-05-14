@@ -25,8 +25,7 @@ Set International Settings - French Canadian
 	Selenium Click	  id     settingInternationalClose
 
 Verify International Settings - French Canadian
-	Selenium Reload
-	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+	Selenium Reload    settingsButton-btnIconEl
 	Selenium Verify Text From Element    id    logout-btnInnerEl    Logout
 	Selenium Click    id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsInternational
@@ -36,8 +35,7 @@ Verify International Settings - French Canadian
     #Selenium Verify Attribute From Element    id    cbTuiLang-inputEl    value    French Canadian
 
 Set International Settings - Spanish-Mexican
-	Selenium Reload
-	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+	Selenium Reload    settingsButton-btnIconEl
 	Selenium Click    id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsInternational
 	Selenium Click    id    settingsInternational
@@ -47,8 +45,7 @@ Set International Settings - Spanish-Mexican
 	Selenium Click	  id     settingInternationalClose
 
 Verify International Settings - Spanish-Mexican
-	Selenium Reload
-	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+	Selenium Reload    settingsButton-btnIconEl
 	Selenium Verify Text From Element    id    logout-btnInnerEl    Logout
 	Selenium Click    id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsInternational
@@ -58,8 +55,7 @@ Verify International Settings - Spanish-Mexican
     #Selenium Verify Attribute From Element    id    cbTuiLang-inputEl    value    LatinAm-Spanish
 
 Set International Settings - English-US
-	Selenium Reload
-	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+	Selenium Reload    settingsButton-btnIconEl
 	Selenium Click    id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsInternational
 	Selenium Click    id    settingsInternational
@@ -69,8 +65,7 @@ Set International Settings - English-US
 	Selenium Click	  id     settingInternationalClose
 
 Verify International Settings - English-US
-	Selenium Reload
-	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+	Selenium Reload    settingsButton-btnIconEl
 	Selenium Verify Text From Element    id    logout-btnInnerEl    Logout
 	Selenium Click    id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsInternational

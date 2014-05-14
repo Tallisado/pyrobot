@@ -53,8 +53,7 @@ Drag And Drop SPRE Settings - Page-Overhead
 #	Selenium Verify Text From Element    id    phone_btn2_lbl    ""
 
 Drag And Drop SPRE Settings - Forward Notification Cancel
-	Selenium Reload
-	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+	Selenium Reload    settingsButton-btnIconEl
 	Selenium Click    id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsPhone
 	Selenium Click    id    settingsPhone
@@ -73,8 +72,7 @@ Drag And Drop SPRE Settings - Forward Notification Cancel
 #	Selenium Verify Text From Element    id    phone_btn2_lbl    ""
 
 #Drag And Drop SPRE Settings - Call Forward + Extension
-#	Selenium Reload
-#	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+#	Selenium Reload    settingsButton-btnIconEl
 #	Selenium Click    id    settingsButton-btnIconEl
 #	Selenium Wait For Element Present    id    settingsPhone
 #	Selenium Click    id    settingsPhone
@@ -94,8 +92,7 @@ Drag And Drop SPRE Settings - Forward Notification Cancel
 #	Selenium Verify Text From Element    id    phone_btn2_lbl    ""
 
 Drag And Drop SPRE Settings - Call Forward Cancel
-	Selenium Reload
-	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+	Selenium Reload    settingsButton-btnIconEl
 	Selenium Click    id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsPhone
 	Selenium Click    id    settingsPhone
@@ -114,8 +111,7 @@ Drag And Drop SPRE Settings - Call Forward Cancel
 #	Selenium Verify Text From Element    id    phone_btn2_lbl    ""
 
 #Drag And Drop SPRE Settings - Call Forward Remote
-#	Selenium Reload
-#	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+#	Selenium Reload    settingsButton-btnIconEl
 #	Selenium Click    id    settingsButton-btnIconEl
 #	Selenium Wait For Element Present    id    settingsPhone
 #	Selenium Click    id    settingsPhone
@@ -137,8 +133,7 @@ Drag And Drop SPRE Settings - Call Forward Cancel
 #	Selenium Verify Text From Element    id    phone_btn2_lbl    ""
 
 #Drag And Drop SPRE Settings - Remote Call Forward Cancel
-#	Selenium Reload
-#	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+#	Selenium Reload    settingsButton-btnIconEl
 #	Selenium Click    id    settingsButton-btnIconEl
 #	Selenium Wait For Element Present    id    settingsPhone
 #	Selenium Click    id    settingsPhone
@@ -160,8 +155,7 @@ Drag And Drop SPRE Settings - Call Forward Cancel
 #	Selenium Verify Text From Element    id    phone_btn2_lbl    ""
 
 Drag And Drop SPRE Settings - Door Phone
-	Selenium Reload
-	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+	Selenium Reload    settingsButton-btnIconEl
 	Selenium Click    id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsPhone
 	Selenium Click    id    settingsPhone
@@ -180,8 +174,7 @@ Drag And Drop SPRE Settings - Door Phone
 #	Selenium Verify Text From Element    id    phone_btn2_lbl    ""
 
 #Drag And Drop SPRE Settings - Send User Directly to Voicemail
-#	Selenium Reload
-#	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+#	Selenium Reload    settingsButton-btnIconEl
 #	Selenium Click    id    settingsButton-btnIconEl
 #	Selenium Wait For Element Present    id    settingsPhone
 #	Selenium Click    id    settingsPhone
@@ -201,8 +194,7 @@ Drag And Drop SPRE Settings - Door Phone
 #	Selenium Verify Text From Element    id    phone_btn2_lbl    ""
 
 Drag And Drop SPRE Settings - DND Enable
-	Selenium Reload
-	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+	Selenium Reload    settingsButton-btnIconEl
 	Selenium Click    id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsPhone
 	Selenium Click    id    settingsPhone
@@ -222,8 +214,7 @@ Drag And Drop SPRE Settings - DND Enable
 #	Selenium Verify Text From Element    id    phone_btn2_lbl    ""
 
 Drag And Drop SPRE Settings - DND Disable
-	Selenium Reload
-	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+	Selenium Reload    settingsButton-btnIconEl
 	Selenium Click    id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsPhone
 	Selenium Click    id    settingsPhone
@@ -243,8 +234,7 @@ Drag And Drop SPRE Settings - DND Disable
 #	Selenium Verify Text From Element    id    phone_btn2_lbl    ""
 
 #Drag And Drop SPRE Settings - Group Login
-#	Selenium Reload
-#	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+#	Selenium Reload    settingsButton-btnIconEl
 #	Selenium Click    id    settingsButton-btnIconEl
 #	Selenium Wait For Element Present    id    settingsPhone
 #	Selenium Click    id    settingsPhone
@@ -264,8 +254,7 @@ Drag And Drop SPRE Settings - DND Disable
 #	Selenium Verify Text From Element    id    phone_btn2_lbl    ""
 
 #Drag And Drop SPRE Settings - Group Logout
-#	Selenium Reload
-#	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+#	Selenium Reload    settingsButton-btnIconEl
 #	Selenium Click    id    settingsButton-btnIconEl
 #	Selenium Wait For Element Present    id    settingsPhone
 #	Selenium Click    id    settingsPhone
@@ -285,8 +274,7 @@ Drag And Drop SPRE Settings - DND Disable
 #	Selenium Verify Text From Element    id    phone_btn2_lbl    ""
 
 #Drag And Drop SPRE Settings - User Station Phone Lock
-#	Selenium Reload
-#	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+#	Selenium Reload    settingsButton-btnIconEl
 #	Selenium Click    id    settingsButton-btnIconEl
 #	Selenium Wait For Element Present    id    settingsPhone
 #	Selenium Click    id    settingsPhone
@@ -307,8 +295,7 @@ Drag And Drop SPRE Settings - DND Disable
 #	Selenium Verify Text From Element    id    phone_btn2_lbl    ""
 
 #Drag And Drop SPRE Settings - User Station Unlock
-#	Selenium Reload
-#	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+#	Selenium Reload    settingsButton-btnIconEl
 #	Selenium Click    id    settingsButton-btnIconEl
 #	Selenium Wait For Element Present    id    settingsPhone
 #	Selenium Click    id    settingsPhone
@@ -329,8 +316,7 @@ Drag And Drop SPRE Settings - DND Disable
 #	Selenium Verify Text From Element    id    phone_btn2_lbl    ""
 
 #Drag And Drop SPRE Settings - Billing Code
-#	Selenium Reload
-#	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+#	Selenium Reload    settingsButton-btnIconEl
 #	Selenium Click    id    settingsButton-btnIconEl
 #	Selenium Wait For Element Present    id    settingsPhone
 #	Selenium Click    id    settingsPhone
@@ -350,8 +336,7 @@ Drag And Drop SPRE Settings - DND Disable
 #	Selenium Verify Text From Element    id    phone_btn2_lbl    ""
 
 Drag And Drop SPRE Settings - Block Caller-ID delivery for this call only
-	Selenium Reload
-	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+	Selenium Reload    settingsButton-btnIconEl
 	Selenium Click    id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsPhone
 	Selenium Click    id    settingsPhone
@@ -370,8 +355,7 @@ Drag And Drop SPRE Settings - Block Caller-ID delivery for this call only
 #	Selenium Verify Text From Element    id    phone_btn2_lbl    ""
 
 Drag And Drop SPRE Settings - Call Return
-	Selenium Reload
-	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+	Selenium Reload    settingsButton-btnIconEl
 	Selenium Click    id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsPhone
 	Selenium Click    id    settingsPhone
@@ -390,8 +374,7 @@ Drag And Drop SPRE Settings - Call Return
 #	Selenium Verify Text From Element    id    phone_btn2_lbl    ""
 
 Drag And Drop SPRE Settings - Disable Call Waiting on a per call basis
-	Selenium Reload
-	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+	Selenium Reload    settingsButton-btnIconEl
 	Selenium Click    id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsPhone
 	Selenium Click    id    settingsPhone
@@ -410,8 +393,7 @@ Drag And Drop SPRE Settings - Disable Call Waiting on a per call basis
 #	Selenium Verify Text From Element    id    phone_btn2_lbl    ""
 
 Drag And Drop SPRE Settings - Call last dialed number
-	Selenium Reload
-	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+	Selenium Reload    settingsButton-btnIconEl
 	Selenium Click    id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsPhone
 	Selenium Click    id    settingsPhone
@@ -430,8 +412,7 @@ Drag And Drop SPRE Settings - Call last dialed number
 #	Selenium Verify Text From Element    id    phone_btn2_lbl    ""
 
 #Drag And Drop SPRE Settings - Pickup Extension
-#	Selenium Reload
-#	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+#	Selenium Reload    settingsButton-btnIconEl
 #	Selenium Click    id    settingsButton-btnIconEl
 #	Selenium Wait For Element Present    id    settingsPhone
 #	Selenium Click    id    settingsPhone
@@ -451,8 +432,7 @@ Drag And Drop SPRE Settings - Call last dialed number
 #	Selenium Verify Text From Element    id    phone_btn2_lbl    ""
 
 Drag And Drop SPRE Settings - Call Park + Zone
-	Selenium Reload
-	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+	Selenium Reload    settingsButton-btnIconEl
 	Selenium Click    id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsPhone
 	Selenium Click    id    settingsPhone
@@ -472,8 +452,7 @@ Drag And Drop SPRE Settings - Call Park + Zone
 #	Selenium Verify Text From Element    id    phone_btn2_lbl    ""
 
 #Drag And Drop SPRE Settings - Held Call Pickup/Park Retrieve - EXT
-#	Selenium Reload
-#	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+#	Selenium Reload    settingsButton-btnIconEl
 #	Selenium Click    id    settingsButton-btnIconEl
 #	Selenium Wait For Element Present    id    settingsPhone
 #	Selenium Click    id    settingsPhone
@@ -493,8 +472,7 @@ Drag And Drop SPRE Settings - Call Park + Zone
 #	Selenium Verify Text From Element    id    phone_btn2_lbl    ""
 
 Drag And Drop SPRE Settings - Held Call Pickup/Park Retrieve - Park Zone
-	Selenium Reload
-	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+	Selenium Reload    settingsButton-btnIconEl
 	Selenium Click    id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsPhone
 	Selenium Click    id    settingsPhone
@@ -517,8 +495,7 @@ Drag And Drop SPRE Settings - Held Call Pickup/Park Retrieve - Park Zone
 #	Selenium Verify Text From Element    id    phone_btn2_lbl    ""
 
 Drag And Drop SPRE Settings - Hands Free Auto-Answer
-	Selenium Reload
-	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+	Selenium Reload    settingsButton-btnIconEl
 	Selenium Click    id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsPhone
 	Selenium Click    id    settingsPhone
