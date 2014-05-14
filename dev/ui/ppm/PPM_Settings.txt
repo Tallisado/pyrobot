@@ -64,7 +64,7 @@ Verify Profile Settings
 	Selenium Verify Attribute From Element    name    SecondaryEmail    value    Kyle.Turris@hotmail.com
 
 Verify PIN Settings
-	Selenium Reload    settingsButton-btnIconEl
+	Selenium Reload    None
 	Selenium Click    id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsPassword
 	Selenium Click    id    settingsPassword
@@ -72,7 +72,7 @@ Verify PIN Settings
 	Selenium Verify Attribute From Element    name    voicemailPINReEnter    value    1234
 	
 Verify Voicemail Settings
-	Selenium Reload    settingsButton-btnIconEl
+	Selenium Reload    None
 	Selenium Click   id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsVoicemail
 	Selenium Click   id    settingsVoicemail
