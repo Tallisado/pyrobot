@@ -26,6 +26,7 @@ Set International Settings - French Canadian
 
 Verify International Settings - French Canadian
 	Selenium Reload    None
+	Selenium Wait For Element Present    id    settingsButton-btnIconEl
 	Selenium Verify Text From Element    id    logout-btnInnerEl    Logout
 	Selenium Click    id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsInternational
@@ -36,6 +37,7 @@ Verify International Settings - French Canadian
 
 Set International Settings - Spanish-Mexican
 	Selenium Reload    None
+	Selenium Wait For Element Present    id    settingsButton-btnIconEl
 	Selenium Click    id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsInternational
 	Selenium Click    id    settingsInternational
@@ -46,6 +48,7 @@ Set International Settings - Spanish-Mexican
 
 Verify International Settings - Spanish-Mexican
 	Selenium Reload    None
+	Selenium Wait For Element Present    id    settingsButton-btnIconEl
 	Selenium Verify Text From Element    id    logout-btnInnerEl    Logout
 	Selenium Click    id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsInternational
@@ -56,6 +59,7 @@ Verify International Settings - Spanish-Mexican
 
 Set International Settings - English-US
 	Selenium Reload    None
+	Selenium Wait For Element Present    id    settingsButton-btnIconEl
 	Selenium Click    id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsInternational
 	Selenium Click    id    settingsInternational
@@ -66,6 +70,7 @@ Set International Settings - English-US
 
 Verify International Settings - English-US
 	Selenium Reload    None
+	Selenium Wait For Element Present    id    settingsButton-btnIconEl
 	Selenium Verify Text From Element    id    logout-btnInnerEl    Logout
 	Selenium Click    id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsInternational
