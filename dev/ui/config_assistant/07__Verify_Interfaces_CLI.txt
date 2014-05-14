@@ -35,6 +35,7 @@ Login via Telnet
     Telnet.Write    no events
     Telnet.Write    terminal length 0
     Telnet.Read Until Prompt
+    Sleep    5
 
 Check Interface Ethernet 0/1
     Telnet.Write    show interface gigabit-ethernet 0/1
