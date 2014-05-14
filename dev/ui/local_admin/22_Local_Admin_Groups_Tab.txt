@@ -34,7 +34,8 @@ Create Call Queue
 	Selenium Click    id    createGroupWiz_save_btn-btnEl
 	
 Verify Call Queue
-	Selenium Reload    groups_tab
+	Selenium Reload    None
+	Selenium Wait For Element Present    id    groups_tab
 	Selenium Click    id    groups_tab
 	Selenium Click    id    groups_panelfilter_search-inputEl
 	Selenium Type    id    groups_panelfilter_search-inputEl    CQTest
@@ -66,7 +67,7 @@ Verify Call Queue
 #	Selenium Click    id    createGroupWiz_save_btn-btnEl
 	
 #Verify Paging Group
-#	Selenium Reload
+#	Selenium Reload    None
 #	Selenium Wait For Element Present    id    groups_tab
 #	Selenium Click    id    groups_tab
 #	Selenium Wait For Element Present    xpath    //*[@id="groups_panelGroups_grid-body"]/div/table/tbody/tr[8]
@@ -97,7 +98,7 @@ Verify Call Queue
 #	Selenium Click    id    createGroupWiz_save_btn-btnEl
 	
 #Verify Pickup Group
-#	Selenium Reload
+#	Selenium Reload    None
 #	Selenium Wait For Element Present    id    groups_tab
 #	Selenium Click    id    groups_tab
 #	Selenium Wait For Element Present    xpath    //*[@id="groups_panelGroups_grid-body"]/div/table/tbody/tr[8]
@@ -106,7 +107,7 @@ Verify Call Queue
 #	Selenium Verify Text From Element    xpath    //*[@id="groups_panelGroups_grid-body"]/div/table/tbody/tr[8]/td[4]/div    1201
 
 Change Call Queue Membership
-	Selenium Reload    settingsButton-btnIconEl
+	Selenium Reload    None
 	Selenium Wait For Element Present    id    groups_tab
 	Selenium Click    id    groups_tab
 	Selenium Click    id    groups_panelfilter_search-inputEl
@@ -123,7 +124,7 @@ Change Call Queue Membership
 	Selenium Click    id    editMembersGroupWiz_save_btn-btnEl
 	
 Delete Call Queue
-	Selenium Reload    settingsButton-btnIconEl
+	Selenium Reload    None
 	Selenium Wait For Element Present    id    groups_tab
 	Selenium Click    id    groups_tab
 	Selenium Click    id    groups_panelfilter_search-inputEl
@@ -135,7 +136,7 @@ Delete Call Queue
 	Selenium Click    id    deleteGroupWindow_save_btn-btnEl
 	
 Verify Delete Call Queue
-	Selenium Reload    settingsButton-btnIconEl
+	Selenium Reload    None
 	Selenium Wait For Element Present    id    groups_tab
 	Selenium Click    id    groups_tab
 	Selenium Type    id    groups_panelfilter_search-inputEl    CQTest
