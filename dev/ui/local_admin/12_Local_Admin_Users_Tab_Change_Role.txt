@@ -15,8 +15,8 @@ Change User Role To Local Admin
 	Sencha Login     		admin    password    helpButton-btnIconEl
 	Selenium Wait For Element Present    id    users_tab
 	Selenium Click    id    users_tab
-	Selenium Wait For Element Present    xpath	   //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]
-	Selenium Click    xpath    //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]
+	Selenium Wait For Element Present    xpath	   //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[3]
+	Selenium Click    xpath    //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[3]
 	Selenium Wait For Element Present    id    users_panel_changeRole_btn
 	Selenium Click    id    users_panel_changeRole_btn
 	Selenium Wait For Element Present    id    changeUserRole_window_localAdmin_radio-inputEl
@@ -28,8 +28,8 @@ Verify Role In Local Admin For User
 	Selenium Reload    None
 	Selenium Wait For Element Present    id    users_tab
 	Selenium Click    id    users_tab
-	Selenium Wait For Element Present    xpath	   //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]
-	Selenium Verify Text From Element    xpath    //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]/td[4]/div    Local Administrator
+	Selenium Wait For Element Present    xpath	   //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[3]
+	Selenium Verify Text From Element    xpath    //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[3]/td[4]/div    Local Administrator
 
 Login As User And Verify Local Admin Button Exists Then Access And Verify That Local Admin Loads
 	Selenium Click    id    logout-btnIconEl
@@ -53,8 +53,8 @@ Change Role Back To User
 	Selenium Click    id    loginbuttonid-btnIconEl
 	Selenium Wait For Element Present    id    users_tab
 	Selenium Click    id    users_tab
-	Selenium Wait For Element Present    xpath	   //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]
-	Selenium Click    xpath    //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]
+	Selenium Wait For Element Present    xpath	   //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[3]
+	Selenium Click    xpath    //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[3]
 	Selenium Wait For Element Present    id    users_panel_changeRole_btn
 	Selenium Click    id    users_panel_changeRole_btn
 	Selenium Wait For Element Present    id    changeUserRole_window_user_radio-inputEl
@@ -66,8 +66,8 @@ Verify User Role Change In Local Admin
 	Selenium Reload    None
 	Selenium Wait For Element Present    id    users_tab
 	Selenium Click    id    users_tab
-	Selenium Wait For Element Present    xpath	   //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]
-	Selenium Verify Text From Element    xpath    //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]/td[4]/div    User
+	Selenium Wait For Element Present    xpath	   //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[3]
+	Selenium Verify Text From Element    xpath    //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[3]/td[4]/div    User
 
 Login As User And Verify Local Admin Button does not exist now
 	Selenium Click    id    logout-btnIconEl
