@@ -22,8 +22,10 @@ Should Create A Backup
 	Selenium Verify Text From Element    xpath    //*[@id="createBackupWiz_progress"]/div     Backup complete
 	
 Download Existing Backup (UI Test Only)
-	Selenium Reload
-	Selenium Wait For Element Present    id    downloadBackup_wiz
+	Selenium Reload    None
+	Wait Until Element Is Visible    id=downloadBackup_wiz    timeout=15
+	Execute Javascript     window.ADTRAN.store.RefreshBaseStore.suspendAll();
+	Execute Javascript     window.ADTRAN.util.SysPollTask.suspend();
 	Selenium Click    id    downloadBackup_wiz
 	Selenium Wait For Element Present    id    downloadBackupWiz_save_btn-btnEl
 	Selenium Click    id    downloadBackupWiz_save_btn-btnEl
