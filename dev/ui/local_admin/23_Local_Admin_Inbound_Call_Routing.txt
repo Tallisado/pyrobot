@@ -1,0 +1,77 @@
+*** Settings ***
+Suite Setup
+Suite Teardown    Close Browser
+Library           Selenium2Library
+Library           Collections
+Library           PyroLibrary
+
+*** Variables ***
+${Neo}            http://${DEVICE_IP}
+${DEVICE_IP}      10.10.9.164
+
+*** Test Cases ***
+Create Custom Route
+	Open Pyro Browser
+	Sencha Login     		admin    password    helpButton-btnIconEl    False
+	Selenium Wait For Element Present    id    incoming_tab
+	Selenium Click    id    incoming_tab
+	Selenium Wait For Element Present    id	   incoming_panel_create_btn-btnEl
+	Selenium Click    id    incoming_panel_create_btn-btnEl
+	Selenium Wait For Element Present    id    addRoute_nameinput-inputEl
+	Selenium2Library.Input Text    id=addRoute_nameinput-inputEl    ${EMPTY}
+	Selenium2Library.Input Text    id=addRoute_nameinput-inputEl    1300
+	Selenium Populate Combo And Click Text    id   addIncomingRouteWindow_model_combobox-inputEl    DefaultAA (x8200)
+	Selenium Click    id    addIncomingRouteWindow_save_btn-btnEl
+	Sleep    1
+	
+Verify Create Custom Route
+	Selenium Reload    None
+	Selenium Wait For Element Present    id    incoming_tab
+	Selenium Click    id    incoming_tab
+	Selenium Click    id    incoming_panel_filterincoming_search-inputEl
+	Selenium Type    id    incoming_panel_filterincoming_search-inputEl    1300
+	Selenium Wait For Element Present    xpath    //*[@id="incoming_panel_incomingRoute_grid-body"]/div/table/tbody/tr[1]
+	Selenium Verify Text From Element    xpath    //*[@id="incoming_panel_incomingRoute_grid-body"]/div/table/tbody/tr[1]/td[1]/div    1300
+	Selenium Verify Text From Element    xpath    //*[@id="incoming_panel_incomingRoute_grid-body"]/div/table/tbody/tr[1]/td[3]/div    8200
+	
+Edit Custom Route
+	Selenium Reload    None
+	Selenium Wait For Element Present    id    incoming_tab
+	Selenium Click    id    incoming_tab
+	Selenium Click    id    incoming_panel_filterincoming_search-inputEl
+	Selenium Type    id    incoming_panel_filterincoming_search-inputEl    1300
+	Selenium Click    xpath    //*[@id="incoming_panel_incomingRoute_grid-body"]/div/table/tbody/tr[1]
+	Selenium Click    id    incoming_panel_edit_btn-btnEl
+	Selenium Wait For Element Present    id    editIncomingRouteWindow_model_combobox-inputEl
+	Selenium Populate Combo And Click Text    id    editIncomingRouteWindow_model_combobox-inputEl    Login to Voicemail (x8500)
+	Selenium Click    id    editIncomingRouteWindow_save_btn-btnEl
+	
+Verify Edit Custom Route
+	Selenium Reload    None
+	Selenium Wait For Element Present    id    incoming_tab
+	Selenium Click    id    incoming_tab
+	Selenium Click    id    incoming_panel_filterincoming_search-inputEl
+	Selenium Type    id    incoming_panel_filterincoming_search-inputEl    1300
+	Selenium Wait For Element Present    xpath    //*[@id="incoming_panel_incomingRoute_grid-body"]/div/table/tbody/tr[1]
+	Selenium Verify Text From Element    xpath    //*[@id="incoming_panel_incomingRoute_grid-body"]/div/table/tbody/tr[1]/td[1]/div    1300
+	Selenium Verify Text From Element    xpath    //*[@id="incoming_panel_incomingRoute_grid-body"]/div/table/tbody/tr[1]/td[3]/div    8500
+	
+Delete Custom Route
+	Selenium Reload    None
+	Selenium Wait For Element Present    id    incoming_tab
+	Selenium Click    id    incoming_tab
+	Selenium Click    id    incoming_panel_filterincoming_search-inputEl
+	Selenium Type    id    incoming_panel_filterincoming_search-inputEl    1300
+	Selenium Click    xpath    //*[@id="incoming_panel_incomingRoute_grid-body"]/div/table/tbody/tr[1]
+	Selenium Click    id    incoming_panel_delete_btn-btnEl
+	Selenium Click    id    deleteIncomingRouteWindow_save_btn-btnEl
+
+Verify Delete Custom Route
+	Selenium Reload    None
+	Selenium Wait For Element Present    id    incoming_tab
+	Selenium Click    id    incoming_tab
+	Selenium Click    id    incoming_panel_filterincoming_search-inputEl
+	Selenium Type    id    incoming_panel_filterincoming_search-inputEl    1300
+	Selenium Element Should Not Be Visible    xpath    //*[@id="incoming_panel_incomingRoute_grid-body"]/div/table/tbody/tr[1]
+	
+*** Keywords ***
