@@ -41,8 +41,7 @@ SIP Trunk - Verify Edit SIP Trunk Identity
 	Selenium Verify Text From Element    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]/td[2]/div    SIP
 	
 SIP Trunk - Edit SIP Settings
-	Open Pyro Browser
-	Sencha Login     		admin    password    helpButton-btnIconEl    False
+	Selenium Reload    None
 	Selenium Wait For Element Present    id    trunks_tab
 	Selenium Click    id    trunks_tab
 	Selenium Click    id    trunks_panelfilter_search-inputEl
@@ -61,8 +60,7 @@ SIP Trunk - Edit SIP Settings
 	Sleep    1
 	
 SIP Trunk - Edit SIP Trunk Security
-	Open Pyro Browser
-	Sencha Login     		admin    password    helpButton-btnIconEl    False
+	Selenium Reload    None
 	Selenium Wait For Element Present    id    trunks_tab
 	Selenium Click    id    trunks_tab
 	Selenium Click    id    trunks_panelfilter_search-inputEl
@@ -73,6 +71,7 @@ SIP Trunk - Edit SIP Trunk Security
 	Selenium Click    id    trunks_panelSecurity_menuitem-itemEl
 	Selenium Wait For Element Present    id    editTrunkSettingsSecurity_window_sipAuth_checkbox-inputEl
 	Selenium Check    id    editTrunkSettingsSecurity_window_sipAuth_checkbox-inputEl
+	Sleep    1
 	Selenium2Library.Input Text    id=editTrunkSettingsSecurity_window_registrationAccountName_txtinput-inputEl   ${EMPTY}
 	Selenium2Library.Input Text    id=editTrunkSettingsSecurity_window_registrationAccountName_txtinput-inputEl    100
 	Selenium2Library.Input Text    id=editTrunkSettingsSecurity_window_authUserName_txtinput-inputEl    ${EMPTY}
@@ -85,8 +84,7 @@ SIP Trunk - Edit SIP Trunk Security
 	Sleep    1
 	
 #SIP Trunk - Edit SIP Trunk Options
-#	Open Pyro Browser
-#	Sencha Login     		admin    password    helpButton-btnIconEl    False
+#	Selenium Reload    None
 #	Selenium Wait For Element Present    id    trunks_tab
 #	Selenium Click    id    trunks_tab
 #	Selenium Click    id    trunks_panelfilter_search-inputEl
