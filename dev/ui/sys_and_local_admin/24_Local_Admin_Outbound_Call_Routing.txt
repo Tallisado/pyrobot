@@ -1,0 +1,70 @@
+*** Settings ***
+Suite Setup
+Suite Teardown    Close Browser
+Library           Selenium2Library
+Library           Collections
+Library           PyroLibrary
+
+*** Variables ***
+${Neo}            http://${DEVICE_IP}
+${DEVICE_IP}      10.10.9.164
+
+*** Test Cases ***
+Create Outgoing Route
+	Open Pyro Browser
+	Sencha Login     		admin    password    helpButton-btnIconEl    False
+	Selenium Wait For Element Present    id    outgoing_tab
+	Selenium Click    id    outgoing_tab
+	Selenium Wait For Element Present    id	   outgoing_panel_create_btn-btnEl
+	Selenium Click    id    outgoing_panel_create_btn-btnEl
+	Selenium Wait For Element Present    id    patterntemplate_input-inputEl
+	Selenium2Library.Input Text    id=patterntemplate_input-inputEl    ${EMPTY}
+	Selenium2Library.Input Text    id=patterntemplate_input-inputEl    613-555-XXXX
+	Selenium Click    id    addOutgoingRouteWizard_next_btn-btnEl
+	Selenium Click    xpath    //*[@id="outgoingDestinationCardUser_gridconfig-body"]/tr[1]
+	Selenium Click    id    outgoingDestinationCardRight_button-btnEl
+	Selenium Click    id    addOutgoingRouteWizard_next_btn
+	Selenium Click    id    addOutgoingRouteWizard_save_btn-btnEl
+	Sleep    1
+	
+Verify Create Outgoing Route
+	Selenium Reload    None
+	Selenium Wait For Element Present    id    outgoing_tab
+	Selenium Click    id    outgoing_tab
+	Selenium Click    id    outgoing_panel_filteroutgoing_search-inputEl
+	Selenium Type    id    outgoing_panel_filteroutgoing_search-inputEl    Custom Route
+	Selenium Wait For Element Present    xpath    //*[@id="outgoing_panel_outgoingRoute_grid-body"]/div/table/tbody/tr[1]
+	Selenium Verify Text From Element    xpath    //*[@id="outgoing_panel_outgoingRoute_grid-body"]/div/table/tbody/tr[1]/td[1]/div    Custom Route
+	
+#Add Custom Template
+#	Selenium Reload    None
+#	Selenium Wait For Element Present    id    outgoing_tab
+#	Selenium Click    id    outgoing_tab
+#	Selenium Click    id    outgoing_panel_filteroutgoing_search-inputEl
+#	Selenium Type    id    outgoing_panel_filteroutgoing_search-inputEl    Custom Route
+#	Selenium Wait For Element Present    xpath    //*[@id="outgoing_panel_outgoingRoute_grid-body"]/div/table/tbody/tr[1]
+#	Selenium Click    id    //*[@id="outgoing_panel_outgoingRoute_grid-body"]/div/table/tbody/tr[1]
+#	Selenium Click    id    outgoingTemplatesCreateButton
+#	Selenium Wait For Element Present    id    create_number_pattern_display-inputEl
+#	Selenium Type    id    create_number_pattern_display-inputEl    614-555-XXXX
+#	Selenium Click    id    addOutgoingRouteTemplateWindow_save_btn-btnEl
+	
+Delete Outgoing Route
+	Selenium Reload    None
+	Selenium Wait For Element Present    id    outgoing_tab
+	Selenium Click    id    outgoing_tab
+	Selenium Click    id    outgoing_panel_filteroutgoing_search-inputEl
+	Selenium Type    id    outgoing_panel_filteroutgoing_search-inputEl    Custom Route
+	Selenium Click    xpath    //*[@id="outgoing_panel_outgoingRoute_grid-body"]/div/table/tbody/tr[1]
+	Selenium Click    id    outgoing_panel_delete_btn-btnEl
+	Selenium Click    id    deleteOutgoingRouteWindow_save_btn-btnEl
+
+#Verify Delete Outgoing Route
+#	Selenium Reload    None
+#	Selenium Wait For Element Present    id    outgoing_tab
+#	Selenium Click    id    outgoing_tab
+#	Selenium Click    id    outgoing_panel_filteroutgoing_search-inputEl
+#	Selenium Type    id    outgoing_panel_filteroutgoing_search-inputEl    Custom Route
+#	Selenium Element Should Not Be Visible    xpath    //*[@id="outgoing_panel_outgoingRoute_grid-body"]/div/table/tbody/tr[1]
+	
+*** Keywords ***
