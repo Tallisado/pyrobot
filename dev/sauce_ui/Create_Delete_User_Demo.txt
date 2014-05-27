@@ -1,0 +1,53 @@
+*** Settings ***
+Suite Setup
+Suite Teardown    Close Browser
+Library           Selenium2Library
+Library           Collections
+Library           PyroLibrary
+
+*** Variables ***
+${Neo}            http://${DEVICE_IP}
+${DEVICE_IP}      10.10.9.150
+
+*** Test Cases ***
+Create User 3100
+	Open Pyro Browser
+	Sencha Login     		admin    password    helpButton-btnIconEl
+	Selenium Wait For Element Present    id    createUser_wiz
+	Selenium Click    id    createUser_wiz
+	Selenium Wait For Element Present    id    createUsersWizardFirstNameField_txtinput-inputEl
+	Input Text    id=createUsersWizardFirstNameField_txtinput-inputEl    Tom
+	Input Text    id=createUsersWizardLastNameField_txtinput-inputEl    Stanton
+	Input Text    id=createUsersWizardDescriptionField_txtinput-inputEl    This demo better work
+	Input Text    id=createUsersWizardExtensionNumberField_txtinput-inputEl    ${EMPTY}
+	Input Text    id=createUsersWizardExtensionNumberField_txtinput-inputEl    3100
+	Input Text    id=createUsersWizardCellPhoneField_txtinput-inputEl    2569638618
+	Input Text    id=createUsersWizardPrimEmailField_txtinput-inputEl    tom.stanton@adtran.com
+	Selenium Element Should Not Be Visible    xpath    //div[@role='presentation' and @style='']
+	Selenium Click    id    createUserWiz_next_btn-btnWrap
+	Selenium Wait For Element Present    id    default_radio-inputEl
+	Selenium Click    xpath    //*[@id="default_radio-inputEl"]
+	Selenium Click    id    createUserWiz_next_btn-btnWrap
+	Selenium Click    xpath    //*[@id="createUserWizardUnassignedPhone_gridconfig-record-00:04:F2:2C:5E:37"]
+	Selenium Click    id    createUserWizardAssignPhoneRight_button
+	Selenium Wait For Element Present    id    createUserWiz_next_btn-btnEl
+	Selenium Click    id    createUserWiz_next_btn-btnEl
+	Selenium Wait For Element Present    id    createUsersWizardELR_txtinput-inputEl
+	Input Text    id=createUsersWizardELR_txtinput-inputEl    Tom's Super Secret Office
+	Selenium Wait For Element Present    id    createUserWiz_next_btn
+	Selenium Click    id    createUserWiz_next_btn
+	Selenium Wait For Element Present    id    createUserWiz_save_btn-btnEl
+	Selenium Click    id    createUserWiz_save_btn-btnEl
+
+Remove User 3100
+	Selenium Reload
+	Selenium Wait For Element Present    xpath    //div[@id="removeUser_wiz"]
+	Selenium Click    xpath    //div[@id="removeUser_wiz"]
+	Selenium Wait For Element Present    name    removeUserWizard_window_removeUser_wizard_user_combobox-inputEl
+	Selenium Click Text From Combobox    name    removeUserWizard_window_removeUser_wizard_user_combobox-inputEl    Tom Stanton
+	Selenium Wait For Element Present    xpath    //*[@id="removeUserWizard_window_removeUser_wizard_next_btn"]
+	Selenium Click    xpath    //*[@id="removeUserWizard_window_removeUser_wizard_next_btn"]
+	Selenium Wait For Element Present    xpath    //*[@id="removeUserWizard_window_removeUser_wizard_save_btn"]
+	Selenium Click    xpath    //*[@id="removeUserWizard_window_removeUser_wizard_save_btn"]
+	
+*** Keywords ***
