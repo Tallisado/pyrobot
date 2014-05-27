@@ -74,4 +74,10 @@ Verify Delete Custom Route
 	Selenium Type    id    incoming_panel_filterincoming_search-inputEl    1300
 	Selenium Element Should Not Be Visible    xpath    //*[@id="incoming_panel_incomingRoute_grid-body"]/div/table/tbody/tr[1]
 	
+Export Inbound Call Routing - UI Validation Only
+	Selenium Reload    None
+	Selenium Wait For Element Present    id    incoming_tab
+	Selenium Click    id    incoming_tab
+	Selenium Click    id    incoming_panel_incomingRoute_grid_export_btn
+	
 *** Keywords ***

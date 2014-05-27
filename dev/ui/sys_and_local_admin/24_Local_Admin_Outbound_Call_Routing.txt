@@ -10,7 +10,7 @@ ${Neo}            http://${DEVICE_IP}
 ${DEVICE_IP}      10.10.9.164
 
 *** Test Cases ***
-Create Outgoing Route
+Create Outgoing Custom Route
 	Open Pyro Browser
 	Sencha Login     		admin    password    helpButton-btnIconEl    False
 	Selenium Wait For Element Present    id    outgoing_tab
@@ -25,9 +25,9 @@ Create Outgoing Route
 	Selenium Click    id    outgoingDestinationCardRight_button-btnEl
 	Selenium Click    id    addOutgoingRouteWizard_next_btn
 	Selenium Click    id    addOutgoingRouteWizard_save_btn-btnEl
-	Sleep    1
+	Sleep    2
 	
-Verify Create Outgoing Route
+Verify Create Outgoing Custom Route
 	Selenium Reload    None
 	Selenium Wait For Element Present    id    outgoing_tab
 	Selenium Click    id    outgoing_tab
@@ -36,20 +36,20 @@ Verify Create Outgoing Route
 	Selenium Wait For Element Present    xpath    //*[@id="outgoing_panel_outgoingRoute_grid-body"]/div/table/tbody/tr[1]
 	Selenium Verify Text From Element    xpath    //*[@id="outgoing_panel_outgoingRoute_grid-body"]/div/table/tbody/tr[1]/td[1]/div    Custom Route
 	
-#Add Custom Template
-#	Selenium Reload    None
-#	Selenium Wait For Element Present    id    outgoing_tab
-#	Selenium Click    id    outgoing_tab
-#	Selenium Click    id    outgoing_panel_filteroutgoing_search-inputEl
-#	Selenium Type    id    outgoing_panel_filteroutgoing_search-inputEl    Custom Route
-#	Selenium Wait For Element Present    xpath    //*[@id="outgoing_panel_outgoingRoute_grid-body"]/div/table/tbody/tr[1]
-#	Selenium Click    id    //*[@id="outgoing_panel_outgoingRoute_grid-body"]/div/table/tbody/tr[1]
-#	Selenium Click    id    outgoingTemplatesCreateButton
-#	Selenium Wait For Element Present    id    create_number_pattern_display-inputEl
-#	Selenium Type    id    create_number_pattern_display-inputEl    614-555-XXXX
-#	Selenium Click    id    addOutgoingRouteTemplateWindow_save_btn-btnEl
+Add Custom Template To Outgoing Custom Route
+	Selenium Reload    None
+	Selenium Wait For Element Present    id    outgoing_tab
+	Selenium Click    id    outgoing_tab
+	Selenium Click    id    outgoing_panel_filteroutgoing_search-inputEl
+	Selenium Type    id    outgoing_panel_filteroutgoing_search-inputEl    Custom Route
+	Selenium Wait For Element Present    xpath    //*[@id="outgoing_panel_outgoingRoute_grid-body"]/div/table/tbody/tr[1]
+	Selenium Click    xpath    //*[@id="outgoing_panel_outgoingRoute_grid-body"]/div/table/tbody/tr[1]
+	Selenium Click    id    outgoingTemplatesCreateButton-btnEl
+	Selenium Wait For Element Present    id    create_number_pattern_display-inputEl
+	Selenium Type    id    create_number_pattern_display-inputEl    614-555-XXXX
+	Selenium Click    id    addOutgoingRouteTemplateWindow_save_btn-btnEl
 	
-Delete Outgoing Route
+Delete Outgoing Custom Route
 	Selenium Reload    None
 	Selenium Wait For Element Present    id    outgoing_tab
 	Selenium Click    id    outgoing_tab
@@ -66,5 +66,12 @@ Delete Outgoing Route
 #	Selenium Click    id    outgoing_panel_filteroutgoing_search-inputEl
 #	Selenium Type    id    outgoing_panel_filteroutgoing_search-inputEl    Custom Route
 #	Selenium Element Should Not Be Visible    xpath    //*[@id="outgoing_panel_outgoingRoute_grid-body"]/div/table/tbody/tr[1]
+
+Export Outbound Call Routing - UI Validation Only
+	Selenium Reload    None
+	Selenium Wait For Element Present    id    outgoing_tab
+	Selenium Click    id    outgoing_tab
+	Selenium Wait For Element Present    id    outgoing_panel_outgoingRoute_grid_export_btn-btnEl
+	Selenium Click    id    outgoing_panel_outgoingRoute_grid_export_btn-btnEl
 	
 *** Keywords ***
