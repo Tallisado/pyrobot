@@ -99,5 +99,26 @@ SIP Trunk - Edit SIP Trunk Security
 #	Selenium Check    id    editTrunkSettingsOptions_window_mainNumbAsCallerIdDuringTransfer_checkboxfield-inputEl
 #	Selenium Click    id    editTrunkSettingsOptions_window_save_btn-btnEl
 #	Sleep    1
+
+SIP Trunk - Delete SIP Trunk
+	Selenium Reload    None
+	Selenium Wait For Element Present    id    trunks_tab
+	Selenium Click    id    trunks_tab
+	Selenium Click    id    trunks_panelfilter_search-inputEl
+	Selenium Type    id    trunks_panelfilter_search-inputEl    SIPTrunkTest
+	Selenium Click    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]
+	Selenium Click    id    trunks_panelDelete_btn-btnEl
+	Selenium Wait For Element Present    id    editTrunkSettingsDelete_window_save_btn-btnEl
+	Selenium Click    id    editTrunkSettingsDelete_window_save_btn-btnEl
+	Sleep    1
+	
+SIP Trunk - Verify Delete SIP Trunk
+	Selenium Reload    None
+	Selenium Wait For Element Present    id    trunks_tab
+	Selenium Click    id    trunks_tab
+	Selenium Click    id    trunks_panelfilter_search-inputEl
+	Selenium Type    id    trunks_panelfilter_search-inputEl    SIPTrunkTest
+	Selenium Element Should Not Be Visible    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]
+	Sleep    1
 	
 *** Keywords ***
