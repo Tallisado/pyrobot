@@ -289,4 +289,25 @@ Verify Delete Ring Group
 	Selenium Type    id    groups_panelfilter_search-inputEl    RingTest
 	Selenium Element Should Not Be Visible    xpath    //*[@id="groups_panelGroups_grid-body"]/div/table/tbody/tr[1]
 	
+Assign 3011 To Operator Group
+	Selenium Reload    None
+	Selenium Wait For Element Present    id    groups_tab
+	Selenium Click    id    groups_tab
+	Selenium Type    id    groups_panelfilter_search-inputEl    Operator
+	Selenium Wait For Element Present    xpath    //*[@id="groups_panelGroups_grid-body"]/div/table/tbody/tr[1]
+	Selenium Click    xpath    //*[@id="groups_panelGroups_grid-body"]/div/table/tbody/tr[1]
+	Selenium Click    id    groups_panelMembership_btn-btnEl
+	Selenium Click    xpath    //*[@id="undefinedUser_gridconfig-body"]/tr[3]
+	Selenium Click    id    undefinedRight_button-btnEl
+	Selenium Click    id    editMembersGroupWiz_next_btn-btnEl
+	Selenium Click    id    editMembersGroupWiz_save_btn-btnEl
+	
+Verify Assign 3011 To Operator Group
+	Selenium Reload    None
+	Selenium Wait For Element Present    id    groups_tab
+	Selenium Click    id    groups_tab
+	Selenium Type    id    groups_panelfilter_search-inputEl    Operator
+	Selenium Wait For Element Present    xpath    //*[@id="groups_panelGroups_grid-body"]/div/table/tbody/tr[1]
+	Selenium Verify Text From Element    xpath    //*[@id="groups_panelGroups_grid-body"]/div/table/tbody/tr[1]/td[3]/div    1
+	
 *** Keywords ***
