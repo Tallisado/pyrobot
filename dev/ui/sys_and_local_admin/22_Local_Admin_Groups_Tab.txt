@@ -269,6 +269,53 @@ Change Ring Group Membership
 	Selenium Wait For Element Present    id    editMembersGroupWiz_save_btn-btnEl
 	Selenium Click    id    editMembersGroupWiz_save_btn-btnEl
 	
+Edit Ring Group - Edit Voicemail Settings
+	Selenium Reload    None
+	Selenium Wait For Element Present    id    groups_tab
+	Selenium Click    id    groups_tab
+	Selenium Click    id    groups_panelfilter_search-inputEl
+	Selenium Type    id    groups_panelfilter_search-inputEl    RingTest
+	Selenium Wait For Element Present    xpath    //*[@id="groups_panelGroups_grid-body"]/div/table/tbody/tr
+	Selenium Click    xpath    //*[@id="groups_panelGroups_grid-body"]/div/table/tbody/tr
+	Selenium Click    id    groups_panelSettingsMenu_btn
+	Selenium Click    id    groups_panelVM_menuitem
+	Selenium Wait For Element Present    id    numRings-inputEl
+	Selenium Type    id    numRings-inputEl    ${EMPTY}
+	Selenium Type    id    numRings-inputEl    3
+	Selenium Click Text From Combobox    id    vmcos_combobox-inputEl    normal_voicemail
+	Selenium Click    id    editGroupWindow_save_btn
+	Sleep    1
+	
+Edit Ring Group - Verify Edit Voicemail Settings
+	Selenium Reload    None
+	Selenium Wait For Element Present    id    groups_tab
+	Selenium Click    id    groups_tab
+	Selenium Click    id    groups_panelfilter_search-inputEl
+	Selenium Type    id    groups_panelfilter_search-inputEl    RingTest
+	Selenium Wait For Element Present    xpath    //*[@id="groups_panelGroups_grid-body"]/div/table/tbody/tr
+	Selenium Click    xpath    //*[@id="groups_panelGroups_grid-body"]/div/table/tbody/tr
+	Selenium Click    id    groups_panelSettingsMenu_btn
+	Selenium Click    id    groups_panelVM_menuitem
+	Selenium Wait For Element Present    id    numRings-inputEl
+	Selenium Verify Attribute From Element    id    numRings-inputEl    value    3
+	Selenium Verify Attribute From Element    id    vmcos_combobox-inputEl    value    normal_voicemail
+	
+Edit Ring Group - Set Voicemail PIN
+	Selenium Reload    None
+	Selenium Wait For Element Present    id    groups_tab
+	Selenium Click    id    groups_tab
+	Selenium Click    id    groups_panelfilter_search-inputEl
+	Selenium Type    id    groups_panelfilter_search-inputEl    RingTest
+	Selenium Wait For Element Present    xpath    //*[@id="groups_panelGroups_grid-body"]/div/table/tbody/tr
+	Selenium Click    xpath    //*[@id="groups_panelGroups_grid-body"]/div/table/tbody/tr
+	Selenium Click    id    groups_panelSettingsMenu_btn
+	Selenium Click    id    groups_panelVMPIN_menuitem
+	Selenium Wait For Element Present    id    ringGrpVmPin-inputEl
+	Selenium Type    id    ringGrpVmPin-inputEl    1234
+	Selenium Type    id    ringGrpVmPin2-inputEl    1234
+	Selenium Click    id    editGroupWindow_save_btn
+	Sleep    1
+	
 Delete Ring Group
 	Selenium Reload    None
 	Selenium Wait For Element Present    id    groups_tab
