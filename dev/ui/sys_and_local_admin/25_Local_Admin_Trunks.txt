@@ -121,4 +121,28 @@ SIP Trunk - Verify Delete SIP Trunk
 	Selenium Element Should Not Be Visible    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]
 	Sleep    1
 	
+FXO Trunk - Edit FXO Trunk Identity
+	Selenium Reload    None
+	Selenium Wait For Element Present    id    trunks_tab
+	Selenium Click    id    trunks_tab
+	Selenium Click    id    trunks_panelfilter_search-inputEl
+	Selenium Type    id    trunks_panelfilter_search-inputEl    FXO 1
+	Selenium Click    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]
+	Selenium Click    id    trunks_panelsettingsFXOMenuBtnId
+	Selenium Click    id    trunks_panelFXO_Identity_menuitem
+	Selenium Wait For Element Present    id    editTrunkSettingsFXOIdentity_window_FXOdescription_txtinput-inputEl
+	Selenium2Library.Input Text    id=editTrunkSettingsFXOIdentity_window_FXOdescription_txtinput-inputEl    ${EMPTY}
+	Selenium2Library.Input Text    id=editTrunkSettingsFXOIdentity_window_FXOdescription_txtinput-inputEl    FXO 0/1
+	Selenium Click    id    editTrunkSettingsFXOIdentity_window_save_btn
+	Sleep    1
+	
+FXO Trunk - Verify Edit FXO Trunk Identity
+	Selenium Reload    None
+	Selenium Wait For Element Present    id    trunks_tab
+	Selenium Click    id    trunks_tab
+	Selenium Click    id    trunks_panelfilter_search-inputEl
+	Selenium Type    id    trunks_panelfilter_search-inputEl    FXO 0/1
+	Selenium Wait For Element Present    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]
+	Selenium Verify Text From Element    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]/td[1]/div    FXO 0/1
+	
 *** Keywords ***
