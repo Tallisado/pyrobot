@@ -1,0 +1,148 @@
+*** Settings ***
+Suite Setup
+Suite Teardown    Close Browser
+Library           Selenium2Library
+Library           Collections
+Library           PyroLibrary
+
+*** Variables ***
+${Neo}            http://${DEVICE_IP}
+${DEVICE_IP}      10.10.9.164
+
+*** Test Cases ***
+SIP Trunk - Edit SIP Trunk Identity
+	Open Pyro Browser
+	Sencha Login     		admin    password    helpButton-btnIconEl    False
+	Selenium Wait For Element Present    id    trunks_tab
+	Selenium Click    id    trunks_tab
+	Selenium Click    id    trunks_panelfilter_search-inputEl
+	Selenium Type    id    trunks_panelfilter_search-inputEl    ITSP Trunk
+	Selenium Click    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]
+	Selenium Click    id    trunks_panelSettingsMenu_btn
+	Selenium Wait For Element Present    id    trunks_panelIdentity_menuitem-itemEl
+	Selenium Click    id    trunks_panelIdentity_menuitem-itemEl
+	Selenium Wait For Element Present    id    editTrunkSettingsIdentity_window_description_txtinput-inputEl
+	Selenium2Library.Input Text    id=editTrunkSettingsIdentity_window_description_txtinput-inputEl    ${EMPTY}
+	Selenium2Library.Input Text    id=editTrunkSettingsIdentity_window_description_txtinput-inputEl    SIPTrunkTest
+	Selenium Click    id    editTrunkSettingsIdentity_window_mainnum_txtinput-inputEl
+	Selenium2Library.Input Text    id=editTrunkSettingsIdentity_window_mainnum_txtinput-inputEl    ${EMPTY}
+	Selenium2Library.Input Text    id=editTrunkSettingsIdentity_window_mainnum_txtinput-inputEl    6135551111
+	Selenium Click    id    editTrunkSettingsIdentity_window_save_btn-btnEl
+	Sleep    1
+	
+SIP Trunk - Verify Edit SIP Trunk Identity
+	Selenium Reload    None
+	Selenium Wait For Element Present    id    trunks_tab
+	Selenium Click    id    trunks_tab
+	Selenium Click    id    trunks_panelfilter_search-inputEl
+	Selenium Type    id    trunks_panelfilter_search-inputEl    SIPTrunkTest
+	Selenium Wait For Element Present    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]
+	Selenium Verify Text From Element    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]/td[1]/div    SIPTrunkTest
+	Selenium Verify Text From Element    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]/td[2]/div    SIP
+	
+SIP Trunk - Edit SIP Settings
+	Selenium Reload    None
+	Selenium Wait For Element Present    id    trunks_tab
+	Selenium Click    id    trunks_tab
+	Selenium Click    id    trunks_panelfilter_search-inputEl
+	Selenium Type    id    trunks_panelfilter_search-inputEl    SIPTrunkTest
+	Selenium Click    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]
+	Selenium Click    id    trunks_panelSettingsMenu_btn
+	Selenium Wait For Element Present    id    trunks_panelSIP_menuitem-itemEl
+	Selenium Click    id    trunks_panelSIP_menuitem-itemEl
+	Selenium Wait For Element Present    id    editTrunkSettingsSIP_window_sipservername_txtinput-inputEl
+	Selenium2Library.Input Text    id=editTrunkSettingsSIP_window_sipservername_txtinput-inputEl    ${EMPTY}
+	Selenium2Library.Input Text    id=editTrunkSettingsSIP_window_sipservername_txtinput-inputEl    172.20.8.203
+	Selenium Click    id    editTrunkSettingsSIP_window_sipserverport_txtinput-inputEl
+	Selenium2Library.Input Text    id=editTrunkSettingsSIP_window_sipserverport_txtinput-inputEl    ${EMPTY}
+	Selenium2Library.Input Text    id=editTrunkSettingsSIP_window_sipserverport_txtinput-inputEl    5066
+	Selenium Click    id    editTrunkSettingsSIP_window_save_btn-btnEl
+	Sleep    1
+	
+SIP Trunk - Edit SIP Trunk Security
+	Selenium Reload    None
+	Selenium Wait For Element Present    id    trunks_tab
+	Selenium Click    id    trunks_tab
+	Selenium Click    id    trunks_panelfilter_search-inputEl
+	Selenium Type    id    trunks_panelfilter_search-inputEl    SIPTrunkTest
+	Selenium Click    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]
+	Selenium Click    id    trunks_panelSettingsMenu_btn
+	Selenium Wait For Element Present    id    trunks_panelSecurity_menuitem-itemEl
+	Selenium Click    id    trunks_panelSecurity_menuitem-itemEl
+	Selenium Wait For Element Present    id    editTrunkSettingsSecurity_window_sipAuth_checkbox-inputEl
+	Selenium Check    id    editTrunkSettingsSecurity_window_sipAuth_checkbox-inputEl
+	Sleep    1
+	Selenium2Library.Input Text    id=editTrunkSettingsSecurity_window_registrationAccountName_txtinput-inputEl   ${EMPTY}
+	Selenium2Library.Input Text    id=editTrunkSettingsSecurity_window_registrationAccountName_txtinput-inputEl    100
+	Selenium2Library.Input Text    id=editTrunkSettingsSecurity_window_authUserName_txtinput-inputEl    ${EMPTY}
+	Selenium2Library.Input Text    id=editTrunkSettingsSecurity_window_authUserName_txtinput-inputEl    100
+	Selenium2Library.Input Text    id=editTrunkSettingsSecurity_window_authPassword_txtinput-inputEl    ${EMPTY}
+	Selenium2Library.Input Text    id=editTrunkSettingsSecurity_window_authPassword_txtinput-inputEl    password
+	Selenium2Library.Input Text    id=editTrunkSettingsSecurity_window_verifyPassword_txtinput-inputEl    ${EMPTY}
+	Selenium2Library.Input Text    id=editTrunkSettingsSecurity_window_verifyPassword_txtinput-inputEl    password
+	Selenium Click    id    editTrunkSettingsSecurity_window_save_btn-btnEl
+	Sleep    1
+	
+#SIP Trunk - Edit SIP Trunk Options
+#	Selenium Reload    None
+#	Selenium Wait For Element Present    id    trunks_tab
+#	Selenium Click    id    trunks_tab
+#	Selenium Click    id    trunks_panelfilter_search-inputEl
+#	Selenium Type    id    trunks_panelfilter_search-inputEl    SIPTrunkTest
+#	Selenium Click    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]
+#	Selenium Click    id    trunks_panelSettingsMenu_btn
+#	Selenium Wait For Element Present    id    trunks_panelSettings_menuitem-itemEl
+#	Selenium Click    id    trunks_panelSettings_menuitem-itemEl
+#	Selenium Wait For Element Present    id    editTrunkSettingsOptions_window_allowMobileUserToTransferCalls_checkboxfield-inputEl
+#	Selenium Check    id    editTrunkSettingsOptions_window_allowMobileUserToTransferCalls_checkboxfield-inputEl
+#	Selenium Check    id    editTrunkSettingsOptions_window_mainNumAsCallerIdForOutboundCalls_checkboxfield-inputEl
+#	Selenium Check    id    editTrunkSettingsOptions_window_mainNumbAsCallerIdDuringTransfer_checkboxfield-inputEl
+#	Selenium Click    id    editTrunkSettingsOptions_window_save_btn-btnEl
+#	Sleep    1
+
+SIP Trunk - Delete SIP Trunk
+	Selenium Reload    None
+	Selenium Wait For Element Present    id    trunks_tab
+	Selenium Click    id    trunks_tab
+	Selenium Click    id    trunks_panelfilter_search-inputEl
+	Selenium Type    id    trunks_panelfilter_search-inputEl    SIPTrunkTest
+	Selenium Click    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]
+	Selenium Click    id    trunks_panelDelete_btn-btnEl
+	Selenium Wait For Element Present    id    editTrunkSettingsDelete_window_save_btn-btnEl
+	Selenium Click    id    editTrunkSettingsDelete_window_save_btn-btnEl
+	Sleep    1
+	
+SIP Trunk - Verify Delete SIP Trunk
+	Selenium Reload    None
+	Selenium Wait For Element Present    id    trunks_tab
+	Selenium Click    id    trunks_tab
+	Selenium Click    id    trunks_panelfilter_search-inputEl
+	Selenium Type    id    trunks_panelfilter_search-inputEl    SIPTrunkTest
+	Selenium Element Should Not Be Visible    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]
+	Sleep    1
+	
+FXO Trunk - Edit FXO Trunk Identity
+	Selenium Reload    None
+	Selenium Wait For Element Present    id    trunks_tab
+	Selenium Click    id    trunks_tab
+	Selenium Click    id    trunks_panelfilter_search-inputEl
+	Selenium Type    id    trunks_panelfilter_search-inputEl    FXO 1
+	Selenium Click    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]
+	Selenium Click    id    trunks_panelsettingsFXOMenuBtnId
+	Selenium Click    id    trunks_panelFXO_Identity_menuitem
+	Selenium Wait For Element Present    id    editTrunkSettingsFXOIdentity_window_FXOdescription_txtinput-inputEl
+	Selenium2Library.Input Text    id=editTrunkSettingsFXOIdentity_window_FXOdescription_txtinput-inputEl    ${EMPTY}
+	Selenium2Library.Input Text    id=editTrunkSettingsFXOIdentity_window_FXOdescription_txtinput-inputEl    FXO 0/1
+	Selenium Click    id    editTrunkSettingsFXOIdentity_window_save_btn
+	Sleep    1
+	
+FXO Trunk - Verify Edit FXO Trunk Identity
+	Selenium Reload    None
+	Selenium Wait For Element Present    id    trunks_tab
+	Selenium Click    id    trunks_tab
+	Selenium Click    id    trunks_panelfilter_search-inputEl
+	Selenium Type    id    trunks_panelfilter_search-inputEl    FXO 0/1
+	Selenium Wait For Element Present    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]
+	Selenium Verify Text From Element    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]/td[1]/div    FXO 0/1
+	
+*** Keywords ***
