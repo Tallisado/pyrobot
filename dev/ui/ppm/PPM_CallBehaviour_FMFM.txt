@@ -1,0 +1,208 @@
+*** Settings ***
+Suite Setup
+Suite Teardown    Close Browser
+Library           Selenium2Library
+Library           Collections
+Library           PyroLibrary
+
+*** Variables ***
+${Neo}            http://${DEVICE_IP}
+${DEVICE_IP}      10.10.9.164
+
+${ACTION_SET_DROPPABLE}     //div[@id='ActionSetPanel-body']//div[contains(concat(' ', @class, ' '), ' x-container x-box-item ')]/div/div/div
+${ACTION_SET_DELETE}        //div[@id='ActionSetPanel-innerCt']//i[contains(concat(' ', @class, ' '), ' icon-remove-sign ')]
+#xpath=//div[@id='ActionSetPanel-body']//div[contains(concat(' ', @class, ' '), ' x-container x-box-item ')]/div/div/div
+
+*** Test Cases ***
+Login to PPM
+	Open Pyro Browser       selenium_speed=0.1
+	Sencha Login     		3011    1234    settingsButton-btnIconEl    False
+
+################
+# FMFM MAIN (PRE FMFM)
+################
+Page Loaded
+	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+	Selenium Click    id    settingsButton-btnIconEl
+	Selenium Wait For Element Present    id    settingsCalls
+	Selenium Click    id    settingsCalls
+	Selenium Wait For Element Present    id    addNewCbButton	
+	Selenium Click    id    addNewCbButton
+	Selenium Wait For Element Present    id    newCBMenuItem_FMFM	
+	Selenium Click    id    newCBMenuItem_FMFM
+	Selenium Wait For Element Present    id    FMFMConfigureRulesTabActionId_createButton
+
+Default Is Empty On First Load
+	#find class that matches 'Default' in the second table index, and use that proved index to show its empty action set
+	Page Should Contain Element     xpath=//tbody[@id='fmfmRulesGrid-body']/tr[2]//div[contains(concat(' ', @class, ' '), ' fmfmRuleElementText ') and contains(text(),'Default')]
+	Page Should Contain Element     xpath=//tbody[@id='fmfmRulesGrid-body']/tr[2]//img[@src='../Images/findMeFollowMe/actions.png']/..//div[contains(concat(' ', @class, ' '), ' fmfmRuleElementText ') and contains(text(),' ')]
+
+
+################
+# ACTION SET
+################
+# (Operational)
+################
+
+Action Set - Create - Page Loaded
+    Selenium Click    id    FMFMConfigureRulesTabActionId_createButton
+    Selenium Wait For Element Present    id    AddEditActionSetActions
+
+Action Set - Create - Drag And Drop All Actions
+	Selenium Drag And Drop     xpath    //div[@id='AddEditActionSetActions-body']//div[contains(text(),'Go to Voicemail')]/../..      ${ACTION_SET_DROPPABLE}
+	Selenium Click    xpath     ${ACTION_SET_DELETE}
+	Selenium Drag And Drop     xpath    //div[@id='AddEditActionSetActions-body']//div[contains(text(),'Ring to')]/../..      ${ACTION_SET_DROPPABLE}
+	Selenium Click    xpath     ${ACTION_SET_DELETE}
+	Selenium Drag And Drop     xpath    //div[@id='AddEditActionSetActions-body']//div[contains(text(),'Go to Operator')]/../..      ${ACTION_SET_DROPPABLE}
+	Selenium Click    xpath     ${ACTION_SET_DELETE}
+	Selenium Drag And Drop     xpath    //div[@id='AddEditActionSetActions-body']//div[contains(text(),'Go to Auto Attendant')]/../..      ${ACTION_SET_DROPPABLE}
+	Selenium Click    xpath     ${ACTION_SET_DELETE}
+	Selenium Drag And Drop     xpath    //div[@id='AddEditActionSetActions-body']//div[contains(text(),'Transfer to')]/../..      ${ACTION_SET_DROPPABLE}
+	Selenium Click    xpath     ${ACTION_SET_DELETE}
+
+# ################
+# # (Data)
+# ################
+Action Set - Create - Create GoToVoicemail
+	Selenium Drag And Drop     xpath    //div[@id='AddEditActionSetActions-body']//div[contains(text(),'Go to Voicemail')]/../..      ${ACTION_SET_DROPPABLE}
+	Page Should Contain Element    xpath=//a[@id='AddEditActionSetWindowNext' and not(contains(concat(' ', @class, ' '), ' x-btn-default-small-disabled '))]    TestCode: Next on Add Action Set unavailable
+	Selenium Click    xpath     //a[@id='AddEditActionSetWindowNext' and not(contains(concat(' ', @class, ' '), ' x-btn-default-small-disabled '))]
+
+# ################
+# # (Operational)
+# ################
+Action Set - Create - Configuration - Mandatory Name
+	Page Should Contain Element    xpath=//a[@id='AddEditActionSetWindowOk' and contains(concat(' ', @class, ' '), ' x-btn-default-small-disabled ')]    TestCode: Save & Close shouldnt have been enabled since the mandatory Name was not given
+	Selenium Type     id    actionsetconfigurationname-inputEl     AutoGoVM
+	Page Should Contain Element    xpath=//a[@id='AddEditActionSetWindowOk' and not(contains(concat(' ', @class, ' '), ' x-btn-default-small-disabled '))]    TestCode: Save & Close should have been enabled since the mandatory Name was given
+
+Action Set - Create - Configuration - Name cannot exceed ten char
+	Selenium Type     id    actionsetconfigurationname-inputEl     ${EMPTY}
+	Selenium Type     id    actionsetconfigurationname-inputEl     iammorethanten
+	Page Should Contain Element    xpath=//a[@id='AddEditActionSetWindowOk' and contains(concat(' ', @class, ' '), ' x-btn-default-small-disabled ')]    TestCode: Name field acceped more than 10 chars
+
+Action Set - Create - Configuration - Description cannot exceed fifty char
+	Selenium Type     id    actionsetconfigurationdescription-inputEl     ${EMPTY}
+	Selenium Type     id    actionsetconfigurationdescription-inputEl     asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd
+	Page Should Contain Element    xpath=//a[@id='AddEditActionSetWindowOk' and contains(concat(' ', @class, ' '), ' x-btn-default-small-disabled ')]    TestCode: Desc field acceped more than 50 chars
+	
+# ################
+# # (Data)
+# ################
+Action Set - Create - Configuration - Save Configuration
+	Selenium Type     id    actionsetconfigurationname-inputEl     ${EMPTY}
+	Selenium Type     id    actionsetconfigurationname-inputEl     AutoSet
+	Selenium Type     id    actionsetconfigurationdescription-inputEl     ${EMPTY}
+	Selenium Type     id    actionsetconfigurationdescription-inputEl     Automated ToVM Set
+	Page Should Contain Element    xpath=//a[@id='AddEditActionSetWindowOk' and not(contains(concat(' ', @class, ' '), ' x-btn-default-small-disabled '))]    TestCode: Cannot save action set config
+	Page Should Not Contain     xpath=//*[contains(text(),'Could not save the action')]     The configuration did not save (popup occured with textL: 'Could not save the action')
+
+################
+# GROUP
+################
+# (Operational)
+################
+Add Group - Page Loaded
+	Selenium Wait For Element Present    id    FMFMConfigureRulesTabGroupId_createButton
+	Selenium Click    id    FMFMConfigureRulesTabGroupId_createButton
+	Selenium Wait For Element Present    id    groupName-inputEl
+
+# Add Group - Name mandatory
+	# Selenium Type     id    groupName-inputEl     ${EMPTY}
+    # Selenium Click     id    groupDescription-inputEl
+	# Page Should Contain Element    xpath=//a[@id='btncreateNewGroupButton-btnIconEl' and contains(concat(' ', @class, ' '), ' x-btn-default-small-disabled ')]    TestCode: Name was not mandatory
+
+# Add Group - Name cannot exceed ten char
+	# Selenium Type     id    groupName-inputEl     ${EMPTY}
+	# Selenium Type     id    groupName-inputEl     iammorethanten
+	# Page Should Contain Element    xpath=//a[@id='btncreateNewGroupButton-btnIconEl' and contains(concat(' ', @class, ' '), ' x-btn-default-small-disabled ')]    TestCode: Name field acceped more than 10 chars
+
+# Add Group - Description cannot exceed fifty char
+	# Selenium Type     id    groupDescription-inputEl     ${EMPTY}
+	# Selenium Type     id    groupDescription-inputEl     asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd
+	# Page Should Contain Element    xpath=//a[@id='btncreateNewGroupButton-btnIconEl' and contains(concat(' ', @class, ' '), ' x-btn-default-small-disabled ')]    TestCode: Desc field acceped more than 50 chars
+
+Add Group - RingGroup is exclusive
+	Selenium Click    id    groupringbackOnly-inputEl
+	Element Should Be Disabled     grouprecordCallersName-inputEl
+	Element Should Be Disabled     groupcourtesyGreeting-inputEl
+	Element Should Be Disabled     groupvmGreetingOption-inputEl
+	Selenium Click    id    groupringbackOnly-inputEl
+
+# ################
+# # (Data)
+# ################
+# #Add Group - Add Member
+# #	Selenium Click     xpath     //div[True and (contains(concat(' ', @class, ' '),'x-grid-row  x-grid-data-row x-grid-row-alt'))]
+# #	Selenium Click     xpath     //span[contains(concat(' ', @class, ' '),'icon-arrow-right ')]
+# #	Page Should Contain Element     xpath    //div[@id='addNewGroupContactsGrid-body']//*[contains(concat(' ', @class, ' '), 'x-grid-row  x-grid-data-row ')]
+
+Add Group - Save Group
+	Selenium Type     id    groupName-inputEl     ${EMPTY}
+	Selenium Type     id    groupName-inputEl     AutoGroup
+    Selenium Type     id    groupDescription-inputEl     ${EMPTY}
+	Selenium Type     id    groupDescription-inputEl     AutoGroupDesc
+	Selenium Click     xpath     //span[@id='btncreateNewGroupButton-btnIconEl' and not(contains(concat(' ', @class, ' '), ' x-btn-default-small-disabled '))]
+
+
+
+# ################
+# # FMFM MAIN (POST FMFM)
+# ################
+Add New Call Behaviour - FMFM - Page Contains New Group
+	Page Should Contain Element     xpath=//div[@id='FMFMConfigureRulesTabGroupId-body']      We were not in correct location to check for the newly created group
+	Page Should Contain Element     xpath=//div[@id='FMFMConfigureRulesTabGroupId-body']//div[contains(text(), 'AutoGroup')]      Cannot find newly created group
+
+Add New Call Behaviour - FMFM - Page Contains New Action Set
+	Page Should Contain Element     xpath=//div[@id='FMFMConfigureRulesTabActionId-body']     We were not in correct location to check for the newly created action set
+	Page Should Contain Element     xpath=//div[@id='FMFMConfigureRulesTabActionId-body']//div[contains(text(), 'AutoSet')]     Cannot find newly created action set
+
+Add New Call Behaviour - FMFM - Create New Call Behavior
+	Selenium Drag And Drop Actions     xpath    //div[@id='FMFMConfigureRulesTabGroupId-body']//div[contains(text(), 'AutoGroup')]      //tbody[@id='fmfmRulesGrid-body']/tr[1]/td[2]
+	Selenium Drag And Drop Actions     xpath    //div[@id='FMFMConfigureRulesTabTimeId-body']//div[contains(text(), 'Default')]      //tbody[@id='fmfmRulesGrid-body']/tr[1]/td[3]
+	Selenium Drag And Drop Actions     xpath    //div[@id='FMFMConfigureRulesTabActionId-body']//div[contains(text(), 'AutoSet')]      //tbody[@id='fmfmRulesGrid-body']/tr[1]/td[4]
+	Selenium Drag And Drop Actions     xpath    //div[@id='FMFMConfigureRulesTabActionId-body']//div[contains(text(), 'AutoSet')]      //tbody[@id='fmfmRulesGrid-body']/tr[3]
+	Selenium Click     xpath     //span[@id='FindmeFollowMeConfigurationWindowNext-btnIconEl' and not(contains(concat(' ', @class, ' '), ' x-btn-default-small-disabled '))]
+	Selenium Wait For Element Present    id    FindMeFollowMeConfigName-bodyEl
+	Selenium Click     id     FindMeFollowMeConfigName-inputEl
+    Selenium Type      id     FindMeFollowMeConfigName-inputEl     AutoCB
+	Selenium Click     id     FindmeFollowMeConfigurationWindowOk-btnIconEl
+	Selenium Wait For Element Present    id    addNewCbButton
+
+# ################
+# # CALL BEHAVIOR - MAIN
+# ################
+# # CALL BEHAVIOR - ACTIVATE/EDIT FMFM
+# ################
+Add New Call Behaviour - FMFM - Page Location Check
+	Page Should Contain Element     xpath=//div[@id='cbPanel_grid-body']    Were were not in the correct location for this test
+
+Add New Call Behaviour - FMFM - Verify Newly Created Call Behavior
+	Selenium Wait For Element Present     xpath     //div[@id='cbPanel_grid-body']//div[contains(text(), 'AutoCB')]
+    Page Should Contain Element     xpath=//div[@id='cbPanel_grid-body']//div[contains(text(), 'AutoCB')]     Could not find the newly created call behavior
+
+# # Add New Call Behaviour - FMFM - Verify New Call Behavior Not Active
+	# # Selenium Click     xpath     //div[@id='cbPanel_grid-body']//div[contains(text(), 'AutoCB')]
+	# # Page Should Contain Element     xpath     //a[@id='cbActivate' and not(contains(concat(' ', @class, ' '), ' x-item-disabled x-disabled '))]
+
+# # Add New Call Behaviour - FMFM - Set New Call Behavior Active
+	# # Selenium Click     xpath     //div[@id='cbPanel_grid-body']//div[contains(text(), 'AutoCB')]
+	# # Selenium Click     xpath     //a[@id='cbActivate']	
+    # # Page Should Contain Element     xpath=//div[@id='cbPanel_grid-body']    Were were not in the correct location for this test
+
+# # Add New Call Behaviour - FMFM - Verify New Call Behavior Active
+	# # Page Should Contain Element     xpath     //a[@id='cbActivate' and contains(concat(' ', @class, ' '), ' x-item-disabled x-disabled ')]	
+
+Add New Call Behaviour - FMFM - Edit Call Behavior Causes Context Change
+	Selenium Click     xpath     //div[@id='cbPanel_grid-body']//*[contains(text(), 'AutoCB')]
+	Selenium Click     xpath     //a[@id='cbEdit']
+	Selenium Wait For Element Present    id    FindmeFollowMeConfigurationWindowNext-btnIconEl
+
+# # Add New Call Behaviour - FMFM - Edit Call Behavior Causes Changes To Save
+    # # Selenium Click     xpath=//div[@id='FMFMConfigureRulesTabActionId-body']//div[contains(text(), 'AutoSet')]
+    # # Selenium Click     xpath     //a[@id='FindmeFollowMeConfigurationWindowNext-btnIconEl']
+    # # Selenium Type     id    FindMeFollowMeRings-inputEl     3
+    # # Selenium Click     xpath     FindmeFollowMeConfigurationWindowOk-btnIconEl
+    # # Selenium Wait For Element Present    id    addNewCbButton
+    # # Selenium Click     xpath     //div[@id='cbPanel_grid-body']//div[contains(text(), 'AutoCB')]
+    # # Page Should Contain Element     xpath=//div[@id='cbInfo-innerCt' and contains(text(), 'Find Me Follow Me after 3 rings')]
