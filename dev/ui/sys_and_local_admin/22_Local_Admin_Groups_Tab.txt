@@ -83,8 +83,7 @@ Verify Delete Call Queue
 	Selenium Element Should Not Be Visible    xpath    //*[@id="groups_panelGroups_grid-body"]/div/table/tbody/tr[1]
 	
 Create Paging Group
-	Open Pyro Browser
-	Sencha Login     		admin    password    helpButton-btnIconEl
+	Selenium Reload    None
 	Selenium Wait For Element Present    id    groups_tab
 	Selenium Click    id    groups_tab
 	Selenium Wait For Element Present    id	   groups_panelCreate_btn-btnEl
