@@ -297,7 +297,7 @@ Assign 3011 To Operator Group
 	Selenium Wait For Element Present    xpath    //*[@id="groups_panelGroups_grid-body"]/div/table/tbody/tr[1]
 	Selenium Click    xpath    //*[@id="groups_panelGroups_grid-body"]/div/table/tbody/tr[1]
 	Selenium Click    id    groups_panelMembership_btn-btnEl
-	Selenium Click    xpath    //*[@id="undefinedUser_gridconfig-body"]/tr[3]
+	Selenium Click    xpath    //*[@id="undefinedUser_gridconfig-body"]/tr[1]
 	Selenium Click    id    undefinedRight_button-btnEl
 	Selenium Click    id    editMembersGroupWiz_next_btn-btnEl
 	Selenium Click    id    editMembersGroupWiz_save_btn-btnEl
