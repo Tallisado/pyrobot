@@ -13,12 +13,12 @@ ${VOICE_USER_NUMBER}    2
 *** Test Cases ***
 Go to Neo
     [Tags]    predefault
-    Open Browser to http://admin:password@${LAN_IP}:81
+    Open Pyro Browser
+	Sencha Login     		admin    password    helpButton-btnIconEl    False
 	
 Go to Wizard
-    Click Image    WizardToggleIcon
-	#Execute Javascript    openStartupWizard()
-    Selenium2Library.Go To    ${LAN_IP}:81/main/wizard/startup/startup_welcome.html
+    Selenium Wait For Element Present    id    installWiz_wiz
+	Selenium2Library.Go To    http://admin:password@10.10.9.164/main/wizard/startup/startup_welcome.html
 
 Create New Configuration
     [Tags]    new
@@ -238,6 +238,7 @@ Enable SIP Authentication
 
 Create User
     [Arguments]    ${extension}    ${first_name}    ${last_name}    ${phone_model}    ${MAC}=""    ${operator_group}=false
+	Selenium Wait For Element Present    name    create_btn
     Click Element    name=create_btn
     Selenium2Library.Input Text    inputExtension    ${extension}
     Selenium2Library.Input Text    inputFirstname    ${first_name}
