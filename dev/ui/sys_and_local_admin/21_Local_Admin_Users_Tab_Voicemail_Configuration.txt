@@ -42,6 +42,7 @@ Verify Voicemail Configuration Settings
 	Selenium Click    id    users_panel_edit_btn-btnEl
 	Selenium Wait For Element Present    id    users_panel_edit_voicemail_cfg_menuitem-itemEl
 	Selenium Click    id    users_panel_edit_voicemail_cfg_menuitem-itemEl
+	Selenium Wait For Element Present    id    playEnvelope_checkbox-inputEl
 	Checkbox Should Not Be Selected    id=playEnvelope_checkbox-inputEl
 	Checkbox Should Not Be Selected    id=autoPlayMessage_checkbox-inputEl
 	Selenium Verify Attribute From Element    name   operatorAssist    value    1000
