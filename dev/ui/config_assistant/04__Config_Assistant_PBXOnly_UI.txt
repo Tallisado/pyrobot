@@ -13,12 +13,12 @@ ${VOICE_USER_NUMBER}    2
 *** Test Cases ***
 Go to Neo
     [Tags]    predefault
-    Open Browser to http://admin:password@${LAN_IP}:81
+    Open Pyro Browser
+	Sencha Login     		admin    password    helpButton-btnIconEl    False
 	
 Go to Wizard
-    Click Image    WizardToggleIcon
-	#Execute Javascript    openStartupWizard()
-    Selenium2Library.Go To    ${LAN_IP}:81/main/wizard/startup/startup_welcome.html
+    Selenium Wait For Element Present    id    installWiz_wiz
+	Selenium2Library.Go To    http://admin:password@${LAN_IP}/main/wizard/startup/startup_welcome.html
 
 Create New Configuration
     [Tags]    new
