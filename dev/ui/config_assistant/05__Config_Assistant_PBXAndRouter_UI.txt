@@ -18,7 +18,7 @@ Go to Neo
 	
 Go to Wizard
     Selenium Wait For Element Present    id    installWiz_wiz
-	Selenium2Library.Go To    http://admin:password@10.10.9.164/main/wizard/startup/startup_welcome.html
+	Selenium2Library.Go To    http://admin:password@${LAN_IP}/main/wizard/startup/startup_welcome.html
 
 Create New Configuration
     [Tags]    new
