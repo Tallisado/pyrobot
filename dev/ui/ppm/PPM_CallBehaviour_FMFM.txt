@@ -95,6 +95,7 @@ Action Set - Create - Configuration - Save Configuration
 	Selenium Type     id    actionsetconfigurationdescription-inputEl     ${EMPTY}
 	Selenium Type     id    actionsetconfigurationdescription-inputEl     Automated ToVM Set
 	Page Should Contain Element    xpath=//a[@id='AddEditActionSetWindowOk' and not(contains(concat(' ', @class, ' '), ' x-btn-default-small-disabled '))]    TestCode: Cannot save action set config
+    Selenium Click    id     AddEditActionSetWindowOk
 	Page Should Not Contain     xpath=//*[contains(text(),'Could not save the action')]     The configuration did not save (popup occured with textL: 'Could not save the action')
 
 ################
