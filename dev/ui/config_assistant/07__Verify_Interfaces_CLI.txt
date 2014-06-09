@@ -96,3 +96,7 @@ Check Interface PRI
 	Should Contain    ${interface}    Calling-party number:  2565552222
 	Should Contain    ${interface}    Signaling role:  user (TE)
 	
+Check SLA Group
+	Telnet.Write    show voice line-group GroupT07
+    ${interface}=    Telnet.Read Until Prompt
+	Should Contain    ${interface}    Trunk: T07
