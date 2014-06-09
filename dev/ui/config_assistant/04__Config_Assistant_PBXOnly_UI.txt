@@ -13,12 +13,12 @@ ${VOICE_USER_NUMBER}    2
 *** Test Cases ***
 Go to Neo
     [Tags]    predefault
-    Open Browser to http://admin:password@${LAN_IP}:81
+    Open Pyro Browser
+	Sencha Login     		admin    password    helpButton-btnIconEl    False
 	
 Go to Wizard
-    Click Image    WizardToggleIcon
-	#Execute Javascript    openStartupWizard()
-    Selenium2Library.Go To    ${LAN_IP}:81/main/wizard/startup/startup_welcome.html
+    Selenium Wait For Element Present    id    installWiz_wiz
+	Selenium2Library.Go To    http://admin:password@${LAN_IP}/main/wizard/startup/startup_welcome.html
 
 Create New Configuration
     [Tags]    new
@@ -114,6 +114,11 @@ Inband Call Routing
 User Configuration
 	Create User    ${USER_EXT}	   ${USER_FIRSTNAME}   ${USER_LASTNAME}     ${USER_PHONE_MODEL}    ${USER_PHONE_MAC}
     Next
+	
+Validate Extension Length
+	Selenium2Library.Click Element    back
+	Create Invalid User    112	   Test   ExtLength     ADTRAN/Polycom IP 650    0004F2149566
+	Next
 
 *** Keywords ***
 Open Browser to ${URL}
@@ -243,6 +248,25 @@ Create User
     ${number}=    Evaluate    ${VOICE_USER_NUMBER} + 1
     Set Global Variable    ${VOICE_USER_NUMBER}    ${number}
     Click Element    name=saveAndClose_btn
+	
+Create Invalid User
+    [Arguments]    ${extension}    ${first_name}    ${last_name}    ${phone_model}    ${MAC}=""    ${operator_group}=false
+	Selenium Wait For Element Present    name    create_btn
+    Click Element    name=create_btn
+    Selenium2Library.Input Text    inputExtension    ${extension}
+    Selenium2Library.Input Text    inputFirstname    ${first_name}
+    Selenium2Library.Input Text    inputLastname    ${last_name}
+    Selenium2Library.Select From List By Value    inputPhoneType    ${phone_model}
+    Selenium2Library.Input Text    inputMAC    ${MAC}
+    ${bool}    Convert to Boolean    ${operator_group}
+    Run Keyword If    ${bool}    Check Box    inputOperator
+    ${number}=    Evaluate    ${VOICE_USER_NUMBER} + 1
+    Set Global Variable    ${VOICE_USER_NUMBER}    ${number}
+	Click Element    id=inputFirstname
+    Click Element    name=saveAndClose_btn
+	Alert Should Be Present    text=Your extensions must be the same length, please make your extension 4 digits.
+	Reload Page
+	Sleep    1
 
 Apply
     Selenium2Library.Click Button    apply

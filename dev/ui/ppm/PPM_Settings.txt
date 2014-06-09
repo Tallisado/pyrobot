@@ -59,6 +59,7 @@ Verify Profile Settings
 	Selenium Click    id    settingsButton-btnIconEl
 	Selenium Wait For Element Present    id    settingsProfile
 	Selenium Click    id    settingsProfile
+	Selenium Wait For Element Present    name    HomeNumber
 	Selenium Verify Attribute From Element    name    HomeNumber    value    (613) 599-0100
 	Selenium Verify Attribute From Element    name    MobileNumber    value    (613) 333-3007
 	Selenium Verify Attribute From Element    name    PrimaryEmail    value    Kyle.Turris@senators.nhl.com

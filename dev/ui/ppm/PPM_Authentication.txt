@@ -10,6 +10,17 @@ ${Neo}            http://${DEVICE_IP}
 ${DEVICE_IP}      10.10.9.164
 
 *** Test Cases ***
+First Time Login
+	Open Pyro Browser
+	Selenium Wait For Element Present    id    loginnameid-inputEl
+	Selenium Wait For Element Present    id    loginpasswordid-inputEl
+	Selenium Type    id    loginnameid-inputEl    3011
+	Selenium Type    id    loginpasswordid-inputEl    1234
+	Selenium Wait For Element Present    id    loginbuttonid-btnIconEl
+	Selenium Click    id    loginbuttonid-btnIconEl
+	Sleep    2
+	Selenium Reload    None
+	
 Test PPM Login and Logout
 	Open Pyro Browser
 	Sencha Login     		3011    1234    settingsButton-btnIconEl    False
