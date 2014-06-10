@@ -252,6 +252,9 @@ Create User
     Selenium2Library.Input Text    inputLastname    ${last_name}
     Selenium2Library.Select From List By Value    inputPhoneType    ${phone_model}
     Selenium2Library.Input Text    inputMAC    ${MAC}
+	Selenium2Library.Input Text    inputLocation    ${USER_EMERGENCY_LOCATION}
+	Selenium2Library.Input Text    inputECID    ${USER_EMERGENCY_CALLERID}
+	Enable Shared Line For User    ${USER_ENABLE_SHARED_LINE}
     ${bool}    Convert to Boolean    ${operator_group}
     Run Keyword If    ${bool}    Check Box    inputOperator
     ${number}=    Evaluate    ${VOICE_USER_NUMBER} + 1
@@ -298,3 +301,8 @@ Configure Trunk With Shared Line
     [Arguments]    ${bool}
     ${bool}    Convert to Boolean    ${bool}
     Run Keyword if    ${bool}    Check Box    slaGroup_chkbox
+	
+Enable Shared Line For User
+    [Arguments]    ${bool}
+    ${bool}    Convert to Boolean    ${bool}
+    Run Keyword if    ${bool}    Check Box    inputSLA
