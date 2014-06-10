@@ -145,4 +145,25 @@ FXO Trunk - Verify Edit FXO Trunk Identity
 	Selenium Wait For Element Present    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]
 	Selenium Verify Text From Element    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]/td[1]/div    FXO 0/1
 	
+FXO Trunk - Delete Trunk
+	Selenium Reload    None
+	Selenium Wait For Element Present    id    trunks_tab
+	Selenium Click    id    trunks_tab
+	Selenium Click    id    trunks_panelfilter_search-inputEl
+	Selenium Type    id    trunks_panelfilter_search-inputEl    FXO 6
+	Selenium Wait For Element Present    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]
+	Selenium Click    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]
+	Selenium Click    id    trunks_panelDelete_btn
+	Selenium Wait For Element Present    id    editTrunkSettingsDelete_window_save_btn-btnEl
+	Selenium Click    id    editTrunkSettingsDelete_window_save_btn-btnEl
+	Sleep    1
+	
+FXO Trunk - Verify Delete Trunk
+	Selenium Reload    None
+	Selenium Wait For Element Present    id    trunks_tab
+	Selenium Click    id    trunks_tab
+	Selenium Click    id    trunks_panelfilter_search-inputEl
+	Selenium Type    id    trunks_panelfilter_search-inputEl    FXO 6
+	Selenium Element Should Not Be Visible    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]
+	
 *** Keywords ***
