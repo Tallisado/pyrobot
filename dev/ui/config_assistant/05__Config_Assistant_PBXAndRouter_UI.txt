@@ -105,6 +105,8 @@ SIP Trunk Configuration
 	
 SIP Trunk Configuration Options
 	Allow Trunk to Trunk Calls    ${SIP_ALLOW_TRUNK_TO_TRUNK}
+	Allow Mobile Users To Transfer Calls    ${SIP_ALLOW_MOBILE_USERS_TO_TRANSFER_CALLS}
+	Configure Trunk With Shared Line    ${SIP_CONFIGURE_TRUNK_WITH_SHARED_LINE}
 	Next
 
 Inband Call Routing
@@ -286,3 +288,13 @@ Erase Wizard Log File
 Select Phone Model
     [Arguments]    ${phone_model}
     Collections.Get From Dictionary    ${PHONE_MODELS}    ${phone_model}
+
+Allow Mobile Users To Transfer Calls
+    [Arguments]    ${bool}
+    ${bool}    Convert to Boolean    ${bool}
+    Run Keyword if    ${bool}    Check Box    mobileCanTransfer_chkbox
+	
+Configure Trunk With Shared Line
+    [Arguments]    ${bool}
+    ${bool}    Convert to Boolean    ${bool}
+    Run Keyword if    ${bool}    Check Box    slaGroup_chkbox

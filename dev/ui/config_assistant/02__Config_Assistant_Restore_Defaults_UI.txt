@@ -7,21 +7,19 @@ Library           Collections
 Variables         phone_dictionary.py
 
 *** Variables ***
-${Neo}            http://admin:password@${LAN_IP}:81
+${Neo}            http://${LAN_IP}
 
 *** Test Cases ***
 Go to Neo
     Open Browser to ${Neo}
 
 Go to Wizard
-	Wait Until Element Is Visible    WizardToggleIcon
-	Click Image    WizardToggleIcon
-    Selenium2Library.Go To    ${LAN_IP}:81/main/wizard/startup/factory_default.html
+	Wait Until Element Is Visible    loginnameid-inputEl
+    Selenium2Library.Go To    http://admin:password@${LAN_IP}/main/wizard/startup/factory_default.html
 	
 Restore Factory Defaults
-    Wait Until Element Is Visible    new
-	#Click Link    xpath=//*[@id="new"]
-	Selenium2Library.Go To    ${LAN_IP}:81/main/wizard/startup/summary/scripts/applyFactoryDefault.html
+	Sleep    1
+	Selenium2Library.Go To    http://${LAN_IP}/main/wizard/startup/summary/scripts/applyFactoryDefault.html
 	Sleep    80s
 	
 Wait For Unit To Restart

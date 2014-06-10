@@ -41,13 +41,13 @@ Check Interface Ethernet 0/1
     Telnet.Write    show interface gigabit-ethernet 0/1
     ${interface}=    Telnet.Read Until Prompt
 	Should Contain    ${interface}    giga-eth 0/1 is UP, line protocol is UP
-	Should Contain    ${interface}    Internet address is 10.10.9.129, netmask is 255.255.248.0  (via DHCP)
+	Should Contain    ${interface}    Internet address is ${WAN_PORT}, netmask is ${WAN_MASK}  (via DHCP)
 	
 Check Interface Ethernet 0/2
     Telnet.Write    show interface gigabit-ethernet 0/2
     ${interface}=    Telnet.Read Until Prompt
 	Should Contain    ${interface}    giga-eth 0/2 is UP, line protocol is UP
-	Should Contain    ${interface}    Ip address is 10.10.10.1, netmask is 255.255.255.0
+	Should Contain    ${interface}    Ip address is ${LAN_PORT}, netmask is ${LAN_MASK}
 
 Check Interface FXO 0/1
     Telnet.Write    show interface fxo 0/1
@@ -100,3 +100,20 @@ Check SLA Group
 	Telnet.Write    show voice line-group GroupT07
     ${interface}=    Telnet.Read Until Prompt
 	Should Contain    ${interface}    Trunk: T07
+	
+Check Remote Phone Rule Set
+	Telnet.Write    show running-config | begin hmr policy CA_FMFM_remote-phone-fix
+    ${interface}=    Telnet.Read Until Prompt
+	Should Contain    ${interface}    hmr policy CA_FMFM_remote-phone-fix
+	Should Contain    ${interface}    rule-set CA_Remote_Phone_Tweaks 10
+	Should Contain    ${interface}    rule-set CA_FMFM 20
+	Should Contain    ${interface}    hmr rule-set CA_FMFM
+	Should Contain    ${interface}    message-rule substitute_ani_T08 message-type request 80
+	Should Contain    ${interface}    match header diversion match-value /FMFM8885999698/
+	Should Contain    ${interface}    modify header diversion position first-match new-value /8885999698/ 20
+	Should Contain    ${interface}    hmr rule-set CA_Remote_Phone_Tweaks
+	Should Contain    ${interface}    message-rule CA_Change_Expires_Time message-type response 10
+	Should Contain    ${interface}    match header CSeq match-value /REGISTER/i
+	Should Contain    ${interface}    match header sip-status-line match-value /200/
+	Should Contain    ${interface}    modify header Expires position first-match new-value /60/ 10
+	
