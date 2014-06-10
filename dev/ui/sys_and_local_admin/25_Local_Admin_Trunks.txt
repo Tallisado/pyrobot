@@ -166,4 +166,42 @@ FXO Trunk - Verify Delete Trunk
 	Selenium Type    id    trunks_panelfilter_search-inputEl    FXO 6
 	Selenium Element Should Not Be Visible    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]
 	
+FXO Trunk - Disable Trunk
+	Selenium Reload    None
+	Selenium Wait For Element Present    id    trunks_tab
+	Selenium Click    id    trunks_tab
+	Selenium Click    id    trunks_panelfilter_search-inputEl
+	Selenium Type    id    trunks_panelfilter_search-inputEl    FXO 0/1
+	Selenium Click    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]
+	Selenium Click    id    trunks_panelsettingsDisable_btn-btnEl
+	Selenium Wait For Element Present    id    trunkDisableFXOTrunk_window_save_btn-btnEl
+	Selenium Click    id    trunkDisableFXOTrunk_window_save_btn-btnEl
+	
+FXO Trunk - Verify Disable Trunk
+	Selenium Reload    None
+	Selenium Wait For Element Present    id    trunks_tab
+	Selenium Click    id    trunks_tab
+	Selenium Click    id    trunks_panelfilter_search-inputEl
+	Selenium Type    id    trunks_panelfilter_search-inputEl    FXO 0/1
+	Selenium Verify Text From Element    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]/td[3]/div    Busy, Pending Update
+	
+FXO Trunk - Enable Trunk
+	Selenium Reload    None
+	Selenium Wait For Element Present    id    trunks_tab
+	Selenium Click    id    trunks_tab
+	Selenium Click    id    trunks_panelfilter_search-inputEl
+	Selenium Type    id    trunks_panelfilter_search-inputEl    FXO 0/1
+	Selenium Click    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]
+	Selenium Click    id    trunks_panelsettingsEnable_btn-btnEl
+	Selenium Wait For Element Present    id    trunkDisableFXOTrunk_window_save_btn-btnEl
+	Selenium Click    id    trunkDisableFXOTrunk_window_save_btn-btnEl
+	
+FXO Trunk - Verify Enable Trunk
+	Selenium Reload    None
+	Selenium Wait For Element Present    id    trunks_tab
+	Selenium Click    id    trunks_tab
+	Selenium Click    id    trunks_panelfilter_search-inputEl
+	Selenium Type    id    trunks_panelfilter_search-inputEl    FXO 0/1
+	Selenium Verify Text From Element    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]/td[3]/div    Available
+	
 *** Keywords ***
