@@ -30,10 +30,8 @@ PIN - VoiceMail - Enter pass and reenable
 	Selenium Type     name    voicemailPINReEnter    1234
 	Page Should Contain Element    xpath=//a[@id='savePasswordId' and not(contains(concat(' ', @class, ' '), ' x-item-disabled '))]    Why cant I Save my Voicemail PIN
 
-Reload Page
-	Selenium Reload     None
-
 PIN - SPRE - Valid after both are typed in
+	Selenium Reload     None
 	Selenium Wait For Element Present    id    users_tab
 	Selenium Click    id    users_tab
 	Selenium Wait For Element Present    xpath	   //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]
@@ -47,10 +45,8 @@ PIN - SPRE - Valid after both are typed in
 	Selenium Type     name    spreCodePINReEnter    1234
 	Page Should Contain Element    xpath=//a[@id='savePasswordId' and not(contains(concat(' ', @class, ' '), ' x-item-disabled '))]    Why cant I Save my Voicemail SPRE
 
-Reload Page
-	Selenium Reload     None
-
 PIN - Voicemail - Should require ReEnter
+	Selenium Reload     None
 	Selenium Wait For Element Present    id    users_tab
 	Selenium Click    id    users_tab
 	Selenium Wait For Element Present    xpath	   //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]
@@ -65,10 +61,8 @@ PIN - Voicemail - Should require ReEnter
 	Selenium Type     name    spreCodePINReEnter    1234
 	Page Should Not Contain Element    xpath=//a[@id='savePasswordId' and not(contains(concat(' ', @class, ' '), ' x-item-disabled '))]    Why can I save V-PIN without reenable
 
-Reload Page
-	Selenium Reload     None
-
 PIN - SPRE - Should require ReEnter
+	Selenium Reload     None
 	Selenium Wait For Element Present    id    users_tab
 	Selenium Click    id    users_tab
 	Selenium Wait For Element Present    xpath	   //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]
