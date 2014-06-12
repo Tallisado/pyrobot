@@ -40,6 +40,19 @@ Set PIN settings
 	Selenium Clear    name    voicemailPINReEnter
 	Selenium Type    name    voicemailPINReEnter    1234
 	Selenium Click    id    savePasswordId-btnEl
+
+PIN should accept either voicemail or SPREE independently
+	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+	Selenium Click    id    settingsButton-btnIconEl
+	Selenium Wait For Element Present    id    settingsPassword
+	Selenium Click    id    settingsPassword
+	Selenium Clear    name    voicemailPIN
+	Selenium Type    name    voicemailPIN    1234
+	Selenium Clear    name    voicemailPINReEnter
+	Selenium Type    name    voicemailPINReEnter    1234
+	Selenium Click    name    spreCodePIN
+	Selenium Click    name    spreCodePINReEnter
+	Page Should Not Contain Element     xpath=//input[@name='spreCodePIN']/../../td[3]/div/ul/li[1]     "Why do I have to change both pins"
 	
 Set Voicemail Settings
 	Selenium Wait For Element Present    id    settingsButton-btnIconEl
