@@ -1,0 +1,51 @@
+*** Settings ***
+Suite Setup
+Suite Teardown    Close Browser
+Library           Selenium2Library
+Library           Collections
+Library           PyroLibrary
+
+*** Variables ***
+${Neo}            http://${DEVICE_IP}
+${DEVICE_IP}      10.10.9.164
+
+*** Test Cases ***
+Login To NEO
+	Open Pyro Browser
+	Sencha Login     		admin    password    helpButton-btnIconEl
+
+Page Present
+	Selenium Wait For Element Present    id    users_tab
+	Selenium Click    id    users_tab
+	Selenium Wait For Element Present    xpath	   //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]
+	Selenium Click    xpath    //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]
+	Selenium Wait For Element Present    id    users_panel_edit_btn-btnEl
+	Selenium Click    id    users_panel_edit_btn-btnEl
+	Selenium Wait For Element Present    id    users_panel_edit_voiceServices_menuitem-textEl
+	Selenium Click    id    users_panel_edit_voiceServices_menuitem-textEl
+	Selenium Wait For Element Present    id    editVoiceServices_window_cosDefault_combobox-labelEl
+
+Assign Service - Override
+	Selenium Populate Combo And Click Text    id     editVoiceServices_window_cosOverride_combobox-inputEl    normal_users     wait_before_click=1
+
+Assign Service - Night
+	Selenium Populate Combo And Click Text    id     editVoiceServices_window_cosNight_combobox-inputEl    normal_users     wait_before_click=1
+
+Assign Service - Lunch
+	Selenium Populate Combo And Click Text    id     editVoiceServices_window_cosLunch_combobox-inputEl    normal_users     wait_before_click=1	
+	
+Assign Service - Weekend
+	Selenium Populate Combo And Click Text    id     editVoiceServices_window_cosWeekend_combobox-inputEl    normal_users     wait_before_click=1	
+	
+Assign Service - Custom1
+	Selenium Populate Combo And Click Text    id     editVoiceServices_window_cosCustom1_combobox-inputEl    normal_users     wait_before_click=1	
+	
+Assign Service - Custom2
+	Selenium Populate Combo And Click Text    id     editVoiceServices_window_cosCustom2_combobox-inputEl    normal_users     wait_before_click=1	
+		
+Assign Service - Custom3
+	Selenium Populate Combo And Click Text    id     editVoiceServices_window_cosCustom3_combobox-inputEl    normal_users     wait_before_click=1	
+	
+#NOTE: there is no save and continue for this set of tests
+
+*** Keywords ***
