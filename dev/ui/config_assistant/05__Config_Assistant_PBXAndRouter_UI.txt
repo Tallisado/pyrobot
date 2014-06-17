@@ -28,7 +28,6 @@ Create New Configuration
 Network Configuration
     Select PBX and Router
     Use DHCP
-	Check Box    remoteAdminEnabled
     Configure LAN Port Settings    ${LAN_PORT}    ${LAN_MASK}
     Next
     Sleep    3
@@ -36,6 +35,7 @@ Network Configuration
 
 General System Setup
     Configure Admin    ${USER}    ${PASSWORD}
+	Check Box    remoteAdminEnabled
     Next
 
 Trunk Configuration
