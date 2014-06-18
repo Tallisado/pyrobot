@@ -1,0 +1,54 @@
+*** Settings ***
+Suite Setup
+Suite Teardown    Close Browser
+Library           Selenium2Library
+Library           Collections
+Library           PyroLibrary
+
+*** Variables ***
+${Neo}            http://${DEVICE_IP}
+${DEVICE_IP}      10.10.9.164
+
+*** Test Cases ***
+Login To NEO
+	Open Pyro Browser
+	Sencha Login     		admin    password    helpButton-btnIconEl
+
+Page Present
+	Selenium Wait For Element Present    id    users_tab
+	Selenium Click    id    users_tab
+	Selenium Wait For Element Present    xpath	   //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]
+	Selenium Click    xpath    //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]
+	Selenium Wait For Element Present    id    users_panel_edit_btn-btnEl
+	Selenium Click    id    users_panel_edit_btn-btnEl
+	Selenium Wait For Element Present    id    users_panel_edit_features_menuitem-textEl
+	Selenium Click    id    users_panel_edit_features_menuitem-textEl
+	Selenium Wait For Element Present    id    editUserFeatures_window_billingCode_combobox-labelEl
+
+Billing Code - Disabled
+	Selenium Populate Combo And Click Text    id     editUserFeatures_window_billingCode_combobox-inputEl    Forced     wait_before_click=1
+
+Billing Code - Forced
+	Selenium Populate Combo And Click Text    id     editUserFeatures_window_billingCode_combobox-inputEl    Disabled     wait_before_click=1
+
+Shared Mobile Extension Port - SIP
+	Selenium Populate Combo And Click Text    name     PbxSecondaryIfc    SIP     wait_before_click=1
+
+Shared Mobile Extension Port - Analog (FXS 1)
+	Selenium Populate Combo And Click Text    name     PbxSecondaryIfc    Analog (FXS 1)     wait_before_click=1
+
+Shared Mobile Extension Port - Analog (FXS 2)
+	Selenium Populate Combo And Click Text    name     PbxSecondaryIfc    Analog (FXS 2)     wait_before_click=1
+
+Call Queue Reporting Status - Toggle
+	Selenium Click     id     editUserFeatures_window_callQueueReportingStatus_checkbox-inputEl
+
+Ring Group Call Waiting - Toggle
+	Selenium Click     id     editUserFeatures_window_ringGroupCallWaiting_checkbox-inputEl
+
+Sample Remote Phone - Toggle
+	Selenium Click     id     editUserFeatures_window_simpleRemotePhone_checkbox-inputEl
+
+Phone Button Management - Toggle
+	Selenium Click     id     editUserFeatures_window_phoneBtnManagement_checkbox-inputEl
+*** Keywords ***

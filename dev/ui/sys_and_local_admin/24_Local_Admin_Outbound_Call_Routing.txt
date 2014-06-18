@@ -18,6 +18,8 @@ Create Outgoing Custom Route
 	Selenium Wait For Element Present    id	   outgoing_panel_create_btn-btnEl
 	Selenium Click    id    outgoing_panel_create_btn-btnEl
 	Selenium Wait For Element Present    id    patterntemplate_input-inputEl
+	Selenium2Library.Input Text    id=addOutgoingWindow_routeName-inputEl    ${EMPTY}
+	Selenium2Library.Input Text    id=addOutgoingWindow_routeName-inputEl    CRTest
 	Selenium2Library.Input Text    id=patterntemplate_input-inputEl    ${EMPTY}
 	Selenium2Library.Input Text    id=patterntemplate_input-inputEl    613-555-XXXX
 	Selenium Click    id    addOutgoingRouteWizard_next_btn-btnEl
