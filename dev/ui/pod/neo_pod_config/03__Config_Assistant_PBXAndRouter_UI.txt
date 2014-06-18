@@ -4,7 +4,6 @@ Suite Teardown    Close Browser
 Library           Selenium2Library
 Library           Collections
 Variables         month_dictionary.py
-Variables         topology_pod.py
 
 *** Variables ***
 ${VOICE_USER_NUMBER}    2

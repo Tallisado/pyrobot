@@ -3,7 +3,6 @@ Suite Setup
 Suite Teardown    Close Browser
 Library           Selenium2Library
 Library           Collections
-Variables         topology_pod.py
 
 *** Variables ***
 ${Neo}            http://${LAN_IP}

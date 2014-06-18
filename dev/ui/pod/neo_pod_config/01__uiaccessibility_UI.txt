@@ -4,7 +4,6 @@ Suite Teardown    Close Browser
 Library           Selenium2Library
 Library           PyroLibrary
 Library           Collections
-Variables         topology_pod.py
 
 *** Variables ***
 ${Neo}            http://admin:password@${LAN_IP}
