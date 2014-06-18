@@ -1,0 +1,193 @@
+*** Settings ***
+Documentation     DVT Test resource for Robot Framework
+Library           String
+Library           Collections
+Library			  BuiltIn
+Library			  SSHLibrary
+Library           OperatingSystem
+
+*** Variables ***
+${SSH_USER_NAME}        admin
+${SSH_PASSWORD}         password
+${ENABLE_PASSWORD}         password
+${SSH_LOGIN_PROMPT}     Username:
+${SSH_PASSWORD_PROMPT}  Password:
+#${COMMAND_FAIL_REGEX}      (?m)(%\ Unrecognized\ command)|(%\ Invalid\ or\ incomplete)|(%Input\ has\ invalid\ format)|(%-+)
+${PROMPT}                  >
+
+*** Test Cases ***
+Login via SSH
+    [Documentation]    This creates a SSH session, logs into the unit, and stores the unit's hostname in "${HOSTNAME}". \ This keyword leaves you at global enable mode on an AOS unit.
+    ${ssh_id_temp}    Open Connection    ${LAN_IP}    timeout=600 seconds
+    Set Global Variable    ${SSH_ID}    ${ssh_id_temp}
+	Set Client Configuration    prompt=${PROMPT}
+    Login    ${SSH_USER_NAME}    ${SSH_PASSWORD}
+    Write    ${EMPTY}
+    ${out}=    Read Until Prompt
+    ${out}=    Replace String    ${out}    >    ${EMPTY}
+    Set Global Variable    ${HOSTNAME}    ${out}
+    Write    enable
+    Read Until    Password:
+	Set Client Configuration    prompt=${HOSTNAME}# 
+    Write    ${ENABLE_PASSWORD}
+    Write    no events
+    Write    terminal length 0
+    Read Until Prompt
+	
+Enter Config Mode
+	Write    config t
+	Set Client Configuration    prompt=${HOSTNAME}(config)#
+	
+Change Enable Password
+	Write    enable password adtran
+	Read Until Prompt
+	
+Enable DNS proxy and AOS name servers
+	Write    domain-proxy
+	Read Until Prompt
+	Write    name-server 10.10.8.1 10.10.14.200
+	Read Until Prompt
+	
+Create custom FTP login
+	Write    username "polycomftp" password "password"
+	Read Until Prompt
+	Write    portal-list "polycomftp" ftp
+	Read Until Prompt
+	Write    username "adtran" password "adtran"
+	Read Until Prompt
+	
+Change DHCP pool configurations
+	Write    ip dhcp excluded-address 10.10.10.254
+	Write    ip dhcp pool "wizard_voice_pool"
+	Write    tftp-server ftp://polycomftp:password@10.10.10.1/Polycom
+	Write    ip dhcp pool "PHONE_3101_POOL"
+    Write    default-router 10.10.10.1
+    Write    host 10.10.10.11 255.255.255.0
+    Write    hardware-address 00:04:f2:6b:27:ba ethernet
+    Write    tftp-server ftp://polycomftp:password@10.10.10.1/Polycom
+	Write    ip dhcp pool "PHONE_3102_POOL"
+    Write    default-router 10.10.10.1
+    Write    host 10.10.10.12 255.255.255.0
+    Write    hardware-address 00:04:f2:6a:ff:43 ethernet
+    Write    tftp-server ftp://polycomftp:password@10.10.10.1/Polycom
+	Write    ip dhcp pool "PHONE_3103_POOL"
+    Write    default-router 10.10.10.1
+    Write    host 10.10.10.13 255.255.255.0
+    Write    hardware-address 00:04:f2:ad:5a:27 ethernet
+    Write    tftp-server ftp://polycomftp:password@10.10.10.1/Polycom
+	Write    ip dhcp pool "PHONE_3104_POOL"
+    Write    default-router 10.10.10.1
+    Write    host 10.10.10.14 255.255.255.0
+    Write    hardware-address 00:04:f2:43:97:4a ethernet
+    Write    tftp-server ftp://polycomftp:password@10.10.10.1/Polycom
+	Write    exit
+	Read Until Prompt
+	
+Add Access List and NAT Policies
+    Write    ip access-list extended WAN
+    Write    permit tcp any any eq www log
+    Write    permit tcp any any eq telnet log
+    Write    permit udp any any eq snmp log
+    Write    permit tcp any any eq ftp log
+    Write    permit icmp any any echo log
+	Write    ip access-list extended web-acl-10
+    Write    remark Port Forward to SIP Phone 3102
+    Write    permit tcp any host 10.10.9.150 eq 8082 log
+	Write    ip access-list extended web-acl-11
+    Write    remark Port Forward to SIP Phone 3103
+    Write    permit tcp any host 10.10.9.150 eq 8083 log
+	Write    ip access-list extended web-acl-12
+    Write    remark Port Forward to SIP Phone 3104
+    Write    permit tcp any host 10.10.9.150 eq 8084 log
+	Write    ip access-list extended web-acl-9
+    Write    remark Port Forward to SIP Phone 3101
+    Write    permit tcp any host 10.10.9.150 eq 8081 log
+	Write    ip policy-class Public
+    Write    nat destination list web-acl-9 address 10.10.10.11 port 80
+    Write    nat destination list web-acl-10 address 10.10.10.12 port 80
+    Write    nat destination list web-acl-11 address 10.10.10.13 port 80
+    Write    nat destination list web-acl-12 address 10.10.10.14 port 80
+	Write    exit
+	Read Until Prompt
+	
+Set IP Route
+	Write    ip route 0.0.0.0 0.0.0.0 ${DEFAULT_GW}
+    Read Until Prompt
+	
+Set Class of Service AA Permit
+	Write    voice class-of-service normal_users
+	Write    aa-initiate-permit XXXX
+
+Set Trunk Numbers for FXO ports
+	Write    voice trunk T01 type analog supervision loop-start
+    Write    trunk-number 3001
+    Write    voice trunk T02 type analog supervision loop-start
+    Write    trunk-number 3002
+    Write    voice trunk T03 type analog supervision loop-start
+    Write    trunk-number 3101
+    Write    voice trunk T04 type analog supervision loop-start
+    Write    trunk-number 3102
+	
+Configure permit templates for PRI Trunk
+	Write    voice grouped-trunk PRI_TRUNKS
+	Write    accept 256444340X cost 0
+	Write    accept 256444341X cost 0
+	Write    accept 256444342X cost 0
+	Write    accept 2564443430 cost 0
+	Write    reject 256555350X
+	
+Configure permit templates for SIP Trunk
+	Write    accept 256444350X cost 0
+	Write    accept 256444351X cost 0
+	Write    accept 256444352X cost 0
+	Write    accept 2564443530 cost 0
+	Write    reject 256555310X
+	
+Remove CA Configured Analog Group Trunk
+	Write	no voice grouped-trunk ANALOG_TRUNKS
+	
+Create Analog Group Trunks
+	Write	voice grouped-trunk ANALOG1
+	Write	trunk T01
+	Write	accept 2564443301 cost 0
+	Write	voice grouped-trunk ANALOG2
+	Write	trunk T02
+	Write	accept 2564443302 cost 0
+	Write	voice grouped-trunk ANALOG3
+	Write	trunk T03
+	Write	accept 2564443303 cost 0
+	Write	voice grouped-trunk ANALOG4
+	Write	trunk T04
+	Write	accept 2564443304 cost 0
+	Write	voice grouped-trunk ANALOG5
+	Write	trunk T05
+	Write	accept 2564443305 cost 0
+	Write	voice grouped-trunk ANALOG6
+	Write	trunk T06
+	Write	accept 2564443306 cost 0
+	
+Create Paging Group
+	Write	voice paging-group 2000
+	Write	description "pg"
+	Write	no shutdown
+	Write	member 3001
+	Write	member 3101
+
+Add WAV File To MOH Player
+	Write	voice music-on-hold player System
+	Write   file 5 JazzClub.wav
+	
+Change SIP Registrar Settings
+    Write   no sip authenticate
+	Write	no sip registrar authenticate
+	Write	sip registrar default-expires 300
+	Write	sip registrar max-expires 3600
+	
+Disable SIP Blacklist
+	Write	sip secure remote-user
+	Write	no blacklist
+	Write   exit
+	
+Save Config
+	Write    do write
+	Read Until Prompt

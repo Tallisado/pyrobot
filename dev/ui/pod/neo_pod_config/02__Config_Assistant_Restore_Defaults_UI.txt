@@ -1,0 +1,35 @@
+*** Settings ***
+Suite Setup
+Suite Teardown    Close Browser
+Library           Selenium2Library
+Library           Collections
+Variables         topology_pod.py
+
+*** Variables ***
+${Neo}            http://${LAN_IP}
+
+*** Test Cases ***
+Go to Neo
+    Open Browser to ${Neo}
+
+Go to Wizard
+	Wait Until Element Is Visible    loginnameid-inputEl
+    Selenium2Library.Go To    http://admin:password@${LAN_IP}/main/wizard/startup/factory_default.html
+	
+Restore Factory Defaults
+	Sleep    1
+	Selenium2Library.Go To    http://${LAN_IP}/main/wizard/startup/summary/scripts/applyFactoryDefault.html
+	Sleep    80s
+	
+Wait For Unit To Restart
+	Wait Until Keyword Succeeds    10 min    5 sec    Check UI ${LAN_IP}
+	
+*** Keywords ***
+Open Browser to ${URL}
+    Open Browser    ${URL}
+    Maximize Browser Window
+    Set Selenium Speed    1
+	
+Check UI ${URL}
+    Selenium2Library.Go To    ${URL}/Login/index.php
+	Wait Until Element Is Visible    loginnameid-inputEl

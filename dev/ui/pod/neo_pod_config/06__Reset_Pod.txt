@@ -1,0 +1,85 @@
+*** Settings ***
+Library           String
+Library           Collections
+Library			  BuiltIn
+Library			  SSHLibrary
+Library           OperatingSystem
+
+*** Variables ***
+${PROMPT}                  >
+
+*** Test Cases ***
+Restart TA900 Switch
+    [Documentation]    This creates a SSH session, logs into the unit, and stores the unit's hostname in "${HOSTNAME}". \ This keyword leaves you at global enable mode on an AOS unit.
+    ${ssh_id_temp}    Open Connection    ${TA900SW_IP}    timeout=10 seconds
+    Set Global Variable    ${SSH_ID}    ${ssh_id_temp}
+	Set Client Configuration    prompt=${PROMPT}
+    Login    adtran    adtran
+    Write    ${EMPTY}
+    ${out}=    Read Until Prompt
+    ${out}=    Replace String    ${out}    >    ${EMPTY}
+    Set Global Variable    ${HOSTNAME}    ${out}
+    Write    enable
+    Read Until    Password:
+	Set Client Configuration    prompt=${HOSTNAME}# 
+    Write    adtran
+    Write    no events
+    Write    terminal length 0
+    Read Until Prompt
+	Write    reload
+	Read Until    Save System Configuration?[y/n]
+	Write    n
+	Read Until    You are about to reboot the system. Continue?[y/n]
+	Write    y
+	Close Connection
+
+Restart BCB
+    [Documentation]    This creates a SSH session, logs into the unit, and stores the unit's hostname in "${HOSTNAME}". \ This keyword leaves you at global enable mode on an AOS unit.
+    ${ssh_id_temp}    Open Connection    ${NEO_BCB_IP}    timeout=10 seconds
+    Set Global Variable    ${SSH_ID}    ${ssh_id_temp}
+	Set Client Configuration    prompt=${PROMPT}
+    Login    adtran    adtran
+    Write    ${EMPTY}
+    ${out}=    Read Until Prompt
+    ${out}=    Replace String    ${out}    >    ${EMPTY}
+    Set Global Variable    ${HOSTNAME}    ${out}
+    Write    enable
+    Read Until    Password:
+	Set Client Configuration    prompt=${HOSTNAME}# 
+    Write    adtran
+    Write    no events
+    Write    terminal length 0
+    Read Until Prompt
+	Write    reload
+	Read Until    Save System Configuration?[y/n]
+	Write    n
+	Read Until    You are about to reboot the system. Continue?[y/n]
+	Write    y
+	Close Connection
+	Sleep    60s
+	
+Wait For TA900 Switch Reboot
+	Wait Until Keyword Succeeds    10 min    5 sec    Verify reconnect to SSH    ${TA900SW_IP}    adtran    adtran    adtran
+	
+Wait For BCB Reboot
+	Wait Until Keyword Succeeds    10 min    5 sec    Verify reconnect to SSH    ${NEO_BCB_IP}    adtran    adtran    adtran
+
+*** Keywords ***
+Verify reconnect to SSH
+	[Arguments]    ${SSH_HOST}    ${SSH_USER_NAME}    ${SSH_PASSWORD}    ${ENABLE_PASSWORD}
+    [Documentation]    This creates a SSH session, logs into the unit, and stores the unit's hostname in "${HOSTNAME}". \ This keyword leaves you at global enable mode on an AOS unit.
+	${ssh_id_temp}    Open Connection    ${SSH_HOST}    timeout=10 seconds
+    Set Global Variable    ${SSH_ID}    ${ssh_id_temp}
+	Set Client Configuration    prompt=${PROMPT}
+    Login    ${SSH_USER_NAME}    ${SSH_PASSWORD}
+    Write    ${EMPTY}
+    ${out}=    Read Until Prompt
+    ${out}=    Replace String    ${out}    >    ${EMPTY}
+    Set Global Variable    ${HOSTNAME}    ${out}
+    Write    enable
+    Read Until    Password:
+	Set Client Configuration    prompt=${HOSTNAME}# 
+    Write    ${ENABLE_PASSWORD}
+    Write    no events
+    Write    terminal length 0
+    Read Until Prompt
