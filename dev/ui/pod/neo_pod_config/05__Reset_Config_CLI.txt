@@ -74,6 +74,7 @@ Configure WAN Interface
 	Write    do write
 	Write    exit
 	Write    exit
+	Sleep    5
 	
 Copy Config File
 	Write    copy tftp startup-config
