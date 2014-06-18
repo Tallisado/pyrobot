@@ -13,7 +13,7 @@ Library           PyroLibrary
 ${TFTP_SERVER}			   10.10.9.156
 ${SSH_USER_NAME}        admin
 ${SSH_PASSWORD}         password
-${ENABLE_PASSWORD}         password
+${ENABLE_PASSWORD}         adtran
 ${SSH_LOGIN_PROMPT}     Username:
 ${SSH_PASSWORD_PROMPT}  Password:
 #${COMMAND_FAIL_REGEX}      (?m)(%\ Unrecognized\ command)|(%\ Invalid\ or\ incomplete)|(%Input\ has\ invalid\ format)|(%-+)
@@ -24,7 +24,7 @@ ${CONFIG_FILE}             config-NEO-POD.cfg
 *** Test Cases ***
 Login via SSH
     [Documentation]    This creates a SSH session, logs into the unit, and stores the unit's hostname in "${HOSTNAME}". \ This keyword leaves you at global enable mode on an AOS unit.
-    ${ssh_id_temp}    Open Connection    ${LAN_IP}    timeout=600 seconds
+    ${ssh_id_temp}    Open Connection    ${LAN_IP}    timeout=10 seconds
     Set Global Variable    ${SSH_ID}    ${ssh_id_temp}
 	Set Client Configuration    prompt=${PROMPT}
     Login    ${SSH_USER_NAME}    ${SSH_PASSWORD}
@@ -61,7 +61,7 @@ Configure WAN Interface
     Write    enable
     Read Until    Password:
 	Set Client Configuration    prompt=${HOSTNAME}# 
-    Write    ${ENABLE_PASSWORD}
+    Write    password
     Write    no events
     Write    terminal length 0
     Read Until Prompt
@@ -107,7 +107,7 @@ Verify reconnect to SSH
     Write    enable
     Read Until    Password:
 	Set Client Configuration    prompt=${HOSTNAME}# 
-    Write    ${ENABLE_PASSWORD}
+    Write    password
     Write    no events
     Write    terminal length 0
     Read Until Prompt
