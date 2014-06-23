@@ -10,10 +10,12 @@ ${Neo}            http://${DEVICE_IP}
 ${DEVICE_IP}      10.10.9.164
 
 *** Test Cases ***
-SIP Trunk - Edit SIP Trunk Identity
+Enter Trunks Tab
 	Open Pyro Browser
 	Sencha Login     		admin    password    helpButton-btnIconEl    False
 	Selenium Wait For Element Present    id    trunks_tab
+
+SIP Trunk - Edit SIP Trunk Identity
 	Selenium Click    id    trunks_tab
 	Selenium Click    id    trunks_panelfilter_search-inputEl
 	Selenium Type    id    trunks_panelfilter_search-inputEl    ITSP Trunk
@@ -132,7 +134,7 @@ FXO Trunk - Edit FXO Trunk Identity
 	Selenium Click    id    trunks_panelFXO_Identity_menuitem
 	Selenium Wait For Element Present    id    editTrunkSettingsFXOIdentity_window_FXOdescription_txtinput-inputEl
 	Selenium2Library.Input Text    id=editTrunkSettingsFXOIdentity_window_FXOdescription_txtinput-inputEl    ${EMPTY}
-	Selenium2Library.Input Text    id=editTrunkSettingsFXOIdentity_window_FXOdescription_txtinput-inputEl    FXO 0/1
+	Selenium2Library.Input Text    id=editTrunkSettingsFXOIdentity_window_FXOdescription_txtinput-inputEl    FXO_01
 	Selenium Click    id    editTrunkSettingsFXOIdentity_window_save_btn
 	Sleep    1
 	
@@ -141,9 +143,9 @@ FXO Trunk - Verify Edit FXO Trunk Identity
 	Selenium Wait For Element Present    id    trunks_tab
 	Selenium Click    id    trunks_tab
 	Selenium Click    id    trunks_panelfilter_search-inputEl
-	Selenium Type    id    trunks_panelfilter_search-inputEl    FXO 0/1
+	Selenium Type    id    trunks_panelfilter_search-inputEl    FXO_01
 	Selenium Wait For Element Present    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]
-	Selenium Verify Text From Element    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]/td[1]/div    FXO 0/1
+	Selenium Verify Text From Element    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]/td[1]/div    FXO_01
 	
 FXO Trunk - Delete Trunk
 	Selenium Reload    None
@@ -171,7 +173,7 @@ FXO Trunk - Disable Trunk
 	Selenium Wait For Element Present    id    trunks_tab
 	Selenium Click    id    trunks_tab
 	Selenium Click    id    trunks_panelfilter_search-inputEl
-	Selenium Type    id    trunks_panelfilter_search-inputEl    FXO 0/1
+	Selenium Type    id    trunks_panelfilter_search-inputEl    FXO_01
 	Selenium Click    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]
 	Selenium Click    id    trunks_panelsettingsDisable_btn-btnEl
 	Selenium Wait For Element Present    id    trunkDisableFXOTrunk_window_save_btn-btnEl
@@ -182,7 +184,7 @@ FXO Trunk - Verify Disable Trunk
 	Selenium Wait For Element Present    id    trunks_tab
 	Selenium Click    id    trunks_tab
 	Selenium Click    id    trunks_panelfilter_search-inputEl
-	Selenium Type    id    trunks_panelfilter_search-inputEl    FXO 0/1
+	Selenium Type    id    trunks_panelfilter_search-inputEl    FXO_01
 	Selenium Verify Text From Element    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]/td[3]/div    Busy
 	
 FXO Trunk - Enable Trunk
@@ -190,7 +192,7 @@ FXO Trunk - Enable Trunk
 	Selenium Wait For Element Present    id    trunks_tab
 	Selenium Click    id    trunks_tab
 	Selenium Click    id    trunks_panelfilter_search-inputEl
-	Selenium Type    id    trunks_panelfilter_search-inputEl    FXO 0/1
+	Selenium Type    id    trunks_panelfilter_search-inputEl    FXO_01
 	Selenium Click    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]
 	Selenium Click    id    trunks_panelsettingsEnable_btn-btnEl
 	Sleep    1
@@ -202,7 +204,7 @@ FXO Trunk - Verify Enable Trunk
 	Selenium Wait For Element Present    id    trunks_tab
 	Selenium Click    id    trunks_tab
 	Selenium Click    id    trunks_panelfilter_search-inputEl
-	Selenium Type    id    trunks_panelfilter_search-inputEl    FXO 0/1
+	Selenium Type    id    trunks_panelfilter_search-inputEl    FXO_01
 	Selenium Verify Text From Element    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]/td[3]/div    Available
 	
 *** Keywords ***
