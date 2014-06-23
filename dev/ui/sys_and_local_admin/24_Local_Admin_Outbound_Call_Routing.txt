@@ -36,7 +36,7 @@ Verify Create Outgoing Custom Route
 	Selenium Click    id    outgoing_panel_filteroutgoing_search-inputEl
 	Selenium Type    id    outgoing_panel_filteroutgoing_search-inputEl    Custom Route
 	Selenium Wait For Element Present    xpath    //*[@id="outgoing_panel_outgoingRoute_grid-body"]/div/table/tbody/tr[1]
-	Selenium Verify Text From Element    xpath    //*[@id="outgoing_panel_outgoingRoute_grid-body"]/div/table/tbody/tr[1]/td[1]/div    Custom Route
+	Selenium Verify Text From Element    xpath    //*[@id="outgoing_panel_outgoingRoute_grid-body"]/div/table/tbody/tr[1]/td[1]/div    Custom Route1
 	
 Add Custom Template To Outgoing Custom Route
 	Selenium Reload    None
