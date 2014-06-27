@@ -1,0 +1,395 @@
+*** Settings ***
+Suite Setup
+Suite Teardown    Close Browser
+Library           Selenium2Library
+Library           PyroLibrary
+Library           Collections
+Library           String
+Library           Telnet
+Variables         phone_dictionary.py
+
+*** Variables ***
+${Neo}            http://${LAN_IP}
+${VOICE_USER_NUMBER}    2
+${TELNET_USER_NAME}        admin
+${TELNET_PASSWORD}         password
+${ENABLE_PASSWORD}         password
+${TELNET_LOGIN_PROMPT}     Username:
+${TELNET_PASSWORD_PROMPT}  Password:
+${PROMPT}                  >
+
+*** Test Cases ***
+
+For-Loop-Elements
+    @{ITEMS}    Create List    Ireland    Mexico    Puerto Rico    United Arab Emirates    United Kingdom    United States
+    #@{ITEMS}    Create List    Ireland
+    :FOR    ${COUNTRY}    IN    @{ITEMS}
+    \    Factory Defaults
+    #Go to Neo
+    #    [Tags]    predefault
+    \    Open Pyro Browser
+    \    Sencha Login     		admin    password    helpButton-btnIconEl    False	
+    #Go to Wizard
+    \    Selenium Wait For Element Present    id    installWiz_wiz
+    \    Selenium2Library.Go To    http://admin:password@${LAN_IP}/main/wizard/startup/startup_welcome.html
+    #Create New Configuration
+    #    [Tags]    new
+    \    Click Link    createNew
+    \    Click Link    modal-upload-submit
+    #Network Configuration
+    \    Select PBX and Router
+    \    Use DHCP
+    \    Configure LAN Port Settings    ${LAN_PORT}    ${LAN_MASK}
+    \    Next
+    \    Sleep    3
+    \    Next
+    #General System Setup
+    \    Configure Admin    ${USER}    ${PASSWORD}
+    \    Check Box    remoteAdminEnabled
+    \    Selenium2Library.Select From List    country     ${COUNTRY} 
+    \    Next
+    #Trunk Configuration
+    \    Create SIP Trunk
+    \    Create Analog Trunk
+    \    Create PRI Trunk
+    \    Next
+    #Analog Trunk Configuration
+    \    Trunk Description    FXO 1
+    \    Select FXO Port 0/1
+    \    Allow Trunk to Trunk Calls    true
+    \    Assign to SLA    false
+    \    Add Another Trunk
+    \    Trunk Description    FXO 2
+    \    Select FXO Port 0/2
+    \    Allow Trunk to Trunk Calls    true
+    \    Assign to SLA    false
+    \    Add Another Trunk
+    \    Trunk Description    FXO 3
+    \    Select FXO Port 0/3
+    \    Allow Trunk to Trunk Calls    true
+    \    Assign to SLA    false
+    \    Add Another Trunk
+    \    Trunk Description    FXO 4
+    \    Select FXO Port 0/4
+    \    Allow Trunk to Trunk Calls    true
+    \    Assign to SLA    false
+    \    Add Another Trunk
+    \    Trunk Description    FXO 5
+    \    Select FXO Port 0/5
+    \    Allow Trunk to Trunk Calls    true
+    \    Assign to SLA    false
+    \    Add Another Trunk
+    \    Trunk Description    FXO 6
+    \    Select FXO Port 0/6
+    \    Allow Trunk to Trunk Calls    true
+    \    Assign to SLA    false
+    \    Next
+    #Resume Previous Session
+    #    [Tags]    resume
+        #Selenium2Library.Execute Javascript    resumeFunction()
+    \    Sleep    1
+    #PRI Trunk Configuration
+    #    [Documentation]    Switch types are ISDN, ATT, NORTEL, and LUCENT
+    \    Trunk Description    ${PRI_TRUNK_DESC}
+    \    Main Phone Number    ${PRI_MAIN_PHONE}
+    \    Use as outbount caller ID    ${PRI_USE_OUTBOUND_CALLER_ID}
+    \    Channels    1    ${PRI_MAX_CHANNEL}
+    \    Switch Type ${PRI_SWITCH_TYPE}
+    \    Allow Trunk to Trunk Calls    ${PRI_ALLOW_TRUNK_TO_TRUNK}
+    \    Assign to SLA    ${PRI_ASSIGN_TO_SLA}
+    \    Next
+    #SIP Trunk Configuration
+    \    Sleep    2
+    \    Trunk Description    ${SIP_TRUNK_DESC}
+    \    Main Phone Number    ${SIP_MAIN_PHONE}
+    \    SIP Server    ${SIP_SERVER}
+    \    SIP Server Port
+    \    SIP Proxy
+    \    SIP Proxy Port
+    \    Enable SIP Authentication    ${ENABLE_SIP_AUTH}
+    \    Next	
+    #SIP Trunk Configuration Options
+    \    Allow Trunk to Trunk Calls    ${SIP_ALLOW_TRUNK_TO_TRUNK}
+    \    Allow Mobile Users To Transfer Calls    ${SIP_ALLOW_MOBILE_USERS_TO_TRANSFER_CALLS}
+    \    Configure Trunk With Shared Line    ${SIP_CONFIGURE_TRUNK_WITH_SHARED_LINE}
+    \    Next
+    #Inband Call Routing
+    #    [Documentation]    Select to route incoming calls to the Autoattendant (id=autoattendant) or operator group (id=operatorgroup)
+    \    Run Keyword And Continue On Failure    Selenium2Library.Radio Button Should Be Set To    radioGroup    ${INBAND_ROUTE}
+    \    Next
+    \    Next
+    #User Configuration
+    \    Create User    ${USER_EXT}	   ${USER_FIRSTNAME}   ${USER_LASTNAME}     ${USER_PHONE_MODEL}    ${USER_PHONE_MAC}
+    \    Next	
+    #Validate Extension Length
+    \    Selenium2Library.Click Element    back
+    \    Create Invalid User    112	   Test   ExtLength     ADTRAN/Polycom IP 650    0004F2149566
+    \    Next	
+    #Apply Configuration
+    \    Next
+    \    Sleep    2
+    \    Apply
+    \    Sleep    60
+    #Check Codec
+    \    ${telnet_id_temp}    Telnet.Open Connection    ${LAN_IP}    timeout=10 seconds
+    \    Set Global Variable    ${TELNET_ID}    ${telnet_id_temp}
+    \    Telnet.Login    ${TELNET_USER_NAME}    ${TELNET_PASSWORD}    ${TELNET_LOGIN_PROMPT}    ${TELNET_PASSWORD_PROMPT}
+    \    Telnet.Set Prompt    ${PROMPT}
+    \    Telnet.Write    ${EMPTY}
+    \    ${out}=    Telnet.Read Until Prompt
+    \    ${out}=    Replace String    ${out}    >    ${EMPTY}
+    \    Set Global Variable    ${HOSTNAME}    ${out}
+    \    Telnet.Write    enable
+    \    Telnet.Read Until    Password:
+    \    Telnet.Set Prompt    ${HOSTNAME}#    prompt_is_regexp=False
+    \    Telnet.Write    ${ENABLE_PASSWORD}
+    \    Verify Config Codec     ${COUNTRY}
+
+
+*** Keywords ***
+Factory Defaults
+    Open Browser to ${Neo}
+	Wait Until Element Is Visible    loginnameid-inputEl
+    Selenium2Library.Go To    http://admin:password@${LAN_IP}/main/wizard/startup/factory_default.html
+	Sleep    1
+	Selenium2Library.Go To    http://${LAN_IP}/main/wizard/startup/summary/scripts/applyFactoryDefault.html
+	Sleep    80s
+	Wait Until Keyword Succeeds    10 min    5 sec    Check UI ${LAN_IP}
+
+Open Browser to ${URL}
+    Open Browser    ${URL}
+    Maximize Browser Window
+    Set Selenium Speed    1
+	
+Check UI ${URL}
+    Selenium2Library.Go To    ${URL}/Login/index.php
+	Wait Until Element Is Visible    loginnameid-inputEl
+
+Add Phone User
+    [Arguments]    ${extension}    ${first_name}    ${last_name}
+    Execute Javascript    var iframe = document.getElementById('user_table_frame'); var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+    ${numbeOfPhones}=    ${numberOfPhones + 1}
+
+Configure Admin
+    [Arguments]    ${name}    ${password}
+    Selenium2Library.Input Text    adminUserName    ${name}
+    Selenium2Library.Input Text    adminPassword    ${password}
+    Selenium2Library.Input Text    verifyPassword    ${password}
+
+Select PBX ${function}
+    [Documentation]    if ${function}==Only will select optionB else if ${function}==and Router will select optionA
+    Run Keyword if    '${function}'=='Only'    Select Radio Button    network_radiobutton    optionB
+    Run Keyword if    '${function}'=='Only'    Click Link    use_dhcp
+    Run Keyword if    '${function}'=='and Router'    Select Radio Button    network_radiobutton    optionA
+    Selenium2Library.Click Button    next
+
+Next
+    Execute Javascript    nextFunction()
+
+Check Box
+    [Arguments]    ${box}
+    Selenium2Library.Click Element    ${box}
+
+Trunk Description
+    [Arguments]    ${description}
+    Selenium2Library.Input Text    identifier=trunk_description    ${description}
+
+Create ${type} Trunk
+    run keyword if    '${type}'=='Analog'    Check Box    identifier=trunk_fxo_checkbox
+    run keyword if    '${type}'=='SIP'    Check Box    identifier=trunk_voip_checkbox
+    run keyword if    '${type}'=='PRI'    Check Box    identifier=trunk_pri_checkbox
+
+Select FXO Port ${port}
+    Selenium2Library.Select From List By Label    fxo_port    FXO ${port}
+
+Assign to SLA
+    [Arguments]    ${bool}
+    ${bool}    Convert to Boolean    ${bool}
+    Run Keyword if    ${bool}    Check Box    slaGroup_chkbox
+
+Allow Trunk to Trunk Calls
+    [Arguments]    ${bool}
+    ${bool}    Convert to Boolean    ${bool}
+    Run Keyword if    ${bool}    Check Box    rejectExternal_checkbox
+
+Add Another Trunk
+    Click Button    add_trunk_button
+
+Main Phone Number
+    [Arguments]    ${number}
+    Selenium2Library.Input Text    main_number    ${number}
+
+Use as outbount caller ID
+    [Arguments]    ${bool}
+    ${bool}    Convert to Boolean    ${bool}
+    Run Keyword if    ${bool}    Check Box    outboundCallId_chkbox
+
+Channels
+    [Arguments]    ${start}    ${end}
+    log    ${start} to ${end}
+
+Switch Type ${type}
+    run keyword if    '${type}'=='ISDN'    Selenium2Library.Select From List By Label    priSwitchType    National ISDN 2
+    run keyword if    '${type}'=='ATT'    Selenium2Library.Select From List By Label    priSwitchType    ATT 4ESS
+    run keyword if    '${type}'=='LUCENT'    Selenium2Library.Select From List By Label    priSwitchType    LUCENT 5ESS
+    run keyword if    '${type}'=='NORTEL'    Selenium2Library.Select From List By Label    priSwitchType    Nortel DMS-100
+
+Configure WAN Port Settings
+    [Arguments]    ${address}    ${mask}    ${gateway}    ${dns1}    ${dns2}
+    Selenium2Library.Input Text    wan_ip    ${address}
+    Selenium2Library.Input Text    wan_subnet    ${mask}
+    Selenium2Library.Input Text    defaultGateway    ${gateway}
+    Selenium2Library.Input Text    primaryDns    ${dns1}
+	Selenium2Library.Input Text    secondaryDns    ${dns2}
+    Selenium2Library.Click Element    remoteAdminEnabled
+
+Use DHCP
+    Check Box    use_dhcp
+
+Configure LAN Port Settings
+    [Arguments]    ${address}    ${mask}
+    Selenium2Library.Input Text    voiceLanIpAddr    ${address}
+    Selenium2Library.Input Text    voiceLanSubnetMask    ${mask}
+
+SIP Server
+    [Arguments]    ${server}    # may be IP address or host name
+    Selenium2Library.Input Text    sip_server_address    ${server}
+
+SIP Server Port
+    [Arguments]    ${port}=5060
+    Run Keyword if    ${port}!=5060    Selenium2Library.Input Text    sip_server_port    ${port}
+
+SIP Proxy
+    [Arguments]    ${host}=""
+    Run Keyword if    ${host}!=""    Selenium2Library.Input Text    sip_proxy    ${host}
+
+SIP Proxy Port
+    [Arguments]    ${port}=5060
+    Run Keyword if    ${port}!=5060    Selenium2Library.Input Text    sip_server_port    ${port}
+
+Enable SIP Authentication
+    [Arguments]    ${bool}
+    ${bool}    Convert to Boolean    ${bool}
+    Run Keyword if    ${bool}    Check Box    sipAuthEnabled_chkbox
+
+Create User
+    [Arguments]    ${extension}    ${first_name}    ${last_name}    ${phone_model}    ${MAC}=""    ${operator_group}=false
+	Selenium Wait For Element Present    name    create_btn
+    Click Element    name=create_btn
+    Selenium2Library.Input Text    inputExtension    ${extension}
+    Selenium2Library.Input Text    inputFirstname    ${first_name}
+    Selenium2Library.Input Text    inputLastname    ${last_name}
+    Selenium2Library.Select From List By Value    inputPhoneType    ${phone_model}
+    Selenium2Library.Input Text    inputMAC    ${MAC}
+	Selenium2Library.Input Text    inputLocation    ${USER_EMERGENCY_LOCATION}
+	Selenium2Library.Input Text    inputECID    ${USER_EMERGENCY_CALLERID}
+	Enable Shared Line For User    ${USER_ENABLE_SHARED_LINE}
+    ${bool}    Convert to Boolean    ${operator_group}
+    Run Keyword If    ${bool}    Check Box    inputOperator
+    ${number}=    Evaluate    ${VOICE_USER_NUMBER} + 1
+    Set Global Variable    ${VOICE_USER_NUMBER}    ${number}
+	Click Element    id=inputFirstname
+    Click Element    name=saveAndClose_btn
+	
+Create Invalid User
+    [Arguments]    ${extension}    ${first_name}    ${last_name}    ${phone_model}    ${MAC}=""    ${operator_group}=false
+	Selenium Wait For Element Present    name    create_btn
+    Click Element    name=create_btn
+    Selenium2Library.Input Text    inputExtension    ${extension}
+    Selenium2Library.Input Text    inputFirstname    ${first_name}
+    Selenium2Library.Input Text    inputLastname    ${last_name}
+    Selenium2Library.Select From List By Value    inputPhoneType    ${phone_model}
+    Selenium2Library.Input Text    inputMAC    ${MAC}
+    ${bool}    Convert to Boolean    ${operator_group}
+    Run Keyword If    ${bool}    Check Box    inputOperator
+    ${number}=    Evaluate    ${VOICE_USER_NUMBER} + 1
+    Set Global Variable    ${VOICE_USER_NUMBER}    ${number}
+	Click Element    id=inputFirstname
+    Click Element    name=saveAndClose_btn
+	Alert Should Be Present    text=Your extensions must be the same length, please make your extension 4 digits.
+	Reload Page
+	Sleep    1
+
+Apply
+    Selenium2Library.Click Button    apply
+    #Confirm Action
+
+Erase Wizard Log File
+    Write    erase flash startupwizard.log
+
+Select Phone Model
+    [Arguments]    ${phone_model}
+    Collections.Get From Dictionary    ${PHONE_MODELS}    ${phone_model}
+
+Allow Mobile Users To Transfer Calls
+    [Arguments]    ${bool}
+    ${bool}    Convert to Boolean    ${bool}
+    Run Keyword if    ${bool}    Check Box    mobileCanTransfer_chkbox
+	
+Configure Trunk With Shared Line
+    [Arguments]    ${bool}
+    ${bool}    Convert to Boolean    ${bool}
+    Run Keyword if    ${bool}    Check Box    slaGroup_chkbox
+	
+Enable Shared Line For User
+    [Arguments]    ${bool}
+    ${bool}    Convert to Boolean    ${bool}
+    Run Keyword if    ${bool}    Check Box    inputSLA
+
+Verify Config Codec
+    [Arguments]    ${arg_country}
+    Run Keyword if    '${arg_country}' == 'Ireland'                        Ireland Codec Entries
+    Run Keyword if    '${arg_country}' == 'Mexico'                         Mexico Codec Entries
+    Run Keyword if    '${arg_country}' == 'Puerto Rico'                    Puerto Rico  Codec Entries
+    Run Keyword if    '${arg_country}' == 'United Arab Emirates'           United Arab Emirates Codec Entries
+    Run Keyword if    '${arg_country}' == 'United Kingdom'                 United Kingdom
+    Run Keyword if    '${arg_country}' == 'United States'                  United States
+
+
+Ireland Codec Entries 
+    Telnet.Write    show running-config | begin voice codec-list DefaultCodecList
+    ${interface}=    Telnet.Read Until     --MORE--
+    Should Contain    ${interface}    default
+    Should Contain    ${interface}    codec g722
+    Should Contain    ${interface}    codec g711alaw
+    Should Contain    ${interface}    codec g729
+
+Mexico Codec Entries 
+    Telnet.Write    show running-config | begin voice codec-list DefaultCodecList
+    ${interface}=    Telnet.Read Until     --MORE--
+    Should Contain    ${interface}    default
+    Should Contain    ${interface}    codec g722
+    Should Contain    ${interface}    codec g711alaw
+    Should Contain    ${interface}    codec g729
+
+Puerto Rico  Codec Entries
+    Telnet.Write    show running-config | begin voice codec-list DefaultCodecList
+    ${interface}=    Telnet.Read Until     --MORE--
+    Should Contain    ${interface}    default
+    Should Contain    ${interface}    codec g722
+    Should Contain    ${interface}    codec g711ulaw
+    Should Contain    ${interface}    codec g729
+
+United Arab Emirates Codec Entries
+    Telnet.Write    show running-config | begin voice codec-list DefaultCodecList
+    ${interface}=    Telnet.Read Until     --MORE--
+    Should Contain    ${interface}    default
+    Should Contain    ${interface}    codec g722
+    Should Contain    ${interface}    codec g711alaw
+    Should Contain    ${interface}    codec g729
+
+United Kingdom
+    Telnet.Write    show running-config | begin voice codec-list DefaultCodecList
+    ${interface}=    Telnet.Read Until     --MORE--
+    Should Contain    ${interface}    default
+    Should Contain    ${interface}    codec g722
+    Should Contain    ${interface}    codec g711alaw
+    Should Contain    ${interface}    codec g729
+
+United States
+    Telnet.Write    show running-config | begin voice codec-list DefaultCodecList
+    ${interface}=    Telnet.Read Until     --MORE--
+    Should Contain    ${interface}    default
+    Should Contain    ${interface}    codec g722
+    Should Contain    ${interface}    codec g711ulaw
+    Should Contain    ${interface}    codec g729
