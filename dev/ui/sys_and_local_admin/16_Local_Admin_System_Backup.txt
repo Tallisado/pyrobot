@@ -17,7 +17,7 @@ Should Create A Backup
 	Selenium Click    id    createBackup_wiz
 	Selenium Wait For Element Present    id    createBackupWiz_next_btn-btnEl
 	Selenium Click    id    createBackupWiz_next_btn-btnEl
-	Sleep     30
+	Sleep     60
 	Selenium Wait For Element Present    xpath    //*[@id="createBackupWiz_progress"]/div
 	Selenium Verify Text From Element    xpath    //*[@id="createBackupWiz_progress"]/div     Backup complete
 	
