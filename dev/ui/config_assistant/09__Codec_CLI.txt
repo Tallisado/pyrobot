@@ -340,10 +340,10 @@ Verify Config Codec
     [Arguments]    ${arg_country}
     Run Keyword if    '${arg_country}' == 'Ireland'                        Ireland Codec Entries
     Run Keyword if    '${arg_country}' == 'Mexico'                         Mexico Codec Entries
-    Run Keyword if    '${arg_country}' == 'Puerto Rico'                    Puerto Rico  Codec Entries
+    Run Keyword if    '${arg_country}' == 'Puerto Rico'                    Puerto Rico Codec Entries
     Run Keyword if    '${arg_country}' == 'United Arab Emirates'           United Arab Emirates Codec Entries
-    Run Keyword if    '${arg_country}' == 'United Kingdom'                 United Kingdom
-    Run Keyword if    '${arg_country}' == 'United States'                  United States
+    Run Keyword if    '${arg_country}' == 'United Kingdom'                 United Kingdom Codec Entries
+    Run Keyword if    '${arg_country}' == 'United States'                  United States Codec Entries
 
 
 Ireland Codec Entries 
@@ -378,7 +378,7 @@ United Arab Emirates Codec Entries
     Should Contain    ${interface}    codec g711alaw
     Should Contain    ${interface}    codec g729
 
-United Kingdom
+United Kingdom Codec Entries
     Telnet.Write    show running-config | begin voice codec-list DefaultCodecList
     ${interface}=    Telnet.Read Until     --MORE--
     Should Contain    ${interface}    default
@@ -386,7 +386,7 @@ United Kingdom
     Should Contain    ${interface}    codec g711alaw
     Should Contain    ${interface}    codec g729
 
-United States
+United States Codec Entries
     Telnet.Write    show running-config | begin voice codec-list DefaultCodecList
     ${interface}=    Telnet.Read Until     --MORE--
     Should Contain    ${interface}    default
