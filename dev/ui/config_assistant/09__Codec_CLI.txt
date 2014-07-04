@@ -5,7 +5,7 @@ Library           Selenium2Library
 Library           PyroLibrary
 Library           Collections
 Library           String
-Library           Telnet
+Library			  Telnet
 Variables         phone_dictionary.py
 
 *** Variables ***
@@ -25,6 +25,7 @@ For-Loop-Elements
     #@{ITEMS}    Create List    Ireland
     :FOR    ${COUNTRY}    IN    @{ITEMS}
     \    Factory Defaults
+	\    Reset System Country
     #Go to Neo
     #    [Tags]    predefault
     \    Open Pyro Browser
@@ -121,11 +122,8 @@ For-Loop-Elements
     #User Configuration
     \    Create User    ${USER_EXT}	   ${USER_FIRSTNAME}   ${USER_LASTNAME}     ${USER_PHONE_MODEL}    ${USER_PHONE_MAC}
     \    Next	
-    #Validate Extension Length
-    \    Selenium2Library.Click Element    back
-    \    Create Invalid User    112	   Test   ExtLength     ADTRAN/Polycom IP 650    0004F2149566
-    \    Next	
     #Apply Configuration
+	\	 Sleep    15
     \    Next
     \    Sleep    2
     \    Apply
@@ -144,6 +142,7 @@ For-Loop-Elements
     \    Telnet.Set Prompt    ${HOSTNAME}#    prompt_is_regexp=False
     \    Telnet.Write    ${ENABLE_PASSWORD}
     \    Verify Config Codec     ${COUNTRY}
+	\	 Close Browser
 
 
 *** Keywords ***
@@ -362,7 +361,7 @@ Mexico Codec Entries
     Should Contain    ${interface}    codec g711alaw
     Should Contain    ${interface}    codec g729
 
-Puerto Rico  Codec Entries
+Puerto Rico Codec Entries
     Telnet.Write    show running-config | begin voice codec-list DefaultCodecList
     ${interface}=    Telnet.Read Until     --MORE--
     Should Contain    ${interface}    default
@@ -393,3 +392,26 @@ United States Codec Entries
     Should Contain    ${interface}    codec g722
     Should Contain    ${interface}    codec g711ulaw
     Should Contain    ${interface}    codec g729
+	
+Reset System Country
+    ${telnet_id_temp}    Telnet.Open Connection    ${LAN_IP}    timeout=10 seconds
+    Set Global Variable    ${TELNET_ID}    ${telnet_id_temp}
+    Telnet.Login    ${TELNET_USER_NAME}    ${TELNET_PASSWORD}    ${TELNET_LOGIN_PROMPT}    ${TELNET_PASSWORD_PROMPT}
+    Telnet.Set Prompt    ${PROMPT}
+    Telnet.Write    ${EMPTY}
+    ${out}=    Telnet.Read Until Prompt
+    ${out}=    Replace String    ${out}    >    ${EMPTY}
+    Set Global Variable    ${HOSTNAME}    ${out}
+    Telnet.Write    enable
+    Telnet.Read Until    Password:
+    Telnet.Set Prompt    ${HOSTNAME}#    prompt_is_regexp=False
+    Telnet.Write    ${ENABLE_PASSWORD}
+	Telnet.Write    no events
+    Telnet.Set Prompt    ${HOSTNAME}(config)#   prompt_is_regexp=False
+    Telnet.Write    config t
+    Telnet.Write    voice system-country United_States
+    Telnet.Read Until    [y/n]
+    Telnet.Write    y
+    Telnet.Close Connection
+	Sleep    60
+	Wait Until Keyword Succeeds    10 min    5 sec    Check UI ${LAN_IP}
