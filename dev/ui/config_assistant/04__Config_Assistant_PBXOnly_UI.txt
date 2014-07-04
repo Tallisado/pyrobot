@@ -116,6 +116,7 @@ User Configuration
     Next
 	
 Validate Extension Length
+	Sleep    15
 	Selenium2Library.Click Element    back
 	Create Invalid User    112	   Test   ExtLength     ADTRAN/Polycom IP 650    0004F2149566
 	Next
