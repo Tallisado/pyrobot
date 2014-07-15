@@ -36,7 +36,7 @@ For-Loop-Elements
     #Create New Configuration
     #    [Tags]    new
     \    Click Link    createNew
-    \    Click Link    modal-upload-submit
+    \    Click Button    modal-upload-submit
     #Network Configuration
     \    Select PBX and Router
     \    Use DHCP
