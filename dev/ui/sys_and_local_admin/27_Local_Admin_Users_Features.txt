@@ -31,15 +31,6 @@ Billing Code - Disabled
 Billing Code - Forced
 	Selenium Populate Combo And Click Text    id     editUserFeatures_window_billingCode_combobox-inputEl    Disabled     wait_before_click=1
 
-Shared Mobile Extension Port - SIP
-	Selenium Populate Combo And Click Text    name     PbxSecondaryIfc    SIP     wait_before_click=1
-
-Shared Mobile Extension Port - Analog (FXS 1)
-	Selenium Populate Combo And Click Text    name     PbxSecondaryIfc    Analog (FXS 1)     wait_before_click=1
-
-Shared Mobile Extension Port - Analog (FXS 2)
-	Selenium Populate Combo And Click Text    name     PbxSecondaryIfc    Analog (FXS 2)     wait_before_click=1
-
 Call Queue Reporting Status - Toggle
 	Selenium Click     id     editUserFeatures_window_callQueueReportingStatus_checkbox-inputEl
 
