@@ -196,8 +196,8 @@ FXO Trunk - Enable Trunk
 	Selenium Click    xpath    //*[@id="trunks_panelTrunks_grid-body"]/div/table/tbody/tr[1]
 	Selenium Click    id    trunks_panelsettingsEnable_btn-btnEl
 	Sleep    1
-	Selenium Wait For Element Present    id    trunkDisableFXOTrunk_window_save_btn-btnEl
-	Selenium Click    id    trunkDisableFXOTrunk_window_save_btn-btnEl
+	Selenium Wait For Element Present    id    trunkEnableFXOTrunk_window_save_btn-btnIconEl
+	Selenium Click    id    trunkEnableFXOTrunk_window_save_btn-btnIconEl
 	
 FXO Trunk - Verify Enable Trunk
 	Selenium Reload    None
