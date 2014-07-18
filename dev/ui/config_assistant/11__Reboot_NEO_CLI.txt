@@ -1,0 +1,74 @@
+*** Settings ***
+Documentation     DVT Test resource for Robot Framework
+Suite Teardown    Close Browser
+Library           Selenium2Library
+Library           String
+Library           Collections
+Library			  BuiltIn
+Library			  SSHLibrary
+Library           OperatingSystem
+Library           PyroLibrary
+
+*** Variables ***
+${TFTP_SERVER}			   10.10.9.156
+${SSH_USER_NAME}        admin
+${SSH_PASSWORD}         password
+${ENABLE_PASSWORD}         password
+${SSH_LOGIN_PROMPT}     Username:
+${SSH_PASSWORD_PROMPT}  Password:
+#${COMMAND_FAIL_REGEX}      (?m)(%\ Unrecognized\ command)|(%\ Invalid\ or\ incomplete)|(%Input\ has\ invalid\ format)|(%-+)
+${PROMPT}                  >
+
+*** Test Cases ***
+Login via SSH
+    [Documentation]    This creates a SSH session, logs into the unit, and stores the unit's hostname in "${HOSTNAME}". \ This keyword leaves you at global enable mode on an AOS unit.
+    ${ssh_id_temp}    Open Connection    ${LAN_IP}    timeout=600 seconds
+    Set Global Variable    ${SSH_ID}    ${ssh_id_temp}
+	Set Client Configuration    prompt=${PROMPT}
+    Login    ${SSH_USER_NAME}    ${SSH_PASSWORD}
+    Write    ${EMPTY}
+    ${out}=    Read Until Prompt
+    ${out}=    Replace String    ${out}    >    ${EMPTY}
+    Set Global Variable    ${HOSTNAME}    ${out}
+    Write    enable
+    Read Until    Password:
+	Set Client Configuration    prompt=${HOSTNAME}# 
+    Write    ${ENABLE_PASSWORD}
+    Write    no events
+    Write    terminal length 0
+    Read Until Prompt
+	
+Reboot Unit
+	Write    reload
+	Read Until    Save System Configuration?[y/n]
+	Write    n
+	Read Until    You are about to reboot the system. Continue?[y/n]
+	Write    y
+	Close Connection
+	Run    sleep 60
+	Open Browser    http://www-internal.objectworld.com
+	Wait Until Keyword Succeeds    10 min    5 sec    Check UI http://${LAN_IP}
+	Sleep    30
+
+*** Keywords ***
+Verify reconnect to SSH
+    [Documentation]    This creates a SSH session, logs into the unit, and stores the unit's hostname in "${HOSTNAME}". \ This keyword leaves you at global enable mode on an AOS unit.
+    ${ssh_id_temp}    Open Connection    ${LAN_IP}    timeout=10 seconds
+    Set Global Variable    ${SSH_ID}    ${ssh_id_temp}
+	Set Client Configuration    prompt=${PROMPT}
+    Login    ${SSH_USER_NAME}    ${SSH_PASSWORD}
+    Write    ${EMPTY}
+    ${out}=    Read Until Prompt
+    ${out}=    Replace String    ${out}    >    ${EMPTY}
+    Set Global Variable    ${HOSTNAME}    ${out}
+    Write    enable
+    Read Until    Password:
+	Set Client Configuration    prompt=${HOSTNAME}# 
+    Write    ${ENABLE_PASSWORD}
+    Write    no events
+    Write    terminal length 0
+    Read Until Prompt
+	
+Check UI ${URL}
+    Selenium2Library.Go To    ${URL}/Login/index.php
+	Wait Until Element Is Visible    loginnameid-inputEl
