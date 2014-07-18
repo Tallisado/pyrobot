@@ -13,7 +13,7 @@ ${FTP_PASSWORD}         password
 
 *** Test Cases ***
 Connect to FTP
-    ftp connect    ${LAN_IP}    ${FTP_USER_NAME}    ${FTP_PASSWORD}
+    ftp connect    ${LAN_IP}    ${FTP_USER_NAME}    ${FTP_PASSWORD}    timeout=600
 	
 Change to backup directory
     Cwd    /backup
