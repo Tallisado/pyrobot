@@ -4,6 +4,7 @@ Suite Teardown    Close Browser
 Library           Selenium2Library
 Library           Collections
 Variables         month_dictionary.py
+Library           PyroLibrary
 
 *** Variables ***
 ${VOICE_USER_NUMBER}    2
@@ -136,7 +137,8 @@ Apply Configuration
     Next
     Sleep    2
     Apply
-    Sleep    60
+    Sleep    1
+	Wait Until Keyword Succeeds    10 min    5 sec    Check Complete
 
 *** Keywords ***
 Open Browser to ${URL}
@@ -334,3 +336,7 @@ Trunk Access Code
 Host Name
 	[Arguments]    ${host_name}
 	Selenium2Library.Input Text    name=hostName    ${host_name}
+	
+Check Complete
+	Selenium Wait For Element Present    xpath    //*[@id="progressBar-bar"]/div
+	Selenium Verify Text From Element    xpath    //*[@id="progressBar-bar"]/div     Complete
