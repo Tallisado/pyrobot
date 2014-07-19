@@ -143,7 +143,8 @@ Apply Configuration
 	
 Submit Configuration
     Apply
-    Sleep    60
+    Sleep    1
+	Wait Until Keyword Succeeds    10 min    5 sec    Check Complete
 
 *** Keywords ***
 Open Browser to ${URL}
@@ -323,3 +324,7 @@ Enable Shared Line For User
     [Arguments]    ${bool}
     ${bool}    Convert to Boolean    ${bool}
     Run Keyword if    ${bool}    Check Box    inputSLA
+	
+Check Complete
+	Selenium Wait For Element Present    xpath    //*[@id="progressBar-bar"]/div
+	Selenium Verify Text From Element    xpath    //*[@id="progressBar-bar"]/div     Complete
