@@ -415,3 +415,4 @@ Reset System Country
     Telnet.Close Connection
 	Sleep    60
 	Wait Until Keyword Succeeds    10 min    5 sec    Check UI ${LAN_IP}
+	Close Browser
