@@ -5,22 +5,19 @@ Library           Selenium2Library
 Library           PyroLibrary
 Library           Collections
 Library           String
-Library			  Telnet
+Library			  SSHLibrary
 Variables         phone_dictionary.py
 
 *** Variables ***
 ${Neo}            http://${LAN_IP}
-${VOICE_USER_NUMBER}    2
-${TELNET_USER_NAME}        admin
-${TELNET_PASSWORD}         password
-${ENABLE_PASSWORD}         password
-${TELNET_LOGIN_PROMPT}     Username:
-${TELNET_PASSWORD_PROMPT}  Password:
-${PROMPT}                  #
+${VOICE_USER_NUMBER}        2
+${SSH_USER_NAME}            admin
+${SSH_PASSWORD}             password
+${ENABLE_PASSWORD}          password
 
 *** Test Cases ***
 
-For-Loop-Elements
+Verify Codecs From Country
     #@{ITEMS}    Create List    Ireland    Mexico    Puerto Rico    United Arab Emirates    United Kingdom    United States
     @{ITEMS}    Create List    Ireland
     :FOR    ${COUNTRY}    IN    @{ITEMS}
@@ -46,6 +43,7 @@ For-Loop-Elements
     #General System Setup
     \    Configure Admin    ${USER}    ${PASSWORD}
     \    Check Box    remoteAdminEnabled
+    \    Check Box    sshEnabled
     \    Selenium2Library.Select From List    country     ${COUNTRY} 
     \    Next
     #Trunk Configuration
@@ -126,20 +124,8 @@ For-Loop-Elements
     \    Next
     \    Sleep    2
     \    Apply
-    \    Sleep    150
+    \    Sleep    250
     #Check Codec
-    \    ${telnet_id_temp}    Telnet.Open Connection    ${LAN_IP}    timeout=10 seconds
-    \    Set Global Variable    ${TELNET_ID}    ${telnet_id_temp}
-    \    Telnet.Login    ${TELNET_USER_NAME}    ${TELNET_PASSWORD}    ${TELNET_LOGIN_PROMPT}    ${TELNET_PASSWORD_PROMPT}
-    \    Telnet.Set Prompt    ${PROMPT}
-    \    Telnet.Write    ${EMPTY}
-    \    ${out}=    Telnet.Read Until Prompt
-    \    ${out}=    Replace String    ${out}    >    ${EMPTY}
-    \    Set Global Variable    ${HOSTNAME}    ${out}
-    \    Telnet.Write    enable
-    \    Telnet.Read Until    Password:
-    \    Telnet.Set Prompt    ${HOSTNAME}#    prompt_is_regexp=False
-    \    Telnet.Write    ${ENABLE_PASSWORD}
     \    Verify Config Codec     ${COUNTRY}
 	\	 Close Browser
 
@@ -336,6 +322,7 @@ Enable Shared Line For User
 
 Verify Config Codec
     [Arguments]    ${arg_country}
+    Login via SSH    
     Run Keyword if    '${arg_country}' == 'Ireland'                        Ireland Codec Entries
     Run Keyword if    '${arg_country}' == 'Mexico'                         Mexico Codec Entries
     Run Keyword if    '${arg_country}' == 'Puerto Rico'                    Puerto Rico Codec Entries
@@ -344,206 +331,204 @@ Verify Config Codec
     Run Keyword if    '${arg_country}' == 'United States'                  United States Codec Entries
 
 
-Ireland Codec Entries 
-    Telnet.Write    show running-config | begin voice codec-list DefaultCodecList
-    ${interface}=    Telnet.Read Until     --MORE--
+Ireland Codec Entries     
+    Write    show running-config | begin voice codec-list DefaultCodecList
+    ${interface}=    Read Until     NEO#
     Should Contain    ${interface}    default
     Should Contain    ${interface}    codec g722
     Should Contain    ${interface}    codec g711alaw
     Should Contain    ${interface}    codec g729
-	Telnet.Write    h	
 
-    Telnet.Write      show running-config | begin interface
-    ${out}=    Telnet.Read Until     --MORE--
-	Should Contain    ${out}    interface t1 0/1
-	Telnet.Write    h
+    Write      show running-config | begin interface
+    ${out}=    Read Until     NEO#
+	Should Contain    ${out}    interface e1 0/1
+	
+    Write    show run voice verbose | begin voice compand-type
+    ${out}=    Read Until     NEO#    
+	Should Contain    ${out}    voice compand-type a-law
+	Should Contain    ${out}    voice codec-country Ireland
+	Should Contain    ${out}    voice callerId-type UK_CCA
+
+    Write    show run voice verbose
+    ${out}=    Read Until     NEO#	
+	Should Contain    ${out}    voice country-code 353
+	Should Contain    ${out}    voice international-prefix 00
+
+    Write      show system
+    ${out}=    Read Until     NEO#
+    Should Contain    ${out}    Country setting is Ireland
+    Should Contain    ${out}    Default GUI Language is English
+    Should Contain    ${out}    Default POTS Codec Country is Ireland
+    Should Contain    ${out}    Default Companding is A-Law
+    Should Contain    ${out}    Default CallerID type is UK_CCA
+     
+    
+Mexico Codec Entries 
+    # Telnet.Write    show running-config | begin voice codec-list DefaultCodecList
+    # ${interface}=    Telnet.Read Until     --MORE--
+    # Should Contain    ${interface}    default
+    # Should Contain    ${interface}    codec g722
+    # Should Contain    ${interface}    codec g711alaw
+    # Should Contain    ${interface}    codec g729
+	# Telnet.Write    h	
+
+    # Telnet.Write      show running-config | begin interface
+    # ${out}=    Telnet.Read Until     --MORE--
+	# Should Contain    ${out}    interface t1 0/1
+	# Telnet.Write    h
 	
     # Telnet.Write    show run voice verbose | begin voice compand-type
     # ${out}=    Telnet.Read Until     --MORE--
 	# Should Contain    ${out}    voice compand-type a-law
-	# Should Contain    ${out}    voice codec-country Ireland
-	# Should Contain    ${out}    voice callerId-type UK_CCA
+	# Should Contain    ${out}    voice codec-country Mexico
+	# Should Contain    ${out}    voice callerId-type Mexico_FSK
 	# Telnet.Write    h
 	
     # Telnet.Write    show run voice verbose
     # ${out}=    Telnet.Read Until     --MORE--	
-	# Should Contain    ${out}    voice country-code 353
+	# Should Contain    ${out}    voice country-code 52
 	# Should Contain    ${out}    voice international-prefix 00
 	# Telnet.Write    h
-
-    Telnet.Write      show system
-    ${out}=    Telnet.Read Until Prompt
-	Should Contain    ${out}    Country setting is Ireland
-	# Should Contain    ${out}    Default GUI Language is English
-	# Should Contain    ${out}    Default POTS Codec Country is United States
-	# Should Contain    ${out}    Default Companding is U-Law
-	# Should Contain    ${out}    Default CallerID type is US_BELLCORE
-    
-    
-    
-  
-  
-  
-  
-    
-    
-    
-Mexico Codec Entries 
-    Telnet.Write    show running-config | begin voice codec-list DefaultCodecList
-    ${interface}=    Telnet.Read Until     --MORE--
-    Should Contain    ${interface}    default
-    Should Contain    ${interface}    codec g722
-    Should Contain    ${interface}    codec g711alaw
-    Should Contain    ${interface}    codec g729
-	Telnet.Write    h	
-
-    Telnet.Write      show running-config | begin interface
-    ${out}=    Telnet.Read Until     --MORE--
-	Should Contain    ${out}    interface t1 0/1
-	Telnet.Write    h
-	
-    Telnet.Write    show run voice verbose | begin voice compand-type
-    ${out}=    Telnet.Read Until     --MORE--
-	Should Contain    ${out}    voice compand-type a-law
-	Should Contain    ${out}    voice codec-country Mexico
-	Should Contain    ${out}    voice callerId-type Mexico_FSK
-	Telnet.Write    h
-	
-    Telnet.Write    show run voice verbose
-    ${out}=    Telnet.Read Until     --MORE--	
-	Should Contain    ${out}    voice country-code 52
-	Should Contain    ${out}    voice international-prefix 00
-	Telnet.Write    h
+    Log 'placeholder'
 	
 Puerto Rico Codec Entries
-    Telnet.Write    show running-config | begin voice codec-list DefaultCodecList
-    ${interface}=    Telnet.Read Until     --MORE--
-    Should Contain    ${interface}    default
-    Should Contain    ${interface}    codec g722
-    Should Contain    ${interface}    codec g711ulaw
-    Should Contain    ${interface}    codec g729
-	Telnet.Write    h	
+    # Telnet.Write    show running-config | begin voice codec-list DefaultCodecList
+    # ${interface}=    Telnet.Read Until     --MORE--
+    # Should Contain    ${interface}    default
+    # Should Contain    ${interface}    codec g722
+    # Should Contain    ${interface}    codec g711ulaw
+    # Should Contain    ${interface}    codec g729
+	# Telnet.Write    h	
 
-    Telnet.Write      show running-config | begin interface
-    ${out}=    Telnet.Read Until     --MORE--
-	Should Contain    ${out}    interface t1 0/1
-	Telnet.Write    h
+    # Telnet.Write      show running-config | begin interface
+    # ${out}=    Telnet.Read Until     --MORE--
+	# Should Contain    ${out}    interface t1 0/1
+	# Telnet.Write    h
 	
-    Telnet.Write    show run voice verbose | begin voice compand-type
-    ${out}=    Telnet.Read Until     --MORE--
-	Should Contain    ${out}    voice compand-type u-law
-	Should Contain    ${out}    voice codec-country Puerto_Rico
-	Should Contain    ${out}    voice callerId-type US_Bellcore
-	Telnet.Write    h
+    # Telnet.Write    show run voice verbose | begin voice compand-type
+    # ${out}=    Telnet.Read Until     --MORE--
+	# Should Contain    ${out}    voice compand-type u-law
+	# Should Contain    ${out}    voice codec-country Puerto_Rico
+	# Should Contain    ${out}    voice callerId-type US_Bellcore
+	# Telnet.Write    h
 	
-    Telnet.Write    show run voice verbose
-    ${out}=    Telnet.Read Until     --MORE--	
-	Should Contain    ${out}    voice country-code 1
-	Should Contain    ${out}    voice international-prefix 011
-	Telnet.Write    h
+    # Telnet.Write    show run voice verbose
+    # ${out}=    Telnet.Read Until     --MORE--	
+	# Should Contain    ${out}    voice country-code 1
+	# Should Contain    ${out}    voice international-prefix 011
+	# Telnet.Write    h
+    Log 'placeholder'
 
 United Arab Emirates Codec Entries
-    Telnet.Write    show running-config | begin voice codec-list DefaultCodecList
-    ${interface}=    Telnet.Read Until     --MORE--
-    Should Contain    ${interface}    default
-    Should Contain    ${interface}    codec g722
-    Should Contain    ${interface}    codec g711alaw
-    Should Contain    ${interface}    codec g729
-	Telnet.Write    h	
+    # Telnet.Write    show running-config | begin voice codec-list DefaultCodecList
+    # ${interface}=    Telnet.Read Until     --MORE--
+    # Should Contain    ${interface}    default
+    # Should Contain    ${interface}    codec g722
+    # Should Contain    ${interface}    codec g711alaw
+    # Should Contain    ${interface}    codec g729
+	# Telnet.Write    h	
 
-    Telnet.Write      show running-config | begin interface
-    ${out}=    Telnet.Read Until     --MORE--
-	Should Contain    ${out}    interface e1 0/1
-	Telnet.Write    h
+    # Telnet.Write      show running-config | begin interface
+    # ${out}=    Telnet.Read Until     --MORE--
+	# Should Contain    ${out}    interface e1 0/1
+	# Telnet.Write    h
 	
-    Telnet.Write    show run voice verbose | begin voice compand-type
-    ${out}=    Telnet.Read Until     --MORE--
-	Should Contain    ${out}    voice compand-type a-law
-	Should Contain    ${out}    voice codec-country United_Arab_Emirates
-	Should Contain    ${out}    voice callerId-type United_Arab_Emirates_FSK
-	Telnet.Write    h
+    # Telnet.Write    show run voice verbose | begin voice compand-type
+    # ${out}=    Telnet.Read Until     --MORE--
+	# Should Contain    ${out}    voice compand-type a-law
+	# Should Contain    ${out}    voice codec-country United_Arab_Emirates
+	# Should Contain    ${out}    voice callerId-type United_Arab_Emirates_FSK
+	# Telnet.Write    h
 	
-    Telnet.Write    show run voice verbose
-    ${out}=    Telnet.Read Until     --MORE--	
-	Should Contain    ${out}    voice country-code 971
-	Should Contain    ${out}    voice international-prefix 00
-	Telnet.Write    h
+    # Telnet.Write    show run voice verbose
+    # ${out}=    Telnet.Read Until     --MORE--	
+	# Should Contain    ${out}    voice country-code 971
+	# Should Contain    ${out}    voice international-prefix 00
+	# Telnet.Write    h
+    Log 'placeholder'
 	
 United Kingdom Codec Entries
-    Telnet.Write    show running-config | begin voice codec-list DefaultCodecList
-    ${interface}=    Telnet.Read Until     --MORE--
-    Should Contain    ${interface}    default
-    Should Contain    ${interface}    codec g722
-    Should Contain    ${interface}    codec g711alaw
-    Should Contain    ${interface}    codec g729
-	Telnet.Write    h	
+    # Telnet.Write    show running-config | begin voice codec-list DefaultCodecList
+    # ${interface}=    Telnet.Read Until     --MORE--
+    # Should Contain    ${interface}    default
+    # Should Contain    ${interface}    codec g722
+    # Should Contain    ${interface}    codec g711alaw
+    # Should Contain    ${interface}    codec g729
+	# Telnet.Write    h	
 
-    Telnet.Write      show running-config | begin interface
-    ${out}=    Telnet.Read Until     --MORE--
-	Should Contain    ${out}    interface e1 0/1
-	Telnet.Write    h
+    # Telnet.Write      show running-config | begin interface
+    # ${out}=    Telnet.Read Until     --MORE--
+	# Should Contain    ${out}    interface e1 0/1
+	# Telnet.Write    h
 	
-    Telnet.Write    show run voice verbose | begin voice compand-type
-    ${out}=    Telnet.Read Until     --MORE--
-	Should Contain    ${out}    voice compand-type a-law
-	Should Contain    ${out}    voice codec-country United_Kingdom
-	Should Contain    ${out}    voice callerId-type UK_BT
-	Telnet.Write    h
+    # Telnet.Write    show run voice verbose | begin voice compand-type
+    # ${out}=    Telnet.Read Until     --MORE--
+	# Should Contain    ${out}    voice compand-type a-law
+	# Should Contain    ${out}    voice codec-country United_Kingdom
+	# Should Contain    ${out}    voice callerId-type UK_BT
+	# Telnet.Write    h
 	
-    Telnet.Write    show run voice verbose
-    ${out}=    Telnet.Read Until     --MORE--	
-	Should Contain    ${out}    voice country-code 44
-	Should Contain    ${out}    voice international-prefix 00
-	Telnet.Write    h
+    # Telnet.Write    show run voice verbose
+    # ${out}=    Telnet.Read Until     --MORE--	
+	# Should Contain    ${out}    voice country-code 44
+	# Should Contain    ${out}    voice international-prefix 00
+	# Telnet.Write    h
+    Log 'placeholder'
 	
 United States Codec Entries
-    Telnet.Write    show running-config | begin voice codec-list DefaultCodecList
-    ${interface}=    Telnet.Read Until     --MORE--
-    Should Contain    ${interface}    default
-    Should Contain    ${interface}    codec g722
-    Should Contain    ${interface}    codec g711ulaw
-    Should Contain    ${interface}    codec g729
-	Telnet.Write    h	
+    # Telnet.Write    show running-config | begin voice codec-list DefaultCodecList
+    # ${interface}=    Telnet.Read Until     --MORE--
+    # Should Contain    ${interface}    default
+    # Should Contain    ${interface}    codec g722
+    # Should Contain    ${interface}    codec g711ulaw
+    # Should Contain    ${interface}    codec g729
+	# Telnet.Write    h	
 
-    Telnet.Write      show running-config | begin interface
-    ${out}=    Telnet.Read Until     --MORE--
-	Should Contain    ${out}    interface e1 0/1
-	Telnet.Write    h
+    # Telnet.Write      show running-config | begin interface
+    # ${out}=    Telnet.Read Until     --MORE--
+	# Should Contain    ${out}    interface e1 0/1
+	# Telnet.Write    h
 	
-    Telnet.Write    show run voice verbose | begin voice compand-type
-    ${out}=    Telnet.Read Until     --MORE--
-	Should Contain    ${out}    voice compand-type u-law
-	Should Contain    ${out}    voice codec-country United_States
-	Should Contain    ${out}    voice callerId-type US_Bellcore
-	Telnet.Write    h
+    # Telnet.Write    show run voice verbose | begin voice compand-type
+    # ${out}=    Telnet.Read Until     --MORE--
+	# Should Contain    ${out}    voice compand-type u-law
+	# Should Contain    ${out}    voice codec-country United_States
+	# Should Contain    ${out}    voice callerId-type US_Bellcore
+	# Telnet.Write    h
 	
-    Telnet.Write    show run voice verbose
-    ${out}=    Telnet.Read Until     --MORE--	
-	Should Contain    ${out}    voice country-code 1
-	Should Contain    ${out}    voice international-prefix 011
-	Telnet.Write    h
+    # Telnet.Write    show run voice verbose
+    # ${out}=    Telnet.Read Until     --MORE--	
+	# Should Contain    ${out}    voice country-code 1
+	# Should Contain    ${out}    voice international-prefix 011
+	# Telnet.Write    h
+    Log 'placeholder'
 
 Reset System Country
-    ${telnet_id_temp}    Telnet.Open Connection    ${LAN_IP}    timeout=10 seconds
-    Set Global Variable    ${TELNET_ID}    ${telnet_id_temp}
-    Telnet.Login    ${TELNET_USER_NAME}    ${TELNET_PASSWORD}    ${TELNET_LOGIN_PROMPT}    ${TELNET_PASSWORD_PROMPT}
-    Telnet.Set Prompt    ${PROMPT}
-    Telnet.Write    ${EMPTY}
-    ${out}=    Telnet.Read Until Prompt
-    ${out}=    Replace String    ${out}    >    ${EMPTY}
-    Set Global Variable    ${HOSTNAME}    ${out}
-    Telnet.Write    enable
-    Telnet.Read Until    Password:
-    Telnet.Set Prompt    ${HOSTNAME}#    prompt_is_regexp=False
-    Telnet.Write    ${ENABLE_PASSWORD}
-	Telnet.Write    no events
-    Telnet.Set Prompt    ${HOSTNAME}(config)#   prompt_is_regexp=False
-    Telnet.Write    config t
-    Telnet.Write    voice system-country United_States
-    Telnet.Read Until    [y/n]
-    Telnet.Write    y
+    Login via SSH    
+    Write    config t
+    Set Client Configuration    prompt=${HOSTNAME}(config)#
+    Write    voice system-country United_States
+    Read Until    [y/n]
+    Write    y
 	Sleep    2
-    Telnet.Close Connection
+    Close Connection
 	Sleep    60
 	Wait Until Keyword Succeeds    10 min    5 sec    Check UI ${LAN_IP}
-	Close Browser
+    
+Login via SSH
+    [Documentation]    This creates a SSH session, logs into the unit, and stores the unit's hostname in "${HOSTNAME}". \ This keyword leaves you at global enable mode on an AOS unit.
+    ${ssh_id_temp}    Open Connection    ${LAN_IP}    timeout=25 seconds
+    Set Global Variable    ${SSH_ID}    ${ssh_id_temp}
+	Set Client Configuration    prompt=>
+    Login    ${SSH_USER_NAME}    ${SSH_PASSWORD}
+    Write    ${EMPTY}
+    ${out}=    Read Until Prompt
+    ${out}=    Replace String    ${out}    >    ${EMPTY}
+    Set Global Variable    ${HOSTNAME}    ${out}
+    Write    enable
+    Read Until    Password:
+	Set Client Configuration    prompt=${HOSTNAME}# 
+    Write    ${ENABLE_PASSWORD}
+    Write    no events
+    Write    terminal length 0
+    Read Until Prompt

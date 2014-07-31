@@ -36,6 +36,7 @@ Network Configuration
 General System Setup
     Configure Admin    ${USER}    ${PASSWORD}
 	Check Box    remoteAdminEnabled
+	Check Box    sshEnabled
     Next
 
 Trunk Configuration
