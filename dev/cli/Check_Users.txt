@@ -44,5 +44,8 @@ Ensure users are cleared from the system
 	Write    do write
 	Read Until Prompt
 	
+Close CLI
+	Close Connection
+	
 *** Keywords ***
 

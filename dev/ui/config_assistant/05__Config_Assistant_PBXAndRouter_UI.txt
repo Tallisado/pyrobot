@@ -145,7 +145,10 @@ Apply Configuration
 Submit Configuration
     Apply
     Sleep    1
+
+Check Finished	
 	Wait Until Keyword Succeeds    10 min    5 sec    Check Complete
+	Wait Until Keyword Succeeds    10 min    5 sec    Check UI ${LAN_IP}
 
 *** Keywords ***
 Open Browser to ${URL}
@@ -329,3 +332,7 @@ Enable Shared Line For User
 Check Complete
 	Selenium Wait For Element Present    xpath    //*[@id="progressBar-bar"]/div
 	Selenium Verify Text From Element    xpath    //*[@id="progressBar-bar"]/div     Complete
+	
+Check UI ${URL}
+    Selenium2Library.Go To    ${URL}/Login/index.php
+	Wait Until Element Is Visible    loginnameid-inputEl

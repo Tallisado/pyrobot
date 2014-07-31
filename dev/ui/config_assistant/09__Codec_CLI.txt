@@ -329,6 +329,7 @@ Verify Config Codec
     Run Keyword if    '${arg_country}' == 'United Arab Emirates'           United Arab Emirates Codec Entries
     Run Keyword if    '${arg_country}' == 'United Kingdom'                 United Kingdom Codec Entries
     Run Keyword if    '${arg_country}' == 'United States'                  United States Codec Entries
+    Close Connection
 
 
 Ireland Codec Entries     
