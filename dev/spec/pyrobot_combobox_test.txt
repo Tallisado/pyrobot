@@ -1,0 +1,24 @@
+*** Settings ***
+Suite Setup
+Suite Teardown    Close Browser
+Library           Selenium2Library
+Library           PyroLibrary
+Library           Collections
+
+*** Variables ***
+
+*** Test Cases ***
+Test Multiple Combo
+	Open Pyro Browser
+	Sencha Login     		3011    1234    settingsButton-btnIconEl    False
+	Selenium Wait For Element Present    id    settingsButton-btnIconEl
+	Selenium Click   id    settingsButton-btnIconEl
+	Selenium Wait For Element Present    id    settingsVoicemail
+	Selenium Click   id    settingsVoicemail
+	Selenium Check   id    playEnvelope_checkbox-inputEl
+	Selenium Check   id    autoPlayMessage_checkbox-inputEl
+	Selenium Click Text From Combobox    id    primaryEmailNotification_combobox-inputEl    Never
+	Selenium Click Text From Combobox    id    primaryEmailNotification_combobox-inputEl    Always
+	Selenium Click Text From Combobox    id    secondaryEmailNotification_combobox-inputEl    Never
+	Selenium Click Text From Combobox    id    secondaryEmailNotification_combobox-inputEl    Always
+	Selenium Click   id    settingVMConfigClose
