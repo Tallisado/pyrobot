@@ -16,7 +16,7 @@ Remove User 3001
 	Selenium Wait For Element Present    xpath    //div[@id="removeUser_wiz"]
 	Selenium Click    xpath    //div[@id="removeUser_wiz"]
 	Selenium Wait For Element Present    name    removeUserWizard_window_removeUser_wizard_user_combobox-inputEl
-	Selenium Click Text From Combobox    name    removeUserWizard_window_removeUser_wizard_user_combobox-inputEl    Automated User
+	Selenium Click Text From Combobox Search    name    removeUserWizard_window_removeUser_wizard_user_combobox-inputEl    Automated User
 	Selenium Wait For Element Present    xpath    //*[@id="removeUserWizard_window_removeUser_wizard_next_btn"]
 	Selenium Click    xpath    //*[@id="removeUserWizard_window_removeUser_wizard_next_btn"]
 	Selenium Wait For Element Present    xpath    //*[@id="removeUserWizard_window_removeUser_wizard_save_btn"]
@@ -27,7 +27,7 @@ Remove User 3002
 	Selenium Wait For Element Present    xpath    //div[@id="removeUser_wiz"]
 	Selenium Click    xpath    //div[@id="removeUser_wiz"]
 	Selenium Wait For Element Present    name    removeUserWizard_window_removeUser_wizard_user_combobox-inputEl
-	Selenium Click Text From Combobox    name    removeUserWizard_window_removeUser_wizard_user_combobox-inputEl    Reassign Test
+	Selenium Click Text From Combobox Search    name    removeUserWizard_window_removeUser_wizard_user_combobox-inputEl    Reassign Test
 	Selenium Wait For Element Present    xpath    //*[@id="removeUserWizard_window_removeUser_wizard_next_btn"]
 	Selenium Click    xpath    //*[@id="removeUserWizard_window_removeUser_wizard_next_btn"]
 	Selenium Wait For Element Present    xpath    //*[@id="removeUserWizard_window_removeUser_wizard_save_btn"]
