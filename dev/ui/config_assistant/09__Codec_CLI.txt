@@ -129,6 +129,9 @@ Verify Codecs From Country
     \    Verify Config Codec     ${COUNTRY}
 	\	 Close Browser
 
+Reset Codec To Default USA
+    Open Browser to ${Neo}
+    Reset System Country
 
 *** Keywords ***
 Factory Defaults
