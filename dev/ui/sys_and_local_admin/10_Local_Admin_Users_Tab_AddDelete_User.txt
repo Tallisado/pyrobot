@@ -8,6 +8,8 @@ Library           PyroLibrary
 *** Variables ***
 ${Neo}            http://${DEVICE_IP}
 ${DEVICE_IP}      10.10.9.164
+${USER_3003}      //*[@id="users_panel_users_grid-body"]/div/table/tbody//*[contains(text(), '3003')]
+${USER_3003_EXT}  ${USER_3003}/../../td[3]/div
 
 *** Test Cases ***
 Verify User extension 3003 Does Not Exist
@@ -55,16 +57,16 @@ Verify User Extension 3003 Exists
 	Selenium Wait For Element Present    id    users_tab
 	Selenium Click    id    users_tab
 	Selenium Type    id    users_panel_filterUser_search-inputEl    User3
-	Selenium Wait For Element Present    xpath    //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]
-	Selenium Verify Text From Element    xpath    //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]/td[3]/div    3003
+	Selenium Wait For Element Present    xpath    ${USER_3003}
+	Selenium Verify Text From Element    xpath    ${USER_3003_EXT}    3003
 	
 Delete User Extension 3003
     Selenium Reload
 	Selenium Wait For Element Present    id    users_tab
 	Selenium Click    id    users_tab
 	Selenium Type    id    users_panel_filterUser_search-inputEl    User3
-	Selenium Wait For Element Present    xpath    //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]
-	Selenium Click    xpath    //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]
+	Selenium Wait For Element Present    xpath    ${USER_3003}
+	Selenium Click    xpath    ${USER_3003}
 	Selenium Click    id    users_panel_delete_btn-btnEl
 	Selenium Wait For Element Present    id    removeUserWizard_window_removeUser_wizard_save_btn-btnEl
 	Selenium Click    id    removeUserWizard_window_removeUser_wizard_save_btn-btnEl
@@ -74,6 +76,6 @@ Verify Removal Of User Extension 3003
 	Selenium Wait For Element Present    id    users_tab
 	Selenium Click    id    users_tab
 	Selenium Type    id    users_panel_filterUser_search-inputEl    User3
-	Selenium Element Should Not Be Visible    xpath    //*[@id="users_panel_users_grid-body"]/div/table/tbody/tr[1]/td[3]/div
+	Selenium Element Should Not Be Visible    xpath    ${USER_3003_EXT}
 	
 *** Keywords ***
